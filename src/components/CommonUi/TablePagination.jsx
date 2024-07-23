@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import ColVisibilityDropdown from "../Shared/ColVisibilityDropdown";
+import { useTranslation } from "react-i18next"; 
 
 const TablePagination = ({
     columns,
@@ -32,6 +33,8 @@ const TablePagination = ({
         setColumnsToShow(val);
     };
 
+    const { t } = useTranslation();
+
     return (
         <>
             <UserPrivateComponent permission={permission}>
@@ -45,7 +48,7 @@ const TablePagination = ({
                                         className="text-white text-xs  md:text-base  py-1 px-0 rounded mr-2 "
                                         filename={csvFileName}
                                     >
-                                        Download CSV
+                                        {t("user_list.download_csv")}
                                     </CSVLink>
                                 </div>
                                 <ColVisibilityDropdown

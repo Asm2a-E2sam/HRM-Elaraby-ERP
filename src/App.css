@@ -27,14 +27,14 @@
 	--bg-item-active: #cef0ff;
 	--text: #000000;
 	--body-bg: #f8f8ff;
-	--sidenav-bg: #344d67;
+	--sidenav-bg: #222751;
 	--table-cell-row-hover: #fafafa;
 	--form-item-label: rgba(0, 0, 0, 0.85);
 	--table-head: rgb(51, 51, 51);
 	--input-border: 1px solid #d9d9d9;
 	--quick-links-bg: #f4f4f4;
 	--form-color: #e6e6e6;
-	--text-color-2: #37306b;
+	--text-color-2: #222751;
 	--text-color-secondary: #146c94;
 	--text-color-hr: #e2e2e2;
 	--shadow-color: #c7d2fe;
@@ -495,4 +495,14 @@ body {
 .scrollbar-hide {
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
+}
+
+.btn-darkblue{
+	background-color:#222751 !important;
+	color: #fff;
+}
+.btn-darkblue:hover{
+	background-color:#373f81 !important;
+	color:#fff !important;
+	border-color: #373f81 !important;
 }

@@ -10,35 +10,36 @@ import StatusSelection from "../CommonUi/StatusSelection";
 import TablePagination from "../CommonUi/TablePagination";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import AddUser from "./addUser";
+import { useTranslation } from "react-i18next"; 
 
 const GetAllUser = () => {
   const [pageConfig, setPageConfig] = useState({ status: "true", page:1, count:10 });
   const { data, isLoading } = useGetUsersQuery(pageConfig);
+  const { t } = useTranslation();
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("user_list.id"),
       dataIndex: "id",
       key: "id",
     },
     {
       id: 2,
-      title: "Name",
-
+      title: t("user_list.name"),
       key: "fullName",
       render: ({ firstName, lastName }) =>
         (firstName + " " + lastName).toUpperCase(),
     },
     {
       id: 3,
-      title: "Usr Name",
+      title: t("user_list.username"),
       dataIndex: "username",
       key: "username",
     },
 
     {
       id: 5,
-      title: "Designation",
+      title: t("user_list.designation"),
       dataIndex: "designationHistory",
       key: "designationHistory",
       render: (record) =>
@@ -47,14 +48,14 @@ const GetAllUser = () => {
 
     {
       id: 6,
-      title: "E-Status",
+      title: t("user_list.e_status"),
       dataIndex: "employmentStatus",
       key: "employmentStatus",
       render: (record) => (record?.name ? record?.name : "N/A"),
     },
     {
       id: 8,
-      title: "Department",
+      title: t("user_list.department"),
       dataIndex: "department",
       key: "department",
       render: (record) => (record?.name ? record?.name : "N/A"),
@@ -62,7 +63,7 @@ const GetAllUser = () => {
 
     {
       id: 9,
-      title: "Shift",
+      title: t("user_list.shift"),
       dataIndex: "shift",
       key: "shift",
       render: (record) => (record?.name ? record?.name : "N/A"),
@@ -70,7 +71,7 @@ const GetAllUser = () => {
 
     {
       id: 7,
-      title: "Action",
+      title: t("user_list.action"),
       dataIndex: "id",
       key: "action",
       render: (id) => (
@@ -88,13 +89,13 @@ const GetAllUser = () => {
 
   return (
     <CardCustom
-      title={"User list"}
+      title={t("user_list.user_list")}
       extra={
         <>
           <StatusSelection setPageConfig={setPageConfig} />
           <CreateDrawer
             permission={"create-user"}
-            title={"Create user"}
+            title={t("user_list.create_user")}
             width={100}
           >
             <AddUser />

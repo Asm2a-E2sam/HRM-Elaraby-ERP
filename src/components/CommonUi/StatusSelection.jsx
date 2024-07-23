@@ -1,6 +1,7 @@
 import { SolutionOutlined, UserDeleteOutlined } from "@ant-design/icons";
 import { Segmented } from "antd";
 import { useState } from "react";
+import { useTranslation } from "react-i18next"; 
 
 export default function StatusSelection({ setPageConfig }) {
     const [status, setStatus] = useState("true");
@@ -16,6 +17,8 @@ export default function StatusSelection({ setPageConfig }) {
             return { ...prevData, status: value };
         });
     };
+    const { t } = useTranslation();
+
     return (
         <Segmented
             className="text-center rounded text-red-500 "
@@ -24,7 +27,7 @@ export default function StatusSelection({ setPageConfig }) {
                 {
                     label: (
                         <span>
-                            <SolutionOutlined /> Active
+                            <SolutionOutlined />{t("user_list.active")}
                         </span>
                     ),
                     value: "true",
@@ -32,7 +35,7 @@ export default function StatusSelection({ setPageConfig }) {
                 {
                     label: (
                         <span>
-                            <UserDeleteOutlined /> Inactive
+                            <UserDeleteOutlined /> {t("user_list.inactive")}
                         </span>
                     ),
                     value: "false",

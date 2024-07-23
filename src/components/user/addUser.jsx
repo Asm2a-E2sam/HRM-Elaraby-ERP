@@ -306,11 +306,11 @@ const AddUser = () => {
               wrapperCol={{ offset: 0, span: 24 }}
             >
               <Button
-                type='primary'
                 htmlType='submit'
                 icon={<PlusOutlined />}
                 loading={isLoading}
                 style={{ width: "100%" }}
+                className="btn-darkblue"
               >
                 {t('add_employee.add_new_staff')}
               </Button>
