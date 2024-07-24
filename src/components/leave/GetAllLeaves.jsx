@@ -8,8 +8,10 @@ import CardCustom from "../CommonUi/CardCustom";
 import TablePagination from "../CommonUi/TablePagination";
 import BtnAllSvg from "../UI/Button/btnAllSvg";
 import BtnViewSvg from "../UI/Button/btnViewSvg";
+import { useTranslation } from "react-i18next"; 
 
 const GetAllLeaves = (props) => {
+  const { t } = useTranslation();
   const [pageConfig, setPageConfig] = useState({
     value: "all",
     page: 1,
@@ -21,27 +23,27 @@ const GetAllLeaves = (props) => {
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("leave.id"),
       dataIndex: "id",
       key: "id",
     },
 
     {
       id: 2,
-      title: " Name",
+      title: t("leave.name"),
       key: "name",
       dataIndex: "user",
       render: ({ firstName, lastName }) => firstName + " " + lastName,
     },
     {
       id: 3,
-      title: "Leave Type",
+      title: t("leave.leave_type"),
       dataIndex: "leaveType",
       key: "leaveType",
     },
     {
       id: 4,
-      title: "Leave From",
+      title: t("leave.leave_from"),
       key: "leaveFrom",
       render: ({leaveFrom, status, acceptLeaveFrom}) => {
         return status === 'ACCEPTED' ? dayjs(acceptLeaveFrom).format("DD-MM-YYYY") : dayjs(leaveFrom).format("DD-MM-YYYY");
@@ -49,7 +51,7 @@ const GetAllLeaves = (props) => {
     },
     {
       id: 5,
-      title: "Leave To",
+      title: t("leave.leave_to"),
       key: "leaveTo",
       render: ({leaveTo, status, acceptLeaveTo}) => {
         return status === 'ACCEPTED' ? dayjs(acceptLeaveTo).format("DD-MM-YYYY") : dayjs(leaveTo).format("DD-MM-YYYY");
@@ -57,7 +59,7 @@ const GetAllLeaves = (props) => {
     },
     {
       id: 6,
-      title: "Leave Duration",
+      title: t("leave.leave_duration"),
       dataIndex: "leaveDuration",
       key: "leaveDuration",
       render: (leaveDuration) => {
@@ -70,7 +72,7 @@ const GetAllLeaves = (props) => {
     },
     {
       id: 7,
-      title: "Status",
+      title: t("leave.status"),
       dataIndex: "status",
       key: "status",
       render: (status) => {
@@ -86,7 +88,7 @@ const GetAllLeaves = (props) => {
 
     {
       id: 7,
-      title: "Action",
+      title: t("leave.action"),
       key: "action",
       render: ({ id }) => (
         <ViewBtn
@@ -111,7 +113,7 @@ const GetAllLeaves = (props) => {
   };
   return (
     <CardCustom
-      title={"Leave Applications"}
+      title={t("leave.leave_application")}
       extra={
         <>
           <div className="ml-2 mt-0.5">
@@ -129,7 +131,7 @@ const GetAllLeaves = (props) => {
               {
                 label: (
                   <span>
-                    <i className="bi bi-person-lines-fill"></i> Accepted
+                    <i className="bi bi-person-lines-fill"></i> {t("leave.accepted")}
                   </span>
                 ),
                 value: "accepted",
@@ -137,7 +139,7 @@ const GetAllLeaves = (props) => {
               {
                 label: (
                   <span>
-                    <i className="bi bi-person-dash-fill"></i> Pending
+                    <i className="bi bi-person-dash-fill"></i> {t("leave.pending")}
                   </span>
                 ),
                 value: "pending",

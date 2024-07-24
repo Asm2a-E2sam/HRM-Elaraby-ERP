@@ -20,19 +20,19 @@ import { toastHandler } from "../../utils/functions";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import Loader from "../loader/loader";
 import { useTranslation } from "react-i18next";
+
 const AddDetails = () => {
     const { Title } = Typography;
     const [form] = Form.useForm();
     const { data } = useGetSettingQuery();
 
     const [updateSetting, { isLoading }] = useUpdateSettingMutation();
+    const { t } = useTranslation();
 
     const [initValues, setInitValues] = useState(null);
     const [fileList, setFileList] = useState([]);
     const [timezoneList, setTimezoneList] = useState([]);
 
-    const { t } = useTranslation();
-    
     const onFinish = async (values) => {
         try {
             const formData = new FormData();
@@ -105,27 +105,28 @@ const AddDetails = () => {
                     >
                         <Card bordered={false}>
                             <Title level={4} className="m-2 mb-4 text-center">
-                                Company Setting
+                            {t('add_details.company_setting')}
                             </Title>
-                            {initValues ? (
+                            {initValues ? 
+                            (
                                 <Form
-                                initialValues={{
-                                  ...initValues,
-                                }}
-                                form={form}
-                                name="basic"
-                                labelCol={{
-                                  span: 6,
-                                }}
-                                labelWrap
-                                wrapperCol={{
-                                  span: 16,
-                                }}
-                                onFinish={onFinish}
-                                onFinishFailed={onFinishFailed}
-                                autoComplete="off"
-                              >
-                                <Form.Item
+                                    initialValues={{
+                                        ...initValues,
+                                    }}
+                                    form={form}
+                                    name="basic"
+                                    labelCol={{
+                                        span: 7,
+                                    }}
+                                    labelWrap
+                                    wrapperCol={{
+                                        span: 16,
+                                    }}
+                                    onFinish={onFinish}
+                                    onFinishFailed={onFinishFailed}
+                                    autoComplete="off"
+                                >
+                                  <Form.Item
                                   style={{ marginBottom: "10px" }}
                                   label={t('add_details.company_name')}
                                   name="companyName"
@@ -277,25 +278,21 @@ const AddDetails = () => {
                                   </Upload>
                                 </Form.Item>
                   
-                                <Form.Item
-                                  style={{ marginBottom: "10px" }}
-                                  className="flex justify-center mt-[24px]"
-                                >
-                                  <Button
-                                    type="primary"
-                                    htmlType="submit"
-                                    shape="round"
-                                    size="large"
-                                    loading={isLoading}
-                                  >
-                                    {t('add_details.register_button')}
-                                  </Button>
-                                </Form.Item>
-                                  <h6 className="text-center mt-2">
-                                  {t('add_details.already_have_account')}{" "}
-                                  <Link to={"/admin/auth/login"}>{t('add_details.login_here')}</Link>
-                                </h6>
-                              </Form>
+                                    <Form.Item
+                                        style={{ marginBottom: "10px" }}
+                                        className="flex justify-center mt-[24px]"
+                                    >
+                                        <Button
+                                            type="primary"
+                                            htmlType="submit"
+                                            shape="round"
+                                            size="large"
+                                            loading={isLoading}
+                                        >
+                                            {t('add_details.update_details')}
+                                        </Button>
+                                    </Form.Item>
+                                </Form>
                             ) : (
                                 <Loader />
                             )}

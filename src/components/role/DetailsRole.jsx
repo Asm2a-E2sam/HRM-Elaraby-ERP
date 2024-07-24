@@ -9,6 +9,7 @@ import PageTitle from "../page-header/PageHeader";
 import { useGetRoleQuery } from "../../redux/rtk/features/role/roleApi";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import CustomTable from "./CustomTable";
+import { useTranslation } from "react-i18next"; 
 
 //PopUp
 
@@ -16,7 +17,7 @@ const DetailRole = () => {
   const { id } = useParams();
 
   const { data: role } = useGetRoleQuery(id);
-
+  const { t } = useTranslation();
   return (
     <div>
       <PageTitle title=" Back  " />
@@ -30,7 +31,7 @@ const DetailRole = () => {
                   <h5>
                     <i className="bi bi-person-lines-fill"></i>
                     <span className="mr-left">
-                      ID : {role.id} | {role.name}
+                    {t("user_list.id")} : {role.id} | {role.name}
                     </span>
                   </h5>
                   <div className="text-end">
@@ -46,7 +47,8 @@ const DetailRole = () => {
                           icon={<EditOutlined />}
                         >
                           {" "}
-                          New Permission{" "}
+                          {t("user_list.new_permission")}
+                          {" "}
                         </Button>
                       </Link>
                     </UserPrivateComponent>

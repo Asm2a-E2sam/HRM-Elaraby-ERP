@@ -11,29 +11,31 @@ import PageTitle from "../page-header/PageHeader";
 import CardCustom from "../CommonUi/CardCustom";
 import TableNoPagination from "../CommonUi/TableNoPagination";
 import ViewBtn from "../Buttons/ViewBtn";
+import { useTranslation } from "react-i18next"; 
 //PopUp
 
 const DetailDesignation = () => {
   const { id } = useParams();
+  const { t } = useTranslation();
 
   const { data: designation, isLoading: loading } = useGetDesignationQuery(id);
 
   const columns = [
     {
-      title: "ID",
+      title: t("user_list.id"),
       dataIndex: "id",
       key: "id",
       render: (id) => <Link to={`/admin/hr/staffs/${id}`}>{id}</Link>,
     },
     {
-      title: "Employee Name",
+      title: t("user_list.name_employee"),
       key: "employee",
       render: ({ firstName, lastName, id }) => (
         <Link to={`/admin/hr/staffs/${id}`}>{firstName + " " + lastName}</Link>
       ),
     },
     {
-      title: "Action",
+      title: t("user_list.id"),
       dataIndex: "id",
       key: "action",
       render: (id) => (
@@ -45,14 +47,14 @@ const DetailDesignation = () => {
   ];
   return (
     <div>
-      <PageTitle title=" Back " subtitle=" " />
+      <PageTitle title={t("user_list.back")} subtitle=" " />
 
       <div className="mt-[10px]">
         <UserPrivateComponent permission={"readSingle-designation"}>
           <CardCustom
             title={
               <h3>
-                ID : {designation?.designationId} |{" "}
+                {t("user_list.id")} : {designation?.designationId} |{" "}
                 {designation?.designationName}
               </h3>
             }
@@ -82,7 +84,7 @@ const DetailDesignation = () => {
             <TableNoPagination
               leftElement={
                 <h1 className="p-2 font-semibold text-lg text-center">
-                  Staffs Information{" "}
+                  {t("user_list.staffs_info")}{" "}
                 </h1>
               }
               list={designation?.employee}

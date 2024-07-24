@@ -12,31 +12,33 @@ import { updatePayslip } from "../../redux/rtk/features/payroll/payrollSlice";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import ColVisibilityDropdown from "../Shared/ColVisibilityDropdown";
 import PageTitle from "../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 function CustomTable({ list, loading }) {
   const [columnsToShow, setColumnsToShow] = useState([]);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const columns = [
     {
-      title: "ID",
+      title: t("payroll.id"),
       dataIndex: "id",
       key: "id",
     },
     {
-      title: "Name",
+      title: t("payroll.name"),
       key: "name",
       render: (record) => `${record.firstName} ${record.lastName}`,
     },
 
     {
-      title: "Salary",
+      title: t("payroll.salary"),
       dataIndex: "salary",
       key: "salary",
     },
 
     {
-      title: "Salary Payable",
+      title: t("payroll.salary_payable"),
       dataIndex: "salaryPayable",
       key: "salaryPayable",
       render: (salaryPayable, { id }) => {
@@ -58,7 +60,7 @@ function CustomTable({ list, loading }) {
     },
 
     {
-      title: "Bonus",
+      title: t("payroll.bonus"),
       dataIndex: "bonus",
       key: "bonus",
       render: (bonus, { id }) => {
@@ -80,7 +82,7 @@ function CustomTable({ list, loading }) {
     },
 
     {
-      title: "B-Comment",
+      title: t("payroll.b_comment"),
       dataIndex: "bonusComment",
       key: "bonusComment",
       render: (bonusComment, { id }) => {
@@ -109,7 +111,7 @@ function CustomTable({ list, loading }) {
     },
 
     {
-      title: "Deduction",
+      title: t("payroll.deduction"),
       dataIndex: "deduction",
       key: "deduction",
       render: (deduction, { id }) => {
@@ -131,7 +133,7 @@ function CustomTable({ list, loading }) {
     },
 
     {
-      title: "D-Comment",
+      title: t("payroll.b_comment"),
       dataIndex: "deductionComment",
       key: "deductionComment",
       render: (deductionComment, { id }) => {
@@ -160,14 +162,14 @@ function CustomTable({ list, loading }) {
     },
 
     {
-      title: "Working Hours",
+      title: t("payroll.working_hours"),
       dataIndex: "workingHour",
       key: "workingHour",
       render: (workingHour) => `${workingHour?.toFixed(2)} hours`,
     },
 
     {
-      title: "Total Payable",
+      title:  t("payroll.total_payable"),
       dataIndex: "totalPayable",
       key: "totalPayable",
     },
@@ -207,7 +209,7 @@ function CustomTable({ list, loading }) {
                 className="btn btn-dark btn-sm mb-1"
                 filename="payslips"
               >
-                Download CSV
+                {t("payroll.download_csv")}
               </CSVLink>
             </div>
           </div>
@@ -224,42 +226,42 @@ function CustomTable({ list, loading }) {
             <div className="flex justify-start">
               <div className="flex flex-col mr-10">
                 <div className="flex justify-between">
-                  <div className="font-bold">Paid Leave : </div>
+                  <div className="font-bold"> {t("payroll.paid_leave")} : </div>
                   <div>{record.paidLeave}</div>
                 </div>
                 <div className="flex justify-between">
-                  <div className="font-bold">Unpaid Leave : </div>
+                  <div className="font-bold"> {t("payroll.unpaid_leave")} : </div>
                   <div className="ml-2">{record.unpaidLeave}</div>
                 </div>
               </div>
               <div className="flex flex-col mr-10">
                 <div className="flex justify-between ">
-                  <div className="font-bold">M-Holiday : </div>
+                  <div className="font-bold"> {t("payroll.m_holiday")} : </div>
                   <div>{record.monthlyHoliday}</div>
                 </div>
                 <div className="flex justify-between">
-                  <div className="font-bold">P-Holiday : </div>
+                  <div className="font-bold"> {t("payroll.p_holiday")} : </div>
                   <div>{record.publicHoliday}</div>
                 </div>
               </div>
 
               <div className="flex flex-col mr-10">
                 <div className="flex justify-between">
-                  <div className="font-bold">Work Day : </div>
+                  <div className="font-bold"> {t("payroll.work_day")} : </div>
                   <div className="ml-2">{record.workDay}</div>
                 </div>
                 <div className="flex justify-between">
-                  <div className="font-bold"> Shift W.H : </div>
+                  <div className="font-bold">  {t("payroll.shift_W_H")} : </div>
                   <div>{record.shiftWiseWorkHour}</div>
                 </div>
               </div>
               <div className="flex flex-col mr-10">
                 <div className="flex justify-between">
-                  <div className="font-bold">Month W.H : </div>
+                  <div className="font-bold"> {t("payroll.month_W_H")} : </div>
                   <div className="ml-2">{record.monthlyWorkHour}</div>
                 </div>
                 <div className="flex justify-between">
-                  <div className="font-bold">H Salary : </div>
+                  <div className="font-bold"> {t("payroll.h_Salary")} : </div>
                   <div className="ml-2">{record.hourlySalary}</div>
                 </div>
               </div>
@@ -279,6 +281,7 @@ const CalculatePayroll = () => {
   });
   const { isLoading } = useGetPayslipsQuery(pageConfig);
   const [addPayslip, { isLoading: addLoading }] = useAddPayrollMutation();
+  const { t } = useTranslation();
 
   const onMonthChange = (date, dateString) => {
     setPageConfig((prev) => {
@@ -335,15 +338,15 @@ const CalculatePayroll = () => {
 
   return (
     <div>
-      <PageTitle title='Back' />
+      <PageTitle title= {t("payroll.back")} />
       <UserPrivateComponent permission={"readAll-payroll"}>
         <Card className='mt-5'>
           <div className='flex justify-between'>
-            <h1 className='font-bold text-lg'>Calculate Payroll</h1>
+            <h1 className='font-bold text-lg'> {t("payroll.calculate_payroll")}</h1>
             <div className='flex gap-3'>
               <h1 className='text-base text-color-2 items-center'>
                 {" "}
-                Select Month :{" "}
+                {t("payroll.select_month")} :{" "}
               </h1>
               <DatePicker
                 format={"M"}
@@ -354,7 +357,7 @@ const CalculatePayroll = () => {
               />
               <h1 className='text-base text-color-2 items-center'>
                 {" "}
-                Select Year :{" "}
+                {t("payroll.select_year")} :{" "}
               </h1>
               <DatePicker
                 format={"YYYY"}
@@ -377,7 +380,7 @@ const CalculatePayroll = () => {
               onClick={OnSubmit}
               className='mt-5 text-end'
             >
-              Generate Payslip
+              {t("payroll.generate_payslip")}
             </Button>
           </div>
         </Card>

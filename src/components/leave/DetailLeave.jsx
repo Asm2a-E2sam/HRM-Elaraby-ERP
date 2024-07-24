@@ -6,27 +6,29 @@ import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import ReviewLeavePopup from "../UI/PopUp/ReviewLeavePopup";
 import Loader from "../loader/loader";
 import PageTitle from "../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 const DetailLeave = () => {
 	const { id } = useParams("id");
 	const { data: leave } = useGetLeaveQuery(id);
+  const { t } = useTranslation();
 
 	return (
     <div>
-      <PageTitle title="Back" />
+      <PageTitle title={t("leave.back")} />
       <UserPrivateComponent permission={"readSingle-leaveApplication"}>
         <Card className="mt-4">
           <div className="text-center mb-4">
             {" "}
             <h2 className="text-2xl font-semibold text-gray-600">
-              Leave Application #{leave?.id}{" "}
+            {t("leave.leave_application")} #{leave?.id}{" "}
             </h2>
           </div>
           {leave ? (
             <div className="flex justify-center ">
               <ul className="list-inside list-none border-2 border-inherit rounded px-5 py-5 ">
                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                  Name :{" "}
+                {t("leave.name")} :{" "}
                   <p className="ml-2 text-sm text-gray-900">
                     {(
                       leave?.user.firstName +
@@ -36,41 +38,41 @@ const DetailLeave = () => {
                   </p>
                 </li>
                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                  Leave Type :{" "}
+                {t("leave.leave_type")} :{" "}
                   <p className="ml-2 text-sm text-gray-900">
                     {leave.leaveType}
                   </p>
                 </li>
                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                  Leave From :{" "}
+                {t("leave.leave_from")} :{" "}
                   <p className="ml-2 text-sm text-gray-900">
                     {dayjs(leave.leaveFrom).format("DD-MM-YYYY")}
                   </p>
                 </li>
 
                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                  Leave To :{" "}
+                {t("leave.leave_to")} :{" "}
                   <p className="ml-2 text-sm text-gray-900">
                     {dayjs(leave.leaveTo).format("DD-MM-YYYY")}
                   </p>
                 </li>
 
                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                  Leave Duration :{" "}
+                {t("leave.leave_duration")} :{" "}
                   <p className="ml-2 text-sm text-red-500">
                     {leave.leaveDuration}
                   </p>
                 </li>
 
                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                  Leave Reason :{" "}
+                {t("leave.leave_reason")} :{" "}
                   <p className="ml-2 text-sm text-gray-900">
                     {leave.reason || "No reason"}
                   </p>
                 </li>
 
                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                  Leave Status :{" "}
+                {t("leave.leave_status")} :{" "}
                   <p className="ml-2 text-sm text-gray-900">
                     {leave.status === "pending" ? (
                       <span className="text-yellow-500">
@@ -89,7 +91,7 @@ const DetailLeave = () => {
                 </li>
 
                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                  Leave Acceted From :{" "}
+                {t("leave.leave_accepted_from")} :{" "}
                   <p className="ml-2 text-sm text-gray-900">
                     {leave.acceptLeaveFrom
                       ? dayjs(leave.acceptLeaveFrom).format("DD-MM-YYYY")
@@ -98,7 +100,7 @@ const DetailLeave = () => {
                 </li>
 
                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                  Leave Acceted To :{" "}
+                {t("leave.leave_accepted_to")} :{" "}
                   <p className="ml-2 text-sm text-gray-900">
                     {leave.acceptLeaveTo
                       ? dayjs(leave.acceptLeaveTo).format("DD-MM-YYYY")
@@ -107,7 +109,7 @@ const DetailLeave = () => {
                 </li>
 
                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                  Leave Acceted By :{" "}
+                {t("leave.leave_accepted_by")} :{" "}
                   <p className="ml-2 text-sm text-green-500">
                     {(leave.acceptLeaveBy?.firstName || "ON") +
                       " " +
@@ -116,14 +118,14 @@ const DetailLeave = () => {
                 </li>
 
                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                  Review Comment :{" "}
+                {t("leave.review_comment")} :{" "}
                   <p className="ml-2 text-sm text-gray-900">
                     {leave.reviewComment || "No comment"}
                   </p>
                 </li>
 
                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                  Attachment :{" "}
+                {t("leave.attachment")} :{" "}
                   <p className="ml-2 text-sm text-gray-900">
                     {leave.attachment ? (
                       <a
@@ -132,7 +134,7 @@ const DetailLeave = () => {
                         rel="noreferrer"
                         className="text-blue-500"
                       >
-                        Download
+                        {t("leave.download")}
                       </a>
                     ) : (
                       "No Attachment"

@@ -9,8 +9,11 @@ import { useGetPublicHolidaysQuery } from "../../redux/rtk/features/publicHolida
 import ViewBtn from "../Buttons/ViewBtn";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import AddPublicHoliday from "./AddPublicHoliday";
+import { useTranslation } from "react-i18next"; 
 
 const PublicHoliday = () => {
+    const { t } = useTranslation();
+
     const [pageConfig, setPageConfig] = useState({
         page: 1,
         count: 10,
@@ -21,20 +24,20 @@ const PublicHoliday = () => {
     const columns = [
         {
             id: 1,
-            title: "ID",
+            title: t("holiday.id"),
             dataIndex: "id",
             key: "id",
         },
         {
             id: 2,
-            title: "Name",
+            title: t("holiday.name"),
             dataIndex: "name",
             key: "name",
         },
 
         {
             id: 3,
-            title: "Date",
+            title: t("holiday.action"),
             dataIndex: "date",
             key: "date",
             render: (date) => dayjs(date).format("DD/MM/YYYY"),
@@ -42,14 +45,14 @@ const PublicHoliday = () => {
 
         {
             id: 3,
-            title: "Created At",
+            title: t("holiday.created_at"),
             dataIndex: "createdAt",
             key: "createdAt",
             render: (createdAt) => dayjs(createdAt).format("DD/MM/YYYY"),
         },
         {
             id: 4,
-            title: "Action",
+            title: t("holiday.action"),
             dataIndex: "id",
             key: "action",
             render: (id) => (
@@ -61,14 +64,14 @@ const PublicHoliday = () => {
     ];
     return (
         <>
-            <PageTitle title="Back" />
+            <PageTitle title={t("holiday.back")} />
             <CardCustom
-                title={"Public Holiday List"}
+                title={t("holiday.public_holiday_list")}
                 extra={
                     <>
                         <CreateDrawer
                             permission={"create-publicHoliday"}
-                            title={"Create Public Holiday"}
+                            title={t("holiday.create_public_holiday")}
                             width={35}
                         >
                             <AddPublicHoliday />

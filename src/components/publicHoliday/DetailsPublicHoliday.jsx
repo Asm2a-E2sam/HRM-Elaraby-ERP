@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import BtnLoader from "../loader/BtnLoader";
 import Loader from "../loader/loader";
 import PageTitle from "../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 import {
     PublicHolidayApi,
@@ -16,12 +17,12 @@ import PublicHolidayEdit from "../UI/PopUp/PublicHolidayEditPopup";
 
 const DetailPublicHoliday = () => {
     const { id } = useParams();
-
+    const { t } = useTranslation();
     const { data: publicHoliday, isLoading } = useGetPublicHolidayQuery(id);
 
     return (
         <div>
-            <PageTitle title=" Back  " />
+            <PageTitle title={t("holiday.back")} />
             <UserPrivateComponent permission={"readSingle-publicHoliday"}>
                 <Card className="mr-top mt-5">
                     {publicHoliday ? (
@@ -29,7 +30,7 @@ const DetailPublicHoliday = () => {
                             <div>
                                 <div className="flex justify-between ">
                                     <h3 className={"text-xl"}>
-                                        ID : {publicHoliday.id} |{" "}
+                                    {t("holiday.id")} : {publicHoliday.id} |{" "}
                                         {publicHoliday.name}
                                     </h3>
                                 </div>
@@ -65,13 +66,13 @@ const DetailPublicHoliday = () => {
                                         <div className="flex justify-center">
                                             <ul className="list-inside list-none ">
                                                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                                                    Name :{" "}
+                                                {t("holiday.name")} :{" "}
                                                     <p className="ml-2 text-sm text-gray-900">
                                                         {(publicHoliday?.name).toUpperCase()}{" "}
                                                     </p>
                                                 </li>
                                                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                                                    Date :{" "}
+                                                {t("holiday.date")} :{" "}
                                                     <p className="ml-2 text-sm text-gray-900">
                                                         {dayjs(
                                                             publicHoliday?.date
@@ -80,7 +81,7 @@ const DetailPublicHoliday = () => {
                                                 </li>
 
                                                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                                                    Created At :{" "}
+                                                {t("holiday.created_at")} :{" "}
                                                     <p className="ml-2 text-sm text-gray-900">
                                                         {dayjs(
                                                             publicHoliday?.createdAt
@@ -89,7 +90,7 @@ const DetailPublicHoliday = () => {
                                                 </li>
 
                                                 <li className="text-sm text-gray-600 font-semibold py-2 px-4 bg-gray-100 mb-1.5 rounded w-96 flex justify-start">
-                                                    Updated At :{" "}
+                                                {t("holiday.updated_at")} :{" "}
                                                     <p className="ml-2 text-sm text-gray-900">
                                                         {dayjs(
                                                             publicHoliday?.updatedAt

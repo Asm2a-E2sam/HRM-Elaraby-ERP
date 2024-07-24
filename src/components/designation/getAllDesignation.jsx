@@ -8,21 +8,23 @@ import CreateDrawer from "../CommonUi/CreateDrawer";
 import TablePagination from "../CommonUi/TablePagination";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import AddDesignation from "./addDesignation";
+import { useTranslation } from "react-i18next"; 
 
 const GetAllDesignation = () => {
   const [pageConfig, setPageConfig] = useState({status: 'true', page:1, count: 10})
   const { data, isLoading: loading } = useGetDesignationsQuery(pageConfig);
+  const { t } = useTranslation();
 
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("user_list.id"),
       dataIndex: "id",
       key: "id",
     },
     {
       id: 2,
-      title: "Name",
+      title: t("user_list.name"),
       dataIndex: "name",
       key: "name",
       render: (name, { id }) => (
@@ -32,7 +34,7 @@ const GetAllDesignation = () => {
 
     {
       id: 3,
-      title: "Action",
+      title: t("user_list.action"),
       key: "action",
       render: ({ id }) => (
         <UserPrivateComponent permission={"readSingle-designation"}>
@@ -43,12 +45,12 @@ const GetAllDesignation = () => {
   ];
   return (
     <CardCustom
-      title={"Designation List"}
+      title={t("user_list.designation_list")}
       extra={
         <>
           <CreateDrawer
             permission={"create-designation"}
-            title={"Create Designation"}
+            title={t("user_list.create_designation")}
             width={30}
           >
             <AddDesignation />

@@ -11,8 +11,10 @@ import CreateDrawer from "../CommonUi/CreateDrawer";
 import TablePagination from "../CommonUi/TablePagination";
 import PageTitle from "../page-header/PageHeader";
 import AddAttendance from "./AddAttendance";
+import { useTranslation } from "react-i18next"; 
 
 const GetAllAttendance = (props) => {
+  const { t } = useTranslation();
   const [pageConfig, setPageConfig] = useState({
     page: 1,
     count: 10,
@@ -40,27 +42,27 @@ const GetAllAttendance = (props) => {
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("attendance.id"),
       dataIndex: "id",
       key: "id",
     },
     {
       id: 10,
-      title: "Name",
+      title: t("attendance.name"),
       dataIndex: "user",
       key: "user",
       render: (user) => `${user?.firstName} ${user?.lastName}`,
     },
     {
       id: 2,
-      title: "In Time",
+      title: t("attendance.in_time"),
       dataIndex: "inTime",
       key: "inTime",
       render: (inTime) => dayjs(inTime).format("DD-MM-YYYY, h:mm A") || "NONE",
     },
     {
       id: 3,
-      title: "Out Time ",
+      title: t("attendance.out_time"),
       dataIndex: `outTime`,
       key: "outTime",
       render: (outTime) =>
@@ -68,7 +70,7 @@ const GetAllAttendance = (props) => {
     },
     {
       id: 4,
-      title: "In Status",
+      title: t("attendance.in_status"),
       dataIndex: "inTimeStatus",
       key: "inTimeStatus",
       render: (inTimeStatus) => {
@@ -80,13 +82,13 @@ const GetAllAttendance = (props) => {
         } else if (inTimeStatus === "On Time") {
           return <Tag color='green'>{inTimeStatus.toUpperCase()}</Tag>;
         } else {
-          return <Tag style={{ color: "orange" }}>NONE</Tag>;
+          return <Tag style={{ color: "orange" }}>{t("attendance.none")}</Tag>;
         }
       },
     },
     {
       id: 5,
-      title: "Out Status",
+      title: t("attendance.out_status"),
       dataIndex: "outTimeStatus",
       key: "outTimeStatus",
       render: (outTimeStatus) => {
@@ -98,13 +100,13 @@ const GetAllAttendance = (props) => {
         } else if (outTimeStatus === "On Time") {
           return <Tag color='green'>{outTimeStatus.toUpperCase()}</Tag>;
         } else {
-          return <Tag style={{ color: "orange" }}>NONE</Tag>;
+          return <Tag style={{ color: "orange" }}>{t("attendance.none")}</Tag>;
         }
       },
     },
     {
       id: 6,
-      title: "Total Hour",
+      title: t("attendance.total_hours"),
       dataIndex: "totalHour",
       key: "totalHour",
       render: (totalHour) => totalHour || "Not Checked",
@@ -112,7 +114,7 @@ const GetAllAttendance = (props) => {
 
     {
       id: 7,
-      title: "Punch By",
+      title: t("attendance.punch_by"),
       dataIndex: "punchBy",
       key: "punchBy",
       render: (punchBy) => (
@@ -124,9 +126,9 @@ const GetAllAttendance = (props) => {
   ];
   return (
     <>
-      <PageTitle title='Back' />
+      <PageTitle title={t("attendance.back")} />
       <CardCustom
-        title={"Attendance List"}
+        title={t("attendance.attendance_list")}
         extra={
           <>
             <RangePicker
@@ -138,7 +140,7 @@ const GetAllAttendance = (props) => {
             />
             <CreateDrawer
               permission={"create-attendance"}
-              title={"Add Attendance"}
+              title={t("attendance.add_attendance")}
               width={35}
             >
               <AddAttendance />

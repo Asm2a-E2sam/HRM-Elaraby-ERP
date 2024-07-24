@@ -8,8 +8,10 @@ import { toast } from "react-toastify";
 import { useAddLeaveMutation } from "../../redux/rtk/features/leave/leaveApi";
 import getUserFromToken from "../../utils/getUserFromToken";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
+import { useTranslation } from "react-i18next"; 
 
 const AddLeave = ({ drawer }) => {
+  const { t } = useTranslation();
   const id = getUserFromToken();
   const [addLeaveApplication, { isLoading }] = useAddLeaveMutation();
   const { Title } = Typography;
@@ -46,7 +48,7 @@ const AddLeave = ({ drawer }) => {
             className='column-design border rounded card-custom'
           >
             <Title level={4} className='m-2 mt-5 mb-5 text-center'>
-              Application for Leave
+            {t("leave.application_for_Leave")}
             </Title>
             <Form
               form={form}
@@ -65,33 +67,33 @@ const AddLeave = ({ drawer }) => {
               <div>
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label='Leave Type'
+                  label={t("leave.leave_type")}
                   name='leaveType'
                   rules={[
                     {
                       required: true,
-                      message: "Please input your shift!",
+                      message:  t("leave.msg_error"),
                     },
                   ]}
                 >
                   <Select
                     mode='single'
-                    placeholder='Select leave type'
+                    placeholder={t("leave.select_leave_type")}
                     optionFilterProp='children'
                   >
-                    <Select.Option value='PAID'>PAID</Select.Option>
-                    <Select.Option value='UNPAID'>UNPAID</Select.Option>
+                    <Select.Option value='PAID'>{t("leave.paid")}</Select.Option>
+                    <Select.Option value='UNPAID'>{t("leave.unpaid")}</Select.Option>
                   </Select>
                 </Form.Item>
 
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label='Start Date'
+                  label={t("leave.start_date")}
                   name='leaveFrom'
                   rules={[
                     {
                       required: true,
-                      message: "Please input your shift!",
+                      message:  t("leave.msg_error"),
                     },
                   ]}
                 >
@@ -100,12 +102,12 @@ const AddLeave = ({ drawer }) => {
 
                 <Form.Item
                   style={{ marginBottom: "20px" }}
-                  label='End Date'
+                  label= {t("leave.end_date")}
                   name='leaveTo'
                   rules={[
                     {
                       required: true,
-                      message: "Please input your shift!",
+                      message:  t("leave.msg_error"),
                     },
                   ]}
                 >
@@ -126,7 +128,7 @@ const AddLeave = ({ drawer }) => {
                     block
                     loading={isLoading}
                   >
-                    Submit Leave
+                    {t("leave.submit_leave")}
                   </Button>
                 </Form.Item>
               </div>

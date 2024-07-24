@@ -45,7 +45,7 @@ const Sidenav = ({ color, sideNavOpenKeys }) => {
                 // <img src="/public/logo-elaraby2.png" alt="logo" width={150} />
             ),
             key: "logo",
-            icon: <img src="/public/short-logo.png" alt="logo" width={40} className="my-5"/>,
+            icon: <img src="/short-logo.png" alt="logo" width={40} className="my-5"/>,
         },
 
         {

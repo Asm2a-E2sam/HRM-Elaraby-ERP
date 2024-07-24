@@ -7,21 +7,23 @@ import { useParams } from "react-router-dom";
 import { useGetAttendanceByUserIdQuery } from "../../redux/rtk/features/attendance/attendanceApi";
 import CardCustom from "../CommonUi/CardCustom";
 import TablePagination from "../CommonUi/TablePagination";
+import { useTranslation } from "react-i18next"; 
 
 const UserAttendance = () => {
+  const { t } = useTranslation();
   const { id } = useParams("id");
   const [pageConfig, setPageConfig] = useState({page:1, count:10});
   const { data, isLoading: loading } = useGetAttendanceByUserIdQuery({id, ...pageConfig});
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("attendance.id"),
       dataIndex: "id",
       key: "id",
     },
     {
       id: 2,
-      title: "Name",
+      title: t("attendance.name"),
       dataIndex: "user",
       key: "user",
       render: ({ firstName, lastName }) => firstName + " " + lastName,
@@ -29,7 +31,7 @@ const UserAttendance = () => {
 
     {
       id: 3,
-      title: "inTime",
+      title: t("attendance.in_time"),
       dataIndex: "inTime",
       key: "inTime",
       render: (inTime) => dayjs(inTime).format("DD-MM-YYYY, h:mm A"),
@@ -37,14 +39,14 @@ const UserAttendance = () => {
 
     {
       id: 4,
-      title: "Out Time",
+      title: t("attendance.out_time"),
       dataIndex: "outTime",
       key: "outTime",
       render: (outTime) => dayjs(outTime).format("DD-MM-YYYY, h:mm A"),
     },
     {
       id: 4,
-      title: "In Status",
+      title: t("attendance.in_status"),
       dataIndex: "inTimeStatus",
       key: "inTimeStatus",
       render: (inTimeStatus) => {
@@ -56,13 +58,13 @@ const UserAttendance = () => {
         } else if (inTimeStatus === "On Time") {
           return <Tag color='green'>{inTimeStatus.toUpperCase()}</Tag>;
         } else {
-          return <Tag style={{ color: "orange" }}>NONE</Tag>;
+          return <Tag style={{ color: "orange" }}>{t("attendance.none")}</Tag>;
         }
       },
     },
     {
       id: 5,
-      title: "Out Status",
+      title: t("attendance.out_status"),
       dataIndex: "outTimeStatus",
       key: "outTimeStatus",
       render: (outTimeStatus) => {
@@ -74,13 +76,13 @@ const UserAttendance = () => {
         } else if (outTimeStatus === "On Time") {
           return <Tag color='green'>{outTimeStatus.toUpperCase()}</Tag>;
         } else {
-          return <Tag style={{ color: "orange" }}>NONE</Tag>;
+          return <Tag style={{ color: "orange" }}>{t("attendance.nane")}</Tag>;
         }
       },
     },
     {
       id: 7,
-      title: "Punch By",
+      title: t("attendance.punch_by"),
       dataIndex: "punchBy",
       key: "punchBy",
       render: (punchBy) => (
@@ -91,7 +93,7 @@ const UserAttendance = () => {
     },
     {
       id: 6,
-      title: "Total Hour",
+      title: t("attendance.total_hours"),
       dataIndex: "totalHour",
       key: "totalHour",
       render: (totalHour) => totalHour || "Not Checked",
@@ -99,8 +101,8 @@ const UserAttendance = () => {
   ];
   return (
     <>
-      <PageTitle title='Back' />
-      <CardCustom title={"Attendance History"}>
+      <PageTitle title={t("attendance.back")} />
+      <CardCustom title={t("attendance.attendance_history")}>
         <TablePagination
           list={data?.getAllAttendanceByUserId}
           total={data?.totalAttendanceByUserId}

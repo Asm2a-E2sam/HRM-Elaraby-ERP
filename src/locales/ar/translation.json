@@ -77,9 +77,8 @@
     "upload_logo": "تحميل الشعار",
     "upload_button": "رفع",
     "field_required": "هذا الحقل مطلوب",
-    "register_button": "تسجيل",
-    "already_have_account": "هل لديك حساب؟",
-    "login_here": "تسجيل الدخول هنا"
+    "update_details": "تحديث البيانات",
+    "company_setting": "بيانات الشركة"
   },
   "footer": {
     "elaraby": "العربي",
@@ -306,9 +305,11 @@
     "click_edit_to_add": "لم يتم العثور عليه، انقر على زر التحرير لإضافة جديد"
   },
   "user_list": {
+    "back":"الخلف",
     "user_list": "قائمة المستخدمين",
     "id": "معرف",
     "name": "اسم",
+    "name_employee":"اسم الموظف",
     "username": "اسم المستخدم",
     "designation": "تعيين",
     "e_status": "الحالة الإلكترونية",
@@ -321,7 +322,27 @@
     "download_csv":"تنزيل CSV",
     "created_at":"أنشئت في",
     "create_role":"إضافة وظيفة",
-    "role_list":"قائمة الوظائف"
-    
-}
+    "role_list":"قائمة الوظائف",
+    "new_permission":"إذن جديد",
+    "designation_list":"قائمة التعيينات",
+    "create_designation":"إضافة تعيين",
+    "staffs_information":"معلومات الموظفين",
+    "department_list":"قائمة الأقسام",
+    "create_department":"إضافة قسم"
+  },
+  "attendance": {
+    "id": "رقم الهوية",
+    "name": "الاسم",
+    "in_time": "وقت الدخول",
+    "out_time": "وقت الخروج",
+    "in_status": "حالة الدخول",
+    "out_status": "حالة الخروج",
+    "total_hours": "إجمالي الساعات",
+    "punch_by": "تم الضرب بواسطة",
+    "attendance_list": "قائمة الحضور",
+    "add_attendance": "إضافة حضور",
+    "back": "رجوع",
+    "none": "لا يوجد",
+    "attendance_history":"تاريخ الحضور"
+  }
 }

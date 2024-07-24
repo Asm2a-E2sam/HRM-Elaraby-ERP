@@ -15,10 +15,12 @@ import { useGetSettingQuery } from "../../redux/rtk/features/setting/settingApi"
 import PrintIconSVG from "../Icons/PrintIconSVG";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import Loader from "../loader/loader";
+import { useTranslation } from "react-i18next"; 
 
 // eslint-disable-next-line react/display-name
 const PrintToPdf = forwardRef(({ data, invoiceData }, ref) => {
   const { Title } = Typography;
+  const { t } = useTranslation();
   return (
     <Fragment>
       <div ref={ref} className="wrapper">
@@ -28,7 +30,7 @@ const PrintToPdf = forwardRef(({ data, invoiceData }, ref) => {
           </Row>
           <Row justify="center">
             <h1 className="text-3xl font-semibold text-slate-600 mt-2 mb-8">
-              SALARY SLIP
+            {t("payroll.salary_slip")}
             </h1>
           </Row>
           <Row>
@@ -61,37 +63,37 @@ const PrintToPdf = forwardRef(({ data, invoiceData }, ref) => {
             <Col span={6}>
               <p>
                 <span className="text-sm font-semibold text-slate-700">
-                  Salary:
+                {t("payroll.salary")}:
                 </span>{" "}
                 $ {data.salary}
               </p>
               <span className="text-sm font-semibold text-slate-700">
-                Work Day:{" "}
+              {t("payroll.work_day")}:{" "}
               </span>{" "}
               {data.workDay}
               <p>
                 <span className="text-sm font-semibold text-slate-700">
-                  Working Hour:{" "}
+                {t("payroll.work_day")}:{" "}
                 </span>{" "}
-                {data.workingHour} Hours
+                {data.workingHour}  {t("payroll.hours")}
               </p>
             </Col>
             <Col span={6}>
               <p>
                 <span className="text-sm font-semibold text-slate-700">
-                  Payslip for:
+                {t("payroll.payslip_for")}:
                 </span>{" "}
                 {dayjs().month(data.salaryMonth -1).format("MMMM")}, {data.salaryYear}
               </p>
               <p>
                 <span className="text-sm font-semibold text-slate-700">
-                  Created at:
+                {t("payroll.status")}:
                 </span>{" "}
                 {dayjs(data.createdAt).format("DD/MM/YYYY")}
               </p>
               <p>
                 <span className="text-sm font-semibold text-slate-700">
-                  Status:
+                {t("payroll.salary_slip")}:
                 </span>{" "}
                 {data.paymentStatus}
               </p>
@@ -103,11 +105,11 @@ const PrintToPdf = forwardRef(({ data, invoiceData }, ref) => {
 
             <Col span={12}>
               <h2 className="text-xl font-semibold text-slate-600 mb-4">
-                Earnings
+              {t("payroll.earnings")}
               </h2>
               <Row>
                 <Col span={12}>
-                  <Title level={5}>Salary Payable</Title>
+                  <Title level={5}>{t("payroll.salary_payable")}</Title>
                 </Col>
                 <Col
                   span={12}
@@ -118,7 +120,7 @@ const PrintToPdf = forwardRef(({ data, invoiceData }, ref) => {
               </Row>
               <Row>
                 <Col span={12}>
-                  <Title level={5}>Bonus : {data.bonusComment}</Title>
+                  <Title level={5}>{t("payroll.bonus")} : {data.bonusComment}</Title>
                 </Col>
                 <Col
                   span={12}
@@ -131,7 +133,7 @@ const PrintToPdf = forwardRef(({ data, invoiceData }, ref) => {
               <Divider></Divider>
               <Row>
                 <Col span={12}>
-                  <Title level={4}>Total Earnings</Title>
+                  <Title level={4}>{t("payroll.total_earnings")}</Title>
                 </Col>
                 <Col
                   span={12}
@@ -144,12 +146,12 @@ const PrintToPdf = forwardRef(({ data, invoiceData }, ref) => {
 
             <Col span={12}>
               <h2 className="text-xl font-semibold text-slate-600 mb-4">
-                Deductions
+              {t("payroll.deduction")}
               </h2>
 
               <Row>
                 <Col span={12}>
-                  <Title level={5}>Deduction : {data.deductionComment}</Title>
+                  <Title level={5}>{t("payroll.deduction")} : {data.deductionComment}</Title>
                 </Col>
                 <Col
                   span={12}
@@ -162,7 +164,7 @@ const PrintToPdf = forwardRef(({ data, invoiceData }, ref) => {
               <Divider style={{ marginTop: "40px" }}></Divider>
               <Row>
                 <Col span={12}>
-                  <Title level={4}>Total Deduction</Title>
+                  <Title level={4}>{t("payroll.total_deduction")}</Title>
                 </Col>
                 <Col
                   span={12}
@@ -177,11 +179,11 @@ const PrintToPdf = forwardRef(({ data, invoiceData }, ref) => {
           <div style={{ marginTop: "5%" }} className="flex justify-end">
             <div>
               <Title level={4}>
-                Total Earnings : $ {data.salaryPayable + data.bonus}{" "}
+              {t("payroll.total_earnings")} : $ {data.salaryPayable + data.bonus}{" "}
               </Title>
-              <Title level={4}>Total Deduction : $ {data.deduction} </Title>
+              <Title level={4}>{t("payroll.total_deduction")} : $ {data.deduction} </Title>
               <Title level={3}>
-                Total Payable Salary : $ {data.totalPayable}{" "}
+              {t("payroll.total_payable_salary")} : $ {data.totalPayable}{" "}
               </Title>
             </div>
           </div>
@@ -193,6 +195,8 @@ const PrintToPdf = forwardRef(({ data, invoiceData }, ref) => {
 
 const DetailPayslip = () => {
   const componentRef = useRef();
+  const { t } = useTranslation();
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -215,7 +219,7 @@ const DetailPayslip = () => {
           <div className='flex justify-end mr-10'>
             {invoiceData && (
               <Button type='primary' size='large' onClick={handlePrint}>
-                Print Payslip
+                {t("payroll.print_payslip")}
               </Button>
             )}
           </div>

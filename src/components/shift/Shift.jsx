@@ -7,8 +7,11 @@ import CreateDrawer from "../CommonUi/CreateDrawer";
 import TablePagination from "../CommonUi/TablePagination";
 import PageTitle from "../page-header/PageHeader";
 import AddShift from "./AddShift";
+import { useTranslation } from "react-i18next"; 
 
 const Shift = (props) => {
+  const { t } = useTranslation();
+
   const [pageConfig, setPageConfig] = useState({
     page: 1,
     count: 10,
@@ -18,20 +21,20 @@ const Shift = (props) => {
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("shift.id"),
       dataIndex: "id",
       key: "id",
     },
     {
       id: 2,
-      title: "Name",
+      title: t("shift.name"),
       dataIndex: "name",
       key: "name",
     },
 
     {
       id: 3,
-      title: "Start Time",
+      title: t("shift.start_time"),
       dataIndex: "startTime",
       key: "startTime",
       render: (startTime) => dayjs(startTime).format("hh:mm A"),
@@ -39,14 +42,14 @@ const Shift = (props) => {
 
     {
       id: 4,
-      title: "End Time",
+      title: t("shift.end_time"),
       dataIndex: "endTime",
       key: "endTime",
       render: (endTime) => dayjs(endTime).format("hh:mm A"),
     },
     {
       id: 5,
-      title: "Action",
+      title: t("shift.action"),
       dataIndex: "id",
       key: "action",
       render: (id) => <ViewBtn path={`/admin/shift/${id}/`} />,
@@ -54,14 +57,14 @@ const Shift = (props) => {
   ];
   return (
     <div>
-      <PageTitle title='Back' />
+      <PageTitle title={t("shift.back")} />
       <CardCustom
-        title={"Shift List"}
+        title={t("shift.shift_list")}
         extra={
           <>
             <CreateDrawer
               permission={"create-shift"}
-              title={"Add shift"}
+              title={t("shift.add_shift")}
               width={30}
             >
               <AddShift />

@@ -5,30 +5,31 @@ import CardCustom from "../CommonUi/CardCustom";
 import CreateDrawer from "../CommonUi/CreateDrawer";
 import TablePagination from "../CommonUi/TablePagination";
 import PageTitle from "../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 import AddEmploymentStatus from "./AddEmploymentStatus";
 
 const EmploymentStatus = () => {
   const [pageConfig, setPageConfig] = useState({status: 'true', page:1, count:10});
   const { data, isLoading } = useGetEmploymentStatusesQuery(pageConfig);
-
+  const { t } = useTranslation();
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("employee_status.id"),
       dataIndex: "id",
       key: "id",
     },
     {
       id: 2,
-      title: "Name",
+      title: t("employee_status.name"),
       dataIndex: "name",
       key: "name",
     },
 
     {
       id: 3,
-      title: "Color Code",
+      title: t("employee_status.color_code"),
       dataIndex: "colourValue",
       key: "colourValue",
       render: (colourValue) => (
@@ -49,13 +50,13 @@ const EmploymentStatus = () => {
 
     {
       id: 4,
-      title: "Description",
+      title: t("employee_status.description"),
       dataIndex: "description",
       key: "description",
     },
     {
       id: 5,
-      title: "Action",
+      title: t("employee_status.action"),
       dataIndex: "id",
       key: "action",
       render: (id) => <ViewBtn path={`/admin/employment-status/${id}/`} />,
@@ -63,15 +64,16 @@ const EmploymentStatus = () => {
   ];
   return (
     <div>
-      <PageTitle title='Back' />
+      <PageTitle title=
+      {t("employee_status.back")} />
 
       <CardCustom
-        title={"Employment Status List"}
+        title={t("employee_status.employment_status_list")}
         extra={
           <>
             <CreateDrawer
               permission={"create-employmentStatus"}
-              title={"Add employment status"}
+              title={t("employee_status.add_employment_status")}
               width={30}
             >
               <AddEmploymentStatus />
