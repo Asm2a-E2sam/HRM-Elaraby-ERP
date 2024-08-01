@@ -11,8 +11,10 @@ import {
 } from "../../../redux/rtk/features/projectManagement/project/taskPriority/taskPriorityApi";
 import Loader from "../../loader/loader";
 import PageTitle from "../../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 const UpdateTaskPriority = () => {
+  const { t } = useTranslation();
   const [initialValues, setInitialValues] = useState(null);
   const { id } = useParams("id");
   const { data: taskPriority } = useGetTaskPriorityQuery(id);
@@ -48,7 +50,7 @@ const UpdateTaskPriority = () => {
   return (
     <>
       {/* <UserPrivateComponent permission={"create-leaveApplication"}> */}
-      <PageTitle title="Back" />
+      <PageTitle title={t("task_status.back")} />
       <Row className="mt-[25px]">
         <Col
           xs={24}
@@ -59,7 +61,7 @@ const UpdateTaskPriority = () => {
           className="column-design border rounded card-custom"
         >
           <Title level={4} className="m-2 mt-5 mb-5 text-center">
-            Update Task Priority
+          {t("task_status.update_task_priority")}
           </Title>
           {initialValues ? (
             <Form
@@ -81,16 +83,16 @@ const UpdateTaskPriority = () => {
               <div>
                 <Form.Item
                   style={{ marginBottom: "20px" }}
-                  label="Task Priority Name"
+                  label={t("task_status.task_priority_name")}
                   name="name"
                   rules={[
                     {
                       required: true,
-                      message: "Enter Task Status Name",
+                      message: t("task_status.task_priority_name_msg ") ,
                     },
                   ]}
                 >
-                  <Input placeholder="Enter Task Status Name" />
+                  <Input placeholder={t("task_status.task_priority_name_msg")}/>
                 </Form.Item>
 
                 <Form.Item
@@ -107,7 +109,7 @@ const UpdateTaskPriority = () => {
                     block
                     loading={isLoading}
                   >
-                    Update Now
+                    {t("task_status.update_now")}
                   </Button>
                 </Form.Item>
               </div>

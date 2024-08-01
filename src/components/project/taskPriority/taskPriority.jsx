@@ -9,26 +9,28 @@ import CreateDrawer from "../../CommonUi/CreateDrawer";
 import TablePagination from "../../CommonUi/TablePagination";
 import PageTitle from "../../page-header/PageHeader";
 import AddTaskPriority from "./AddtaskPriority";
+import { useTranslation } from "react-i18next"; 
 
 const TaskStatus = () => {
   const { isLoading, data: list } = useGetTaskPrioritiesQuery();
+  const { t } = useTranslation();
 
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("task_status.id"),
       dataIndex: "id",
       key: "id",
     },
     {
       id: 2,
-      title: "Name",
+      title: t("task_status.name"),
       key: "name",
       render: ({ name }) => name.toUpperCase(),
     },
     {
       id: 3,
-      title: "Action",
+      title: t("task_status.action"),
       dataIndex: "id",
       key: "action",
       render: (id) => (
@@ -49,14 +51,14 @@ const TaskStatus = () => {
   ];
   return (
     <div>
-      <PageTitle title='Back' />
+      <PageTitle title={t("task_status.back")} />
 
       <CardCustom
-        title={"Task Priority Column List"}
+        title={t("task_status.task_priority")}
         extra={
           <>
             <CreateDrawer
-              title={"Create Task Priority"}
+              title={t("task_status.create_task_priority")}
               permission={"create-priority"}
               width={30}
             >

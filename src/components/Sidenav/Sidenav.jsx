@@ -399,7 +399,7 @@ const Sidenav = ({ color, sideNavOpenKeys }) => {
                 hasPermission("readAll-project") && {
                     label: (
                         <NavLink to="/admin/project">
-                            <span>{t("sidebar.all_project")}</span>
+                            <span>{t("sidebar.all_projects")}</span>
                         </NavLink>
                     ),
                     key: "allProject",

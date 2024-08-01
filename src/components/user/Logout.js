@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { useLogoutMutation } from "../../redux/rtk/features/user/userApi";
+import { useLogoutUserMutation } from "../../redux/rtk/features/user/userApi";
 
 function Logout() {
   const id = Number(localStorage.getItem("id"));
-  const [logout] = useLogoutMutation()
+  const [logout] = useLogoutUserMutation()
   useEffect(() => {
     logout(id)
   }, [logout, id]);

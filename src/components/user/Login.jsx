@@ -1,24 +1,37 @@
-import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
-import React from "react";
-
+import { Button, Card, Col, Form, Input, Row, Typography, Radio } from "antd";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { useLoginMutation } from "../../redux/rtk/features/user/userApi";
-import LoginTable from "../Card/LoginTable";
+import { useLoginUserMutation } from "../../redux/rtk/features/user/userApi";
+import { useLoginAdminMutation } from "../../redux/rtk/features/user/adminApi";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const Login = () => {
-  const [login, { isLoading }] = useLoginMutation();
+  const [loginUser, { isLoading: isUserLoading }] = useLoginUserMutation();
+  const [loginAdmin, { isLoading: isAdminLoading }] = useLoginAdminMutation();
   const { Title } = Typography;
+  const { t } = useTranslation();
+
+  const [role, setRole] = useState("user");
+
+  const onRoleChange = (e) => {
+    setRole(e.target.value);
+  };
 
   const onFinish = async (values) => {
-    login(values);
+    let val = { username: values.username, password: values.password };
+    console.log(values);
+    if (role === "admin") {
+      loginAdmin(val);
+    } else {
+      loginUser(val);
+    }
   };
-  
-  const { t } = useTranslation();
+
   const onFinishFailed = (errorInfo) => {
     toast.error(t("login.failed_msg"));
   };
+
   return (
     <>
       <Row className="card-row ">
@@ -70,15 +83,29 @@ const Login = () => {
                 <Input.Password />
               </Form.Item>
 
+              <Form.Item name="role" className="mb-5 mx-4">
+                <Radio.Group onChange={onRoleChange} value={role}>
+                  <Radio value="user">{t("login.employee")}</Radio>
+                  <Radio value="admin">{t("login.admin")}</Radio>
+                </Radio.Group>
+              </Form.Item>
+
               <Form.Item className="flex justify-center">
-                <Button type="primary" htmlType="submit" loading={isLoading}>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  loading={role === "admin" ? isAdminLoading : isUserLoading}
+                >
                   {t("login.submit")}
                 </Button>
               </Form.Item>
-              <Form.Item className="w-100 mt-[30px]text-center">
+
+              <Form.Item className="w-100 mt-[30px] text-center">
                 <p>
-                {t("login.do_not_have_account")}
-                    <Link to="/admin/auth/register" className="px-3">{t("login.register_now")}</Link>
+                  {t("login.do_not_have_account")}
+                  <Link to="/admin/auth/register" className="px-3">
+                    {t("login.register_now")}
+                  </Link>
                 </p>
               </Form.Item>
             </Form>

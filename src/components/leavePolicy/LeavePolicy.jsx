@@ -7,8 +7,11 @@ import TablePagination from "../CommonUi/TablePagination";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import PageTitle from "../page-header/PageHeader";
 import AddLeavePolicy from "./AddLeavePolicy";
+import { useTranslation } from "react-i18next"; 
+
 
 const LeavePolicy = () => {
+    const { t } = useTranslation();
     const [pagConfig, setPageConfig] = useState({
         status: "true",
         page: 1,
@@ -18,33 +21,33 @@ const LeavePolicy = () => {
     const columns = [
         {
             id: 1,
-            title: "ID",
+            title: t("policy.id"),
             dataIndex: "id",
             key: "id",
         },
         {
             id: 2,
-            title: "Name",
+            title: t("policy.name"),
             dataIndex: "name",
             key: "name",
         },
 
         {
             id: 3,
-            title: "Total Paid Leave",
+            title: t("policy.total_paid_leave"),
             dataIndex: "paidLeaveCount",
             key: "paidLeaveCount",
         },
 
         {
             id: 3,
-            title: "Total Unpaid Leave",
+            title: t("policy.total_unpaid_leave"),
             dataIndex: "unpaidLeaveCount",
             key: "unpaidLeaveCount",
         },
         {
             id: 4,
-            title: "Action",
+            title: t("policy.action"),
             dataIndex: "id",
             key: "action",
             render: (id) => (
@@ -56,14 +59,14 @@ const LeavePolicy = () => {
     ];
     return (
         <>
-            <PageTitle title="Back" />
+            <PageTitle title={t("policy.back")} />
             <CardCustom
-                title={"Leave Policies"}
+                title={t("policy.leave_policies")}
                 extra={
                     <>
                         <CreateDrawer
                             permission={"create-leavePolicy"}
-                            title={"Create Leave Policy"}
+                            title={t("policy.create_leave_policy")}
                             width={35}
                         >
                             <AddLeavePolicy />

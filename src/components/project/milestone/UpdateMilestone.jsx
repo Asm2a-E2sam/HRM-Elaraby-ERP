@@ -19,8 +19,10 @@ import {
 import { useGetProjectsQuery } from "../../../redux/rtk/features/projectManagement/project/project/projectApi";
 import { toastHandler } from "../../../utils/functions";
 import Loader from "../../loader/loader";
+import { useTranslation } from "react-i18next"; 
 
 const UpdateMilestone = () => {
+  const { t } = useTranslation();
   const { id } = useParams("id");
   const { data: milestone, loading } = useGetMilestoneQuery(id);
   const { data: list } = useGetProjectsQuery();
@@ -72,7 +74,7 @@ const UpdateMilestone = () => {
           className="column-design border rounded card-custom"
         >
           <Title level={4} className="m-2 mt-5 mb-5 text-center">
-            Update Milestone
+          {t("milestone.update_milestone")}
           </Title>
           {initialState ? (
             <Form
@@ -93,19 +95,19 @@ const UpdateMilestone = () => {
               <div>
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label="Project"
+                  label= {t("milestone.project")}
                   name="projectId"
                   rules={[
                     {
                       required: true,
-                      message: "Select Project",
+                      message: t("milestone.select_project"),
                     },
                   ]}
                 >
                   <Select
                     mode="single"
                     loading={loading}
-                    placeholder="Select Project"
+                    placeholder={t("milestone.select_project")}
                     optionFilterProp="children"
                   >
                     {list.map((item) => (
@@ -118,25 +120,25 @@ const UpdateMilestone = () => {
                 <Form.Item
                   style={{ marginBottom: "10px" }}
                   label="Milestone Name"
-                  name="name"
+                  name= {t("milestone.name")}
                   rules={[
                     {
                       required: true,
-                      message: "Enter Milestone Name",
+                      message: t("milestone.enter_milestone_name"),
                     },
                   ]}
                 >
-                  <Input placeholder="Enter Milestone Name" />
+                  <Input placeholder= {t("milestone.start_date_msg")} />
                 </Form.Item>
 
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label="Start Date"
+                  label={t("milestone.start_date")}
                   name="startDate"
                   rules={[
                     {
                       required: true,
-                      message: "Please input Project Start Date!",
+                      message: t("milestone.start_date_msg"),
                     },
                   ]}
                 >
@@ -145,12 +147,12 @@ const UpdateMilestone = () => {
 
                 <Form.Item
                   style={{ marginBottom: "20px" }}
-                  label="End Date"
+                  label={t("milestone.end_date")}
                   name="endDate"
                   rules={[
                     {
                       required: true,
-                      message: "Please input Project End Date!",
+                      message: t("milestone.end_date_msg"),
                     },
                   ]}
                 >
@@ -159,16 +161,16 @@ const UpdateMilestone = () => {
 
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label="Milestone Description"
+                  label= {t("milestone.milestone_description")}
                   name="description"
                   rules={[
                     {
                       required: true,
-                      message: "Enter Milestone Description",
+                      message: t("milestone.milestone_description_msg"),
                     },
                   ]}
                 >
-                  <Input placeholder="Enter Milestone Description" />
+                  <Input placeholder={t("milestone.milestone_description_msg")} />
                 </Form.Item>
 
                 <Form.Item
@@ -185,7 +187,7 @@ const UpdateMilestone = () => {
                     block
                     loading={isLoading}
                   >
-                    Submit
+                    {t("milestone.submit")}
                   </Button>
                 </Form.Item>
               </div>

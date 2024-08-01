@@ -11,17 +11,19 @@ import {
 } from "../../redux/rtk/features/transaction/transactionApi";
 import CommonDelete from "../CommonUi/CommonDelete";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
+import { useTranslation } from "react-i18next"; 
 
 //PopUp
 
 const DetailTransaction = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
 
   const { data: payment } = useGetTransactionQuery(id);
 
   return (
     <div>
-      <PageTitle title=' Back ' subtitle={`Payment ${id} information`} />
+      <PageTitle title={t("transaction.back")} subtitle={`Payment ${id} information`} />
 
       <UserPrivateComponent permission={"readSingle-transaction"}>
         <div className='my-[40px]'>
@@ -35,7 +37,7 @@ const DetailTransaction = () => {
                   <h5>
                     <i className='bi bi-person-lines-fill'></i>
                     <span className='ml-[20px]'>
-                      ID : {payment.id} | {payment.date}
+                      {t("transaction.id")} : {payment.id} | {payment.date}
                     </span>
                   </h5>
                   <div className='text-end'>
@@ -52,22 +54,22 @@ const DetailTransaction = () => {
                 <div>
                   <p>
                     <Typography.Text className='font-semibold'>
-                      Date :
+                      {t("transaction.date")} :
                     </Typography.Text>{" "}
                     {dayjs(payment.date).format("YYYY-MM-DD")}
                   </p>
 
                   <p>
-                    <Typography.Text strong>Amount :</Typography.Text>{" "}
+                    <Typography.Text strong>{t("transaction.amount")} :</Typography.Text>{" "}
                     {payment.amount}
                   </p>
 
                   <p>
-                    <Typography.Text strong>Particulars :</Typography.Text>{" "}
+                    <Typography.Text strong>{t("transaction.particulars")} :</Typography.Text>{" "}
                     {payment.particulars}
                   </p>
                   <p>
-                    <Typography.Text strong>Type :</Typography.Text>{" "}
+                    <Typography.Text strong>{t("transaction.type")} :</Typography.Text>{" "}
                     {payment.type}
                   </p>
                 </div>

@@ -54,7 +54,7 @@ const WeeklyHoliday = () => {
     ];
     return (
         <>
-            <PageTitle title="Back" />
+            <PageTitle title={t("holiday.back")} />
             <CardCustom
                 title={t("holiday.weekly_holiday_list")}
                 extra={

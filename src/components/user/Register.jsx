@@ -21,23 +21,26 @@ import { useGetWeeklyHolidaysQuery } from "../../redux/rtk/features/weeklyHolida
 import { useGetRolesQuery } from "../../redux/rtk/features/role/roleApi";
 import { useGetShiftsQuery } from "../../redux/rtk/features/shift/shiftApi";
 import { useGetDepartmentsQuery } from "../../redux/rtk/features/Department/departmentApi";
+import { useAddAdminMutation } from "../../redux/rtk/features/user/adminApi";
 
 const Register = () => {
   const { t } = useTranslation(); // Use the hook
 
-  const { data: leavePolicy } = useGetLeavePoliciesQuery({ query: 'all' });
-  const { data: weeklyHoliday } = useGetWeeklyHolidaysQuery({ query: 'all' });
-  const { data: shift } = useGetShiftsQuery({ query: 'all' });
-  const { data: list } = useGetRolesQuery({ query: 'all' });
-  const { data: department } = useGetDepartmentsQuery({ query: 'all' });
+  // const { data: leavePolicy } = useGetLeavePoliciesQuery({ query: 'all' });
+  // const { data: weeklyHoliday } = useGetWeeklyHolidaysQuery({ query: 'all' });
+  // const { data: shift } = useGetShiftsQuery({ query: 'all' });
+  // const { data: list } = useGetRolesQuery({ query: 'all' });
 
-  const [addUser, { isSuccess, isLoading }] = useAddUserMutation();
+  // const { data: department } = useGetDepartmentsQuery({ query: 'all' });
+
+  const [addAdmin, { isSuccess, isLoading }] = useAddAdminMutation();
   const [form] = Form.useForm();
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
+    console.log(values);
     try {
-      await addUser(values);
+      await addAdmin(values);
       toast.success(t("register.user_added_successfully"));
       navigate("/admin/auth/login");
     } catch (error) {
@@ -219,7 +222,7 @@ const Register = () => {
                 </Upload>
               </Form.Item>
 
-              <Form.Item
+              {/* <Form.Item
                 name="departmentId"
                 style={{ marginBottom: "10px" }}
                 label={t("register.department")}
@@ -324,7 +327,7 @@ const Register = () => {
                       </Option>
                     ))}
                 </Select>
-              </Form.Item>
+              </Form.Item> */}
 
               <Form.Item style={{ marginBottom: "10px", marginTop: "10px" }} wrapperCol={{ offset: 4, span: 16 }}>
                 <Button className="mt-5" block type="primary" shape="round" htmlType="submit" loading={isLoading}>

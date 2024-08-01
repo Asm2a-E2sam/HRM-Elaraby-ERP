@@ -9,8 +9,10 @@ import UpdateBtn from "../../Buttons/UpdateBtn";
 import CommonDelete from "../../CommonUi/CommonDelete";
 import PageTitle from "../../page-header/PageHeader";
 import AddTaskStatus from "./AddtaskStatus";
+import { useTranslation } from "react-i18next"; 
 
 const TaskStatus = ({ isFixed }) => {
+  const { t } = useTranslation();
   const { id } = useParams("id");
   const { isLoading, data: list } = useGetAllTaskStatusByProjectIdQuery(id);
   const [columnsToShow, setColumnsToShow] = useState([]);
@@ -23,25 +25,25 @@ const TaskStatus = ({ isFixed }) => {
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title:  t("task_status.id"),
       dataIndex: "id",
       key: "id",
     },
     {
       id: 2,
-      title: "Name",
+      title:  t("task_status.name"),
       key: "name",
       render: ({ name }) => name.toUpperCase(),
     },
     {
       id: 4,
-      title: "Project",
+      title:  t("task_status.project"),
       key: "project",
       render: ({ project }) => project?.name?.toUpperCase(),
     },
     {
       id: 3,
-      title: "Action",
+      title:  t("task_status.action"),
       dataIndex: "id",
       key: "action",
       render: (id) => (
@@ -58,14 +60,14 @@ const TaskStatus = ({ isFixed }) => {
   ];
   return (
     <div>
-      <PageTitle title='Back' />
+      <PageTitle title={ t("task_status.back")} />
       <AddTaskStatus list={list} loading={isLoading} isFixed={isFixed} />
 
       {isFixed && (
         <Card className='mb-4'>
           <h1 className='text-xl mb-4'>
             {" "}
-            Task Column List :{" "}
+            { t("task_status.task_column_list")} :{" "}
             <span className='font-semibold'>
               {list ? list[0]?.project?.name : "No Task"}
             </span>{" "}

@@ -9,38 +9,40 @@ import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import { useGetConfigEmailQuery } from "../../redux/rtk/features/emailConfig/emailConfigApi";
 import dayjs from "dayjs";
 import UpdateEmailConfig from "./UpdateEmailConfig";
+import { useTranslation } from "react-i18next"; 
 
 const GetAllEmailConfig = () => {
+  const { t } = useTranslation();
   const [pageConfig, setPageConfig] = useState({status: 'true', page:1, count: 10})
   const { data, isLoading: loading } = useGetConfigEmailQuery();
   const columns = [
     {
       id: 1,
-      title: "Name",
+      title: t("mail_config.name"),
       dataIndex: "emailConfigName",
       key: "emailConfigName",
     },
     {
       id: 2,
-      title: "Host",
+      title: t("mail_config.host"),
       dataIndex: "emailHost",
       key: "emailHost",
     },
     {
       id: 3,
-      title: "Port",
+      title: t("mail_config.port"),
       dataIndex: "emailPort",
       key: "emailPort",
     },
     {
       id: 4,
-      title: "Email User",
+      title: t("mail_config.email_user"),
       dataIndex: "emailUser",
       key: "emailUser",
     },
     {
       id: 5,
-      title: "Create date",
+      title: t("mail_config.create_date"),
       dataIndex: "createdAt",
       key: "createdAt",
       render: (createdAt) => dayjs(createdAt).format("YYYY-MM-DD"),
@@ -49,12 +51,12 @@ const GetAllEmailConfig = () => {
   ];
   return (
     <CardCustom
-      title={"Email Config List"}
+      title={t("mail_config.email_Config_List")}
       extra={
         <>
           <CreateDrawer
             permission={"update-emailConfig"}
-            title={"Update Email Config"}
+            title={t("mail_config.update_email_Config")}
             width={30}
           >
             <UpdateEmailConfig data={data} />

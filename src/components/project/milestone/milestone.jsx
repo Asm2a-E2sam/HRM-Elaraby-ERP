@@ -10,9 +10,11 @@ import UpdateBtn from "../../Buttons/UpdateBtn";
 import CommonDelete from "../../CommonUi/CommonDelete";
 import PageTitle from "../../page-header/PageHeader";
 import AddMilestone from "./AddMilestone";
+import { useTranslation } from "react-i18next"; 
 
 const Milestone = ({ isFixed }) => {
   const { id } = useParams("id");
+  const { t } = useTranslation();
 
   const { isLoading: loading, data: list } =
     useGetMilestoneByProjectIdQuery(id);
@@ -26,32 +28,32 @@ const Milestone = ({ isFixed }) => {
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title:t("milestone.id"),
       dataIndex: "id",
       key: "id",
     },
     {
       id: 2,
-      title: "Name",
+      title:t("milestone.name"),
       dataIndex: "name",
       key: "name",
     },
 
     {
       id: 4,
-      title: "Start Date",
+      title:t("milestone.start_date"),
       key: "startDate",
       render: ({ startDate }) => dayjs(startDate).format("DD/MM/YYYY"),
     },
     {
       id: 5,
-      title: "End Date",
+      title:t("milestone.end_date"),
       key: "endDate",
       render: ({ endDate }) => dayjs(endDate).format("DD/MM/YYYY"),
     },
     {
       id: 5,
-      title: "Action",
+      title:t("milestone.action"),
       dataIndex: "id",
       key: "action",
       render: (id) => (
@@ -69,11 +71,11 @@ const Milestone = ({ isFixed }) => {
 
   return (
     <div>
-      <PageTitle title='Back' />
+      <PageTitle title={t("milestone.back")} />
       <AddMilestone isFixed={isFixed} />
       {isFixed && (
         <Card>
-          <h1 className='text-xl mb-5'> Milestones in Project </h1>
+          <h1 className='text-xl mb-5'>{t("milestone.milestones_in_project")} </h1>
           <Table
             scroll={{ x: true }}
             loading={loading}

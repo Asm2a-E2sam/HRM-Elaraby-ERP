@@ -21,8 +21,10 @@ import { useGetUsersQuery } from "../../redux/rtk/features/user/userApi";
 import { toastHandler } from "../../utils/functions";
 import Loader from "../loader/loader";
 import PageTitle from "../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 const UpdateProject = ({ drawer }) => {
+  const { t } = useTranslation();
   const projectId = useParams("id").projectId;
   const { data: userList, isLoading } = useGetUsersQuery({ status: "true" });
   const { data: project } = useGetProjectQuery(projectId);
@@ -64,12 +66,12 @@ const UpdateProject = ({ drawer }) => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toastHandler("Failed at adding Project", "warning");
+    toastHandler(t("project.warning_msg") , "warning");
   };
   return (
     <>
       {/* <UserPrivateComponent permission={"create-leaveApplication"}> */}
-      <PageTitle title={"Back"} />
+      <PageTitle title={t("project.back")} />
       <Row className="mt-[25px]" justify={drawer ? "center" : "center"}>
         <Col
           xs={24}
@@ -80,7 +82,7 @@ const UpdateProject = ({ drawer }) => {
           className="column-design border rounded card-custom"
         >
           <Title level={4} className="m-2 mt-5 mb-5 text-center">
-            Update Project
+          {t("project.update_project")}
           </Title>
           {initialState ? (
             <Form
@@ -102,12 +104,12 @@ const UpdateProject = ({ drawer }) => {
               <div>
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label="Project Manager"
+                  label={t("project.select_project_manager")}
                   name="projectManagerId"
                   rules={[
                     {
                       required: true,
-                      message: "Select Project Manager",
+                      message: t("project.back"),
                     },
                   ]}
                 >
@@ -115,7 +117,7 @@ const UpdateProject = ({ drawer }) => {
                     loading={isLoading}
                     mode="single"
                     showSearch
-                    placeholder="Select Project Manager"
+                    placeholder={t("project.select_project_manager")}
                     optionFilterProp="children"
                   >
                     {userList?.map((item) => (
@@ -128,26 +130,26 @@ const UpdateProject = ({ drawer }) => {
 
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label="Project Name"
+                  label={t("project.project_name")}
                   name="name"
                   rules={[
                     {
                       required: true,
-                      message: "Enter Project Name",
+                      message: t("project.enter_project_name"),
                     },
                   ]}
                 >
-                  <Input placeholder="Enter Project Name" />
+                  <Input placeholder={t("project.enter_project_name")} />
                 </Form.Item>
 
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label="Start Date"
+                  label={t("project.start_date")}
                   name="startDate"
                   rules={[
                     {
                       required: true,
-                      message: "Please input Project Start Date!",
+                      message: t("project.start_date_err"),
                     },
                   ]}
                 >
@@ -156,12 +158,12 @@ const UpdateProject = ({ drawer }) => {
 
                 <Form.Item
                   style={{ marginBottom: "20px" }}
-                  label="End Date"
+                  label={t("project.end_date")}
                   name="endDate"
                   rules={[
                     {
                       required: true,
-                      message: "Please input Project End Date!",
+                      message: t("project.end_date_err"),
                     },
                   ]}
                 >
@@ -170,16 +172,16 @@ const UpdateProject = ({ drawer }) => {
 
                 <Form.Item
                   style={{ marginBottom: "20px" }}
-                  label="Project Description"
+                  label={t("project.project_description")}
                   name="description"
                   rules={[
                     {
                       required: true,
-                      message: "Enter Project Description",
+                      message: t("project.enter_project_description"),
                     },
                   ]}
                 >
-                  <Input.TextArea placeholder="Enter Project Description" />
+                  <Input.TextArea placeholder={t("project.enter_project_description")} />
                 </Form.Item>
 
                 <Form.Item
@@ -196,7 +198,7 @@ const UpdateProject = ({ drawer }) => {
                     block
                     loading={addLoading}
                   >
-                    Update Project
+                    {t("project.update_project")}
                   </Button>
                 </Form.Item>
               </div>

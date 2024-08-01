@@ -16,25 +16,27 @@ import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import LeavePolicyEdit from "../UI/PopUp/LeavePolicyEditPopup";
 import CardCustom from "../CommonUi/CardCustom";
 import TableNoPagination from "../CommonUi/TableNoPagination";
+import { useTranslation } from "react-i18next"; 
 
 //PopUp
 
 
 
 const DetailLeavePolicy = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const { data: leavePolicy ,isLoading:loading} = useGetLeavePolicyQuery(id);
    const columns = [
      {
        id: 1,
-       title: "ID",
+       title: t("policy.id"),
        dataIndex: "id",
        key: "id",
      },
 
      {
        id: 2,
-       title: " Name",
+       title: t("policy.name"),
        key: "name",
 
        render: ({ firstName, lastName }) => firstName + " " + lastName,
@@ -42,21 +44,21 @@ const DetailLeavePolicy = () => {
 
      {
        id: 6,
-       title: "Paid Leave",
+       title:  t("policy.paid_leave"),
        key: "paidLeaveCount",
        render: () => leavePolicy?.paidLeaveCount,
      },
 
      {
        id: 6,
-       title: "Unpaid Leave",
+       title:  t("policy.unpaid_leave"),
        key: "unpaidLeaveCount",
        render: () => leavePolicy?.unpaidLeaveCount,
      },
 
      {
        id: 4,
-       title: "Action",
+       title:  t("policy.action"),
        dataIndex: "id",
        key: "action",
        render: (id) => (
@@ -69,12 +71,12 @@ const DetailLeavePolicy = () => {
 
   return (
     <div>
-      <PageTitle title=" Back  " />
+      <PageTitle title={ t("policy.back")} />
       <UserPrivateComponent permission={"readSingle-leavePolicy"}>
         <CardCustom
           title={
             <h3>
-              ID : {leavePolicy?.id} | {leavePolicy?.name}
+              { t("policy.id")} : {leavePolicy?.id} | {leavePolicy?.name}
             </h3>
           }
           extra={
@@ -97,7 +99,7 @@ const DetailLeavePolicy = () => {
           <TableNoPagination
             leftElement={
               <h1 className="p-2 font-semibold text-lg text-center">
-                Employee List
+                { t("policy.employee_list")}
               </h1>
             }
             list={leavePolicy?.user}

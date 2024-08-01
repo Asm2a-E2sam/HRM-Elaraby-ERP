@@ -9,8 +9,10 @@ import CreateDrawer from "../CommonUi/CreateDrawer";
 import TablePagination from "../CommonUi/TablePagination";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import AddTransaction from "./AddTransaction";
+import { useTranslation } from "react-i18next"; 
 
 const GetAllTransaction = () => {
+  const { t } = useTranslation();
   const [pageConfig, setPageConfig] = useState({
     page: 1,
     count: 10,
@@ -32,14 +34,14 @@ const GetAllTransaction = () => {
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("transaction.id"),
       dataIndex: "id",
       key: "id",
       render: (id) => <Link to={`/admin/transaction/${id}`}>{id}</Link>,
     },
     {
       id: 2,
-      title: "Date",
+      title: t("transaction.date"),
       dataIndex: "date",
       key: "date",
       render: (date) => dayjs(date).format("DD/MM/YYYY"),
@@ -47,7 +49,7 @@ const GetAllTransaction = () => {
 
     {
       id: 3,
-      title: "Debit Account",
+      title: t("transaction.debit_account"),
       dataIndex: "debit",
       key: "debit",
       render: (debit) => debit?.name,
@@ -55,7 +57,7 @@ const GetAllTransaction = () => {
 
     {
       id: 4,
-      title: "Credit Account",
+      title: t("transaction.credit_account"),
       dataIndex: "credit",
       key: "credit",
       render: (credit) => credit?.name,
@@ -63,14 +65,14 @@ const GetAllTransaction = () => {
 
     {
       id: 5,
-      title: "Amount",
+      title: t("transaction.amount"),
       dataIndex: "amount",
       key: "amount",
       responsive: ["md"],
     },
     {
       id: 6,
-      title: "Particulars",
+      title: t("transaction.particulars"),
       dataIndex: "particulars",
       key: "particulars",
     },
@@ -79,7 +81,7 @@ const GetAllTransaction = () => {
   return (
     <UserPrivateComponent permission={"readAll-transaction"}>
       <CardCustom
-        title={"Transaction History"}
+        title={t("transaction.transaction_history")}
         extra={
           <>
             <RangePicker
@@ -92,7 +94,7 @@ const GetAllTransaction = () => {
             />
             <CreateDrawer
               permission={"create-transaction"}
-              title={"Add Transaction"}
+              title={t("transaction.add_transaction")}
               width={30}
             >
               <AddTransaction />

@@ -161,8 +161,8 @@ function App() {
               {/* job desk public route ended*/}
 
 
-              <Route path='/admin/auth/login' exact element={<Login />} />
               <Route path='/admin/auth/register' exact element={<Register/>} />
+              <Route path='/admin/auth/login' exact element={<Login />} />
               <Route path='/admin/auth/logout' exact element={<Logout />} />
               <Route element={<UserPrivateRoute permission={"create-user"} />}>
                 <Route

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { changeLanguageSlice } from "../../redux/rtk/features/language/language";
+
 import { useSelector } from "react-redux";
 
 const toggler = [
@@ -23,8 +24,7 @@ const toggler = [
 
 function Header({ onPress, collapsed, handleCollapsed }) {
   useEffect(() => window.scrollTo(0, 0));
-
-  const isLogged = localStorage.getItem("isLogged");
+  const { t, i18n } = useTranslation();  const isLogged = localStorage.getItem("isLogged");
   const user = localStorage.getItem("user");
 
   const items = [
@@ -43,7 +43,7 @@ function Header({ onPress, collapsed, handleCollapsed }) {
         <Link to='/admin/auth/logout' className='flex items-center p-0.5'>
           <LogoutOutlined className='text-danger' />
           <span className='logout-text font-weight-bold me-2 ms-1'>
-            Log Out
+            {t("logout")}
           </span>
         </Link>
       ),
@@ -62,13 +62,14 @@ function Header({ onPress, collapsed, handleCollapsed }) {
   }, [isDarkMode]);
 
   const dispatch = useDispatch();
-  const { t, i18n } = useTranslation();
+  
   const handleChangeLanguage = (newLanguage) => {
         console.log( newLanguage);
         i18n.changeLanguage(newLanguage);
         dispatch(changeLanguageSlice(newLanguage));
   };
   const language = useSelector((state) => state.language.language);
+
 
   return (
     <>
@@ -129,7 +130,7 @@ function Header({ onPress, collapsed, handleCollapsed }) {
               <Button className='user-btn group relative'>
                 <UserOutlined style={{ fontSize: "16px" }} className='mb-2' />
                 <Menu
-                  className='absolute hidden group-hover:block rounded right-0  z-10'
+                  className={`absolute hidden group-hover:block rounded ${language=="en"? "right-0":"left-0"}  z-10 shadow`}
                   items={items}
                 />
               </Button>

@@ -11,8 +11,10 @@ import StatusSelectionDropdown from "../../CommonUi/StatusSelectionDropdown";
 import TablePagination from "../../CommonUi/TablePagination";
 import PageTitle from "../../page-header/PageHeader";
 import AddJobApplication from "./AddJobApplication";
+import { useTranslation } from "react-i18next"; 
 
 const JobApplication = () => {
+    const { t } = useTranslation();
     const [pagConfig, setPageConfig] = useState({
         status: "true",
         page: 1,
@@ -24,12 +26,12 @@ const JobApplication = () => {
     const columns = [
         {
             key: "id",
-            title: "ID",
+            title: t("recruitment.id"),
             dataIndex: "id",
         },
         {
             key: "job",
-            title: "Job Title",
+            title: t("recruitment.job_title"),
             dataIndex: "job",
             render: (job) => {
                 return job?.jobTitle;
@@ -37,18 +39,18 @@ const JobApplication = () => {
         },
         {
             key: "name",
-            title: "Candidate",
+            title: t("recruitment.candidate"),
             dataIndex: "name",
         },
         {
             key: "createdAt",
-            title: "Application Date",
+            title: t("recruitment.application_date"),
             dataIndex: "createdAt",
             render: (createdAt) => dayjs(createdAt).format("DD/MM/YYYY"),
         },
         {
             key: "applicationStatus",
-            title: "Status",
+            title: t("recruitment.status"),
             dataIndex: "jobApplicationStatus",
             render: (jobApplicationStatus) => (
                 <span
@@ -78,7 +80,7 @@ const JobApplication = () => {
         },
         {
             key: "action",
-            title: "Action",
+            title: t("recruitment.action"),
             dataIndex: "id",
             render: (id) => (
                 <>
@@ -93,10 +95,10 @@ const JobApplication = () => {
     ];
     return (
         <>
-            <PageTitle title="back" />
+            <PageTitle title={t("recruitment.back")} />
 
             <CardCustom
-                title={"Job Application"}
+                title={t("recruitment.job_application")}
                 extra={
                     <>
                         <StatusSelectionDropdown
@@ -109,7 +111,7 @@ const JobApplication = () => {
 
                         <CreateDrawer
                             permission={"create-jobApplication"}
-                            title={"Create JobApplication"}
+                            title={t("recruitment.create_job_application")}
                             width={42}
                         >
                             <AddJobApplication />

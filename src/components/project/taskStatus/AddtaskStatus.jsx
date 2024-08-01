@@ -7,8 +7,10 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { useGetProjectsQuery } from "../../../redux/rtk/features/projectManagement/project/project/projectApi";
 import { useAddTaskStatusMutation } from "../../../redux/rtk/features/projectManagement/project/taskStatus/taskStatusApi";
+import { useTranslation } from "react-i18next"; 
 
 const AddTaskStatus = ({ isFixed, projectId }) => {
+  const { t } = useTranslation();
   const { IsLoading: projectLoading, data: projectList } =
     useGetProjectsQuery();
   const [addSingleTaskStatus, { isLoading }] = useAddTaskStatusMutation();
@@ -50,7 +52,7 @@ const AddTaskStatus = ({ isFixed, projectId }) => {
           className="column-design border rounded card-custom"
         >
           <Title level={4} className="m-2 mt-5 mb-5 text-center">
-            Add Task Status Column
+            {t("task_status.add_task_status")}
           </Title>
           <Form
             form={form}
@@ -72,7 +74,7 @@ const AddTaskStatus = ({ isFixed, projectId }) => {
                   {!projectId && (
                     <Form.Item
                       style={{ marginBottom: "10px" }}
-                      label="Project"
+                      label={t("task_status.project")}
                       tooltip="Project is already selected "
                       name="projectId"
                     >
@@ -83,19 +85,19 @@ const AddTaskStatus = ({ isFixed, projectId }) => {
               ) : (
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label="Project"
+                  label={t("task_status.project")}
                   name="projectId"
                   rules={[
                     {
                       required: true,
-                      message: "Select Project",
+                      message: t("task_status.select_project"),
                     },
                   ]}
                 >
                   <Select
                     showSearch
                     loading={projectLoading}
-                    placeholder="Select Project"
+                    placeholder={t("task_status.select_project")}
                     optionFilterProp="children"
                     filterOption={(input, option) =>
                       option.children
@@ -114,16 +116,16 @@ const AddTaskStatus = ({ isFixed, projectId }) => {
               )}
               <Form.Item
                 style={{ marginBottom: "20px" }}
-                label="Task Status Name"
+                label={t("task_status.task_status_name")}
                 name="name"
                 rules={[
                   {
                     required: true,
-                    message: "Enter Task Status Name",
+                    message: t("task_status.enter_task_status_name"),
                   },
                 ]}
               >
-                <Input placeholder="Enter Task Status Name" />
+                <Input placeholder={t("task_status.enter_task_status_name")} />
               </Form.Item>
 
               <Form.Item
@@ -140,7 +142,7 @@ const AddTaskStatus = ({ isFixed, projectId }) => {
                   block
                   loading={isLoading}
                 >
-                  Submit
+                  {t("task_status.submit")}
                 </Button>
               </Form.Item>
             </div>

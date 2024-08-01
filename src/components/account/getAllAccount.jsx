@@ -13,14 +13,16 @@ import CreateDrawer from "../CommonUi/CreateDrawer";
 import TablePagination from "../CommonUi/TablePagination";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import AddAccount from "./AddAccount";
+import { useTranslation } from "react-i18next"; 
 
 const GetAllAccount = () => {
+  const { t } = useTranslation();
   const [pageConfig, setPageConfig] = useState({query: 'sa', page: 1, count: 10});
   const { data, isLoading } = useGetAccountsQuery(pageConfig);
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("account.id"),
       dataIndex: "id",
       key: "id",
       render: (id) => <Link to={`/admin/account/${id}`}>{id}</Link>,
@@ -28,14 +30,14 @@ const GetAllAccount = () => {
 
     {
       id: 2,
-      title: "Account",
+      title: t("account.account"),
       dataIndex: "name",
       key: "name",
     },
 
     {
       id: 3,
-      title: "Account Type ",
+      title: t("account.account_type"),
       dataIndex: "account",
       key: "account",
       render: (account) => account?.name,
@@ -43,7 +45,7 @@ const GetAllAccount = () => {
     },
     {
       id: 4,
-      title: "Action",
+      title: t("account.create_account"),
       key: "action",
       render: ({ id }) => (
         <div className='flex justify-start align-middle'>
@@ -61,12 +63,12 @@ const GetAllAccount = () => {
   ];
   return (
     <CardCustom
-      title={"Accounts List"}
+      title={t("account.accounts_list")}
       extra={
         <>
           <CreateDrawer
             permission={"create-account"}
-            title={"Create Account"}
+            title={t("account.create_account")}
             width={30}
           >
             <AddAccount />

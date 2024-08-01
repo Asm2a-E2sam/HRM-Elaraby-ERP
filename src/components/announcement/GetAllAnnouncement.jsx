@@ -8,6 +8,7 @@ import CommonDelete from "../CommonUi/CommonDelete";
 import CreateDrawer from "../CommonUi/CreateDrawer";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import AddAnnouncement from "./AddAnnouncement";
+import { useTranslation } from "react-i18next"; 
 
 const TitleComponent = ({ item }) => {
   return (
@@ -27,15 +28,16 @@ const TitleComponent = ({ item }) => {
 
 const GetAllAnnouncement = () => {
   const { isLoading, data: list } = useGetAnnouncementsQuery();
+  const { t } = useTranslation();
 
   return (
     <CardCustom
-      title={"Announcements"}
+      title={t("announcement.announcement")}
       extra={
         <>
           <CreateDrawer
             permission={"create-announcement"}
-            title={"Create Announcements"}
+            title= {t("announcement.create_announcements")}
             width={30}
           >
             <AddAnnouncement />

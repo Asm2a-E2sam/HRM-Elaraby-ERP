@@ -2,9 +2,11 @@ import { Button, Form, Input } from "antd";
 import React from "react";
 import { toast } from "react-toastify";
 import { useAddJobTypeMutation } from "../../../redux/rtk/features/recruitment/jobType/jobTypeApi";
+import { useTranslation } from "react-i18next"; 
 
 const AddJobType = () => {
     const [form] = Form.useForm();
+    const { t } = useTranslation();
 
     const [addSingleJobType, { isLoading: addLoading }] =
         useAddJobTypeMutation();
@@ -18,7 +20,7 @@ const AddJobType = () => {
     };
 
     const onFinishFailed = (errorInfo) => {
-        toast.warning("Failed at adding Job Type");
+        toast.warning(t("recruitment.warning_msg"));
     };
     return (
         <Form
@@ -35,16 +37,16 @@ const AddJobType = () => {
             <div>
                 <Form.Item
                     style={{ marginBottom: "10px" }}
-                    label={"Job Type"}
+                    label={t("recruitment.job_type")}
                     name={"jobTypeName"}
                     rules={[
                         {
                             required: true,
-                            message: "please Input Job Type Name",
+                            message: t("recruitment.job_type_msg"),
                         },
                     ]}
                 >
-                    <Input placeholder="Full Time" />
+                    <Input placeholder={t("recruitment.full_time")} />
                 </Form.Item>
 
                 <Form.Item
@@ -61,7 +63,7 @@ const AddJobType = () => {
                         block
                         loading={addLoading}
                     >
-                        Add Job Type
+                        {t("recruitment.add_job_type")}
                     </Button>
                 </Form.Item>
             </div>

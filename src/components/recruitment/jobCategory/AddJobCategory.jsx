@@ -2,9 +2,11 @@ import { Button, Form, Input } from "antd";
 import React from "react";
 import { toast } from "react-toastify";
 import { useAddJobCategoryMutation } from "../../../redux/rtk/features/recruitment/jobCategory/jobCategoryApi";
+import { useTranslation } from "react-i18next"; 
 
 const AddJobCategory = () => {
     const [form] = Form.useForm();
+    const { t } = useTranslation();
 
     const [addSingleJobCategory, { isLoading: addLoading }] =
         useAddJobCategoryMutation();
@@ -36,12 +38,12 @@ const AddJobCategory = () => {
             <div>
                 <Form.Item
                     style={{ marginBottom: "10px" }}
-                    label={"Job Category"}
+                    label={t("recruitment.job_category")}
                     name={"jobCategoryName"}
                     rules={[
                         {
                             required: true,
-                            message: "please Input Job Category Name",
+                            message: t("recruitment.job_category_msg"),
                         },
                     ]}
                 >
@@ -62,7 +64,7 @@ const AddJobCategory = () => {
                         block
                         loading={addLoading}
                     >
-                        Add Job Category
+                        {t("recruitment.add_job_category")}
                     </Button>
                 </Form.Item>
             </div>

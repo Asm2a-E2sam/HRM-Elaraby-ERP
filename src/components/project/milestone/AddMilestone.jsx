@@ -17,8 +17,10 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { useAddMilestoneMutation } from "../../../redux/rtk/features/projectManagement/project/milestone/milestoneApi";
 import { useGetProjectsQuery } from "../../../redux/rtk/features/projectManagement/project/project/projectApi";
+import { useTranslation } from "react-i18next"; 
 
 const AddMilestone = ({ isFixed, projectId }) => {
+  const { t } = useTranslation();
   const { isLoading: loading, data: list } = useGetProjectsQuery();
   const [addSingleMilestone, { isLoading }] = useAddMilestoneMutation();
   const { id } = useParams("id");
@@ -60,7 +62,7 @@ const AddMilestone = ({ isFixed, projectId }) => {
           className="column-design border rounded card-custom"
         >
           <Title level={4} className="m-2 mt-5 mb-5 text-center">
-            Add Milestone in Project
+          { t("milestone.add_milestones_in_project")}
           </Title>
           <Form
             form={form}
@@ -80,12 +82,12 @@ const AddMilestone = ({ isFixed, projectId }) => {
               {!isFixed ? (
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label="Project"
+                  label={ t("milestone.project")}
                   name="projectId"
                   rules={[
                     {
                       required: true,
-                      message: "Select Project",
+                      message: t("milestone.select_project"),
                     },
                   ]}
                 >
@@ -93,7 +95,7 @@ const AddMilestone = ({ isFixed, projectId }) => {
                     mode="single"
                     disabled={isFixed}
                     loading={loading}
-                    placeholder="Select Project"
+                    placeholder= {t("milestone.select_project")}
                     optionFilterProp="children"
                   >
                     {list?.map((item) => (
@@ -108,7 +110,7 @@ const AddMilestone = ({ isFixed, projectId }) => {
                   {!projectId && (
                     <Form.Item
                       style={{ marginBottom: "10px" }}
-                      label="Project"
+                      label={t("milestone.project")}
                       tooltip="Your Project is already selected"
                       name="projectId"
                     >
@@ -120,26 +122,26 @@ const AddMilestone = ({ isFixed, projectId }) => {
 
               <Form.Item
                 style={{ marginBottom: "10px" }}
-                label="Milestone Name"
+                label={t("milestone.name")}
                 name="name"
                 rules={[
                   {
                     required: true,
-                    message: "Enter Milestone Name",
+                    message: t("milestone.enter_milestone_name"),
                   },
                 ]}
               >
-                <Input placeholder="Enter Milestone Name" />
+                <Input placeholder={t("milestone.enter_milestone_name")}/>
               </Form.Item>
 
               <Form.Item
                 style={{ marginBottom: "10px" }}
-                label="Start Date"
+                label={t("milestone.start_date")}
                 name="startDate"
                 rules={[
                   {
                     required: true,
-                    message: "Please input Project Start Date!",
+                    message: t("milestone.start_date_msg"),
                   },
                 ]}
               >
@@ -148,12 +150,12 @@ const AddMilestone = ({ isFixed, projectId }) => {
 
               <Form.Item
                 style={{ marginBottom: "20px" }}
-                label="End Date"
+                label={t("milestone.end_date")}
                 name="endDate"
                 rules={[
                   {
                     required: true,
-                    message: "Please input Project End Date!",
+                    message:t("milestone.end_date_msg"),
                   },
                 ]}
               >
@@ -162,16 +164,16 @@ const AddMilestone = ({ isFixed, projectId }) => {
 
               <Form.Item
                 style={{ marginBottom: "10px" }}
-                label="Milestone Description"
+                label={t("milestone.milestone_description")}
                 name="description"
                 rules={[
                   {
                     required: true,
-                    message: "Enter Milestone Description",
+                    message: t("milestone.milestone_description_msg"),
                   },
                 ]}
               >
-                <Input placeholder="Enter Milestone Description" />
+                <Input placeholder={t("milestone.milestone_description_msg")}/>
               </Form.Item>
 
               <Form.Item
@@ -188,7 +190,7 @@ const AddMilestone = ({ isFixed, projectId }) => {
                   block
                   loading={isLoading}
                 >
-                  Add Milestone
+                  {t("milestone.add_milestone")}
                 </Button>
               </Form.Item>
             </div>

@@ -8,8 +8,10 @@ import StatusSelectionDropdown from "../../CommonUi/StatusSelectionDropdown";
 import TablePagination from "../../CommonUi/TablePagination";
 import PageTitle from "../../page-header/PageHeader";
 import AddJobType from "./AddJobType";
+import { useTranslation } from "react-i18next"; 
 
 const JobType = () => {
+    const { t } = useTranslation();
     const [pagConfig, setPageConfig] = useState({
         status: "true",
         page: 1,
@@ -20,17 +22,17 @@ const JobType = () => {
     const columns = [
         {
             key: "id",
-            title: "ID",
+            title: t("recruitment.id"),
             dataIndex: "id",
         },
         {
             key: "jobTypeName",
-            title: "Name",
+            title:  t("recruitment.name"),
             dataIndex: "jobTypeName",
         },
         {
             key: "action",
-            title: "Action",
+            title:  t("recruitment.action"),
             dataIndex: "id",
             render: (id) => (
                 <ViewBtn path={`/admin/recruitment/jobType/${id}`} />
@@ -39,10 +41,10 @@ const JobType = () => {
     ];
     return (
         <>
-            <PageTitle title="back" />
+            <PageTitle title={ t("recruitment.back")} />
 
             <CardCustom
-                title={"Job Type"}
+                title={ t("recruitment.job_type")}
                 extra={
                     <>
                         <StatusSelectionDropdown
@@ -50,7 +52,7 @@ const JobType = () => {
                         />
                         <CreateDrawer
                             permission={"create-jobType"}
-                            title={"Job Type"}
+                            title={ t("recruitment.job_type")}
                             width={35}
                         >
                             <AddJobType />

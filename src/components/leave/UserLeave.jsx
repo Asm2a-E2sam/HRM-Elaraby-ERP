@@ -9,8 +9,10 @@ import ViewBtn from "../Buttons/ViewBtn";
 import CardCustom from "../CommonUi/CardCustom";
 import TablePagination from "../CommonUi/TablePagination";
 import BtnViewSvg from "../UI/Button/btnViewSvg";
+import { useTranslation } from "react-i18next"; 
 
 const UserLeave = (props) => {
+  const { t } = useTranslation();
   const { id } = useParams("id");
 
   const [pageConfig, setPageConfig] = useState({page: 1, count: 10});
@@ -19,20 +21,20 @@ const UserLeave = (props) => {
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("leave.id"),
       dataIndex: "id",
       key: "id",
     },
 
     {
       id: 3,
-      title: "Leave Type",
+      title: t("leave.leave_type"),
       dataIndex: "leaveType",
       key: "leaveType",
     },
     {
       id: 4,
-      title: "Leave From",
+      title: t("leave.leave_from"),
       key: "leaveFrom",
       render: ({leaveFrom, status, acceptLeaveFrom}) => {
         return status === 'ACCEPTED' ? dayjs(acceptLeaveFrom).format("DD-MM-YYYY") : dayjs(leaveFrom).format("DD-MM-YYYY");
@@ -40,7 +42,7 @@ const UserLeave = (props) => {
     },
     {
       id: 5,
-      title: "Leave To",
+      title: t("leave.leave_to"),
       key: "leaveTo",
       render: ({leaveTo, status, acceptLeaveTo}) => {
         return status === 'ACCEPTED' ? dayjs(acceptLeaveTo).format("DD-MM-YYYY") : dayjs(leaveTo).format("DD-MM-YYYY");
@@ -48,7 +50,7 @@ const UserLeave = (props) => {
     },
     {
       id: 6,
-      title: "Leave Duration",
+      title: t("leave.leave_duration"),
       dataIndex: "leaveDuration",
       key: "leaveDuration",
       render: (leaveDuration) => {
@@ -62,7 +64,7 @@ const UserLeave = (props) => {
 
     {
       id: 7,
-      title: "Status",
+      title: t("leave.status"),
       dataIndex: "status",
       key: "status",
       render: (status) => {
@@ -78,14 +80,14 @@ const UserLeave = (props) => {
 
     {
       id: 7,
-      title: "Applied On",
+      title: t("leave.applied_on"),
       dataIndex: "createdAt",
       render: (createdAt) => dayjs(createdAt).format("DD-MM-YYYY"),
     },
 
     {
       id: 7,
-      title: "Action",
+      title: t("leave.action"),
       key: "action",
       render: ({ id }) => (
         <ViewBtn
@@ -97,7 +99,7 @@ const UserLeave = (props) => {
     },
   ];
   return (
-    <CardCustom title={"My Leave Application"}>
+    <CardCustom title={t("leave.my_leave_application")}>
       <TablePagination
         columns={columns}
         list={data?.getAllLeaveByUser}

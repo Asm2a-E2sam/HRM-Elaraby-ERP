@@ -8,8 +8,10 @@ import {
 import { toastHandler } from "../../utils/functions";
 import Loader from "../loader/loader";
 import PageTitle from "../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 const UpdateStatus = () => {
+  const { t } = useTranslation();
   const projectId = useParams("id").projectId;
   const [initialValues, setInitialValues] = useState(null);
   const { data: project } = useGetProjectQuery(projectId);
@@ -36,12 +38,12 @@ const UpdateStatus = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toastHandler("Failed at adding Status", "warning");
+    toastHandler(t("project.warning_status"), "warning");
   };
   return (
     <>
       {/* <UserPrivateComponent permission={"create-leaveApplication"}> */}
-      <PageTitle title="Back" />
+      <PageTitle title={t("project.back")} />
       <Row className="mt-[25px]">
         <Col
           xs={24}
@@ -52,7 +54,7 @@ const UpdateStatus = () => {
           className="column-design border rounded card-custom"
         >
           <Title level={4} className="m-2 mt-5 mb-5 text-center">
-            Update Status
+          {t("project.update_status")}
           </Title>
           {initialValues ? (
             <Form
@@ -74,20 +76,20 @@ const UpdateStatus = () => {
               <div>
                 <Form.Item
                   style={{ marginBottom: "20px" }}
-                  label="Status"
+                  label={t("project.status")}
                   name="status"
                   rules={[
                     {
                       required: true,
-                      message: "Select Status Name",
+                      message: t("project.select_status"),
                     },
                   ]}
                 >
-                  <Select placeholder="Select Status Name">
-                    <Select.Option value="PROGRESS">PROGRESS</Select.Option>
-                    <Select.Option value="COMPLETE">COMPLETE</Select.Option>
-                    <Select.Option value="ONHOLD">ONHOLD</Select.Option>
-                    <Select.Option value="DELETED">DELETED</Select.Option>
+                  <Select placeholder={t("project.select_status")}>
+                    <Select.Option value="PROGRESS">{t("project.progress")}</Select.Option>
+                    <Select.Option value="COMPLETE">{t("project.complete")}</Select.Option>
+                    <Select.Option value="ONHOLD">{t("project.on_hold")}</Select.Option>
+                    <Select.Option value="DELETED">{t("project.deleted")}</Select.Option>
                   </Select>
                 </Form.Item>
 
@@ -105,7 +107,7 @@ const UpdateStatus = () => {
                     block
                     loading={isLoading}
                   >
-                    Update Now
+                    {t("project.update_now")}
                   </Button>
                 </Form.Item>
               </div>

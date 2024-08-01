@@ -8,8 +8,10 @@ import StatusSelectionDropdown from "../../CommonUi/StatusSelectionDropdown";
 import TablePagination from "../../CommonUi/TablePagination";
 import PageTitle from "../../page-header/PageHeader";
 import AddJobLocation from "./AddJobLocation";
+import { useTranslation } from "react-i18next"; 
 
 const JobLocation = () => {
+    const { t } = useTranslation();
     const [pagConfig, setPageConfig] = useState({
         status: "true",
         page: 1,
@@ -19,22 +21,22 @@ const JobLocation = () => {
     const columns = [
         {
             key: "id",
-            title: "ID",
+            title: t("recruitment.id"),
             dataIndex: "id",
         },
         {
             key: "countryName",
-            title: "Country",
+            title: t("recruitment.country"),
             dataIndex: "countryName",
         },
         {
             key: "jobLocation",
-            title: "Location",
+            title: t("recruitment.location"),
             dataIndex: "jobLocation",
         },
         {
             key: "action",
-            title: "Action",
+            title: t("recruitment.action"),
             dataIndex: "id",
             render: (id) => (
                 <ViewBtn path={`/admin/recruitment/jobLocation/${id}`} />
@@ -43,10 +45,10 @@ const JobLocation = () => {
     ];
     return (
         <>
-            <PageTitle title="back" />
+            <PageTitle title={t("recruitment.back")}/>
 
             <CardCustom
-                title={"Job Location"}
+                title={t("recruitment.job_location")}
                 extra={
                     <>
                         <StatusSelectionDropdown

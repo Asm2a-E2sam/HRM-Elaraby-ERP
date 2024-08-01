@@ -5,14 +5,16 @@ import PageTitle from "../page-header/PageHeader";
 import { useGetTrailBalanceQuery } from "../../redux/rtk/features/account/accountApi";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import Loader from "../loader/loader";
+import { useTranslation } from "react-i18next"; 
 
 const TrialBalance = () => {
+  const { t } = useTranslation();
   const { data, isLoading } = useGetTrailBalanceQuery();
   if (isLoading) return <Loader />;
 
   return (
     <>
-      <PageTitle title={"Back"} />
+      <PageTitle title={t("account.back")} />
       <br />
       <UserPrivateComponent permission={"readSingle-account"}>
         <Card>
@@ -20,7 +22,7 @@ const TrialBalance = () => {
             <div className='card-title  flex  justify-between'>
               <h5 className='text-xl mb-3'>
                 <span className=' ml-2 report-section-card-title'>
-                  Trail Balance
+                {t("account.trail_balance")}
                 </span>
               </h5>
             </div>
@@ -32,19 +34,19 @@ const TrialBalance = () => {
                       scope='col'
                       className='text-white border-gray border-b-2 border-t-2 border-gray-200 py-3 px-3 bg-gray-900 text-left text-xs font-semibold uppercase tracking-wider'
                     >
-                      Account
+                      {t("account.account")}
                     </th>
                     <th
                       scope='col'
                       className='text-white border-gray border-b-2 border-t-2 border-gray-200 py-3 px-3 bg-gray-900 text-left text-xs font-semibold uppercase tracking-wider'
                     >
-                      Debit
+                      {t("account.debit")}
                     </th>
                     <th
                       scope='col'
                       className='text-white border-gray border-b-2 border-t-2 border-gray-200 py-3 px-3 bg-gray-900 text-left text-xs font-semibold uppercase tracking-wider'
                     >
-                      Credit
+                      {t("account.credit")}
                     </th>
                   </tr>
                 </thead>
@@ -86,7 +88,7 @@ const TrialBalance = () => {
 
                   <tr className='hover:bg-gray-100 hover:cursor-pointer  font-semibold'>
                     <td className='py-4 px-6 border-b border-gray-200 text-gray-900 text-sm '>
-                      TOTAL
+                    {t("account.total")}
                     </td>
                     <td className='py-4 px-6 border-b border-gray-200 text-gray-900 text-sm'>
                       {data?.totalDebit}

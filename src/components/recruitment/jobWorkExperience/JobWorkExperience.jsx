@@ -7,8 +7,10 @@ import StatusSelectionDropdown from "../../CommonUi/StatusSelectionDropdown";
 import TablePagination from "../../CommonUi/TablePagination";
 import PageTitle from "../../page-header/PageHeader";
 import AddJobWorkExperience from "./AddJobWorkExperience";
+import { useTranslation } from "react-i18next"; 
 
 const JobWorkExperience = () => {
+    const { t } = useTranslation();
     const [pagConfig, setPageConfig] = useState({
         status: "true",
         page: 1,
@@ -19,17 +21,17 @@ const JobWorkExperience = () => {
     const columns = [
         {
             key: "id",
-            title: "ID",
+            title: t("recruitment.id"),
             dataIndex: "id",
         },
         {
             key: "jobWorkExperience",
-            title: "Work Experience",
+            title: t("recruitment.work_experience"),
             dataIndex: "workExperience",
         },
         {
             key: "action",
-            title: "Action",
+            title: t("recruitment.action"),
             dataIndex: "id",
             render: (id) => (
                 <ViewBtn path={`/admin/recruitment/jobWorkExperience/${id}`} />
@@ -38,17 +40,17 @@ const JobWorkExperience = () => {
     ];
     return (
         <>
-            <PageTitle title="back" />
+            <PageTitle title={t("recruitment.back")} />
 
             <CardCustom
-                title={"Job Work Experience"}
+                title= {t("recruitment.job_work_experience")}
                 extra={
                     <>
                         <StatusSelectionDropdown
                             setPageConfig={setPageConfig}
                         />
                         <CreateDrawer
-                            permission={"create-jobWorkExperience"}
+                            permission={t("recruitment.job_work_experience")}
                             title={"Job Work Experience"}
                             width={35}
                         >

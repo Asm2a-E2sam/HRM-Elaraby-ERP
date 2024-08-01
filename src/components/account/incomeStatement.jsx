@@ -4,13 +4,15 @@ import { useGetIncomeStatementQuery } from "../../redux/rtk/features/account/acc
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import Loader from "../loader/loader";
 import PageTitle from "../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 const IncomeStatement = () => {
+  const { t } = useTranslation();
   const { data, isLoading } = useGetIncomeStatementQuery();
   if (isLoading) return <Loader />;
   return (
     <>
-      <PageTitle title={"Back"} />
+      <PageTitle title={t("income_statement.back")} />
       <br />
       <UserPrivateComponent permission={"readSingle-account"}>
         <Card>
@@ -18,7 +20,7 @@ const IncomeStatement = () => {
             <div className='card-title  flex  justify-between'>
               <h5 className='text-xl mb-2'>
                 <span className='ml-2 report-section-card-title'>
-                  Income Statement{" "}
+                {t("income_statement.income_statement")}{" "}
                 </span>
               </h5>
             </div>
@@ -26,7 +28,7 @@ const IncomeStatement = () => {
               <table className=' w-full max-w-full mb-4 bg-transparent detail-account-table'>
                 <h5 className='mt-2 mb-1 ml-2  font-semibold text-base'>
                   {" "}
-                  Revenue{" "}
+                  {t("income_statement.revenue")}{" "}
                 </h5>
                 <thead className='text-gray-600 text-xs font-semibold border-gray tracking-wider text-left px-5 py-3 hover:cursor-pointer uppercase border-b-2 border-gray-200'>
                   <tr className='border-b border-gray'>
@@ -34,13 +36,13 @@ const IncomeStatement = () => {
                       scope='col'
                       className='text-white border-gray border-b-2 border-t-2 border-gray-200 py-3 px-3 bg-gray-900 text-left text-xs font-semibold uppercase tracking-wider'
                     >
-                      Account
+                      {t("income_statement.account")}
                     </th>
                     <th
                       scope='col'
                       className='text-white border-gray border-b-2 border-t-2 border-gray-200 py-3 px-3 bg-gray-900 text-left text-xs font-semibold uppercase tracking-wider'
                     >
-                      Amount
+                      {t("income_statement.amount")}
                     </th>
                   </tr>
                 </thead>
@@ -66,7 +68,7 @@ const IncomeStatement = () => {
                   <tr className='hover:bg-gray-100 hover:cursor-pointer'>
                     <td className='py-4 px-6 border-b border-gray-200 text-gray-900 text-sm'>
                       {" "}
-                      <strong>TOTAL</strong>
+                      <strong>{t("income_statement.total")}</strong>
                     </td>
                     <td className='py-4 px-6 border-b border-gray-200 text-gray-900 text-sm'>
                       <strong>{data?.totalRevenue}</strong>
@@ -75,7 +77,7 @@ const IncomeStatement = () => {
 
                   <h5 className='mt-2 mb-1 ml-2  font-semibold text-base'>
                     {" "}
-                    Expense
+                    {t("income_statement.expense")}
                   </h5>
 
 
@@ -98,7 +100,7 @@ const IncomeStatement = () => {
 
                   <tr className='hover:bg-gray-100 hover:cursor-pointer'>
                     <td className='py-4 px-6 border-b border-gray-200 text-gray-900 text-sm'>
-                      <strong>TOTAL</strong>
+                      <strong>{t("income_statement.total")}</strong>
                     </td>
                     <td className='py-4 px-6 border-b border-gray-200 text-gray-900 text-sm'>
                       <strong>{data?.totalExpense}</strong>
@@ -107,12 +109,12 @@ const IncomeStatement = () => {
 
                   <h5 className='mt-2 mb-1 ml-2  font-semibold text-base'>
                     {" "}
-                    Profit
+                    {t("income_statement.profit")}
                   </h5>
                   <tr className='hover:bg-gray-100 hover:cursor-pointer'>
                     <td className='py-4 px-6 border-b border-gray-200 text-gray-900 text-sm'>
                       {" "}
-                      <strong>Total </strong>
+                      <strong>{t("income_statement.total")} </strong>
                     </td>
                     <td className='py-4 px-6 border-b border-gray-200 text-gray-900 text-sm'>
                       <strong>{data?.profit}</strong>

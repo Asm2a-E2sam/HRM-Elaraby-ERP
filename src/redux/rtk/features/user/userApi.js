@@ -87,7 +87,7 @@ export const userApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Users", "User"],
     }),
 
-    login: builder.mutation({
+    loginUser: builder.mutation({
       query: (values) => ({
         method: "POST",
         headers: {
@@ -117,7 +117,7 @@ export const userApi = apiSlice.injectEndpoints({
       invalidatesTags: ["Users"],
     }),
 
-    logout: builder.mutation({
+    logoutUser: builder.mutation({
       query: (id) => ({
         method: "POST",
         headers: {
@@ -150,7 +150,7 @@ export const {
   useGetUsersQuery,
   useAddUserMutation,
   useUpdateUserMutation,
-  useLoginMutation,
-  useLogoutMutation,
+  useLoginUserMutation,
+  useLogoutUserMutation,
   useDeleteUserMutation,
 } = userApi;

@@ -12,24 +12,26 @@ import AwardEditPopup from "../UI/PopUp/AwardEditPopup";
 import PageTitle from "../page-header/PageHeader";
 import CardCustom from "../CommonUi/CardCustom";
 import TableNoPagination from "../CommonUi/TableNoPagination";
+import { useTranslation } from "react-i18next"; 
 
 //PopUp
 
 
 const DetailAward = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const { data: award ,isLoading} = useGetAwardQuery(id);
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("award.id"),
       dataIndex: "id",
       key: "id",
     },
 
     {
       id: 2,
-      title: " Name",
+      title: t("award.name"),
       key: "user",
       dataIndex: "user",
       render: (user) => user?.firstName + " " + user?.lastName,
@@ -37,7 +39,7 @@ const DetailAward = () => {
 
     {
       id: 6,
-      title: "Awarded Date",
+      title: t("award.award_date"),
       dataIndex: "awardedDate",
       key: "awardedDate",
       render: (awardedDate) => dayjs(awardedDate).format("DD/MM/YYYY"),
@@ -45,14 +47,14 @@ const DetailAward = () => {
 
     {
       id: 5,
-      title: "Comment",
+      title: t("award.comment"),
       dataIndex: "comment",
       key: "comment",
     },
 
     {
       id: 4,
-      title: "Action",
+      title: t("award.action"),
       dataIndex: "id",
       key: "action",
       render: (id) => (
@@ -64,12 +66,12 @@ const DetailAward = () => {
   ];
   return (
     <div>
-      <PageTitle title=" Back  " />
+      <PageTitle title={t("award.back")}/>
       <UserPrivateComponent permission={"readSingle-award"}>
         <CardCustom
           title={
             <h3>
-              ID : {award?.id} | {award?.name}
+              {t("award.id")} : {award?.id} | {award?.name}
             </h3>
           }
           extra={
@@ -87,7 +89,7 @@ const DetailAward = () => {
           <TableNoPagination
             leftElement={
               <h1 className="p-2 font-semibold text-lg text-center">
-                Employee List
+                {t("award.employee_list")}
               </h1>
             }
             list={award?.awardHistory}

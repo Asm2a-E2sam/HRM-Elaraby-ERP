@@ -16,8 +16,10 @@ import StatusSelectionDropdown from "../../CommonUi/StatusSelectionDropdown";
 import TablePagination from "../../CommonUi/TablePagination";
 import PageTitle from "../../page-header/PageHeader";
 import AddJob from "./AddJob";
+import { useTranslation } from "react-i18next"; 
 
 const Job = () => {
+    const { t } = useTranslation();
     const [pagConfig, setPageConfig] = useState({
         status: "true",
         page: 1,
@@ -27,17 +29,17 @@ const Job = () => {
     const columns = [
         {
             key: "id",
-            title: "ID",
+            title: t("recruitment.id"),
             dataIndex: "id",
         },
         {
             key: "jobTitle",
-            title: "Title",
+            title: t("recruitment.title"),
             dataIndex: "jobTitle",
         },
         {
             key: "jobCategory",
-            title: "Job Category",
+            title: t("recruitment.job_category"),
             dataIndex: "jobCategory",
             render: (jobCategory) => {
                 return jobCategory.jobCategoryName;
@@ -45,12 +47,12 @@ const Job = () => {
         },
         {
             key: "totalPosition",
-            title: "Total Position",
+            title: t("recruitment.total_position"),
             dataIndex: "totalPosition",
         },
         {
             key: "jobType",
-            title: "Job Type",
+            title: t("recruitment.job_type"),
             dataIndex: "jobType",
             render: (jobType) => {
                 return jobType.jobTypeName;
@@ -58,7 +60,7 @@ const Job = () => {
         },
         {
             key: "action",
-            title: "Action",
+            title: t("recruitment.action"),
             dataIndex: "id",
             render: (id) => (
                 <>
@@ -83,10 +85,10 @@ const Job = () => {
     ];
     return (
         <>
-            <PageTitle title="back" />
+            <PageTitle title={t("recruitment.back")} />
 
             <CardCustom
-                title={"Job"}
+                title={t("recruitment.job")}
                 extra={
                     <>
                         <StatusSelectionDropdown
@@ -97,7 +99,7 @@ const Job = () => {
 
                         <CreateDrawer
                             permission={"create-job"}
-                            title={"Create Job"}
+                            title={t("recruitment.create_job")}
                             width={82}
                         >
                             <AddJob />

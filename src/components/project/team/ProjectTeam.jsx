@@ -12,34 +12,35 @@ import CommonDelete from "../../CommonUi/CommonDelete";
 import CreateDrawer from "../../CommonUi/CreateDrawer";
 import TablePagination from "../../CommonUi/TablePagination";
 import ProjectTeamStatusUpdatePopup from "../../UI/PopUp/ProjectManagemnet/ProjectTeamStatusUpdatePopup";
+import { useTranslation } from "react-i18next"; 
 
 const ProjectTeam = () => {
   const [pageConfig, setPageConfig] = useState({status: "true", page: 1, count: 10});
   const { data, isLoading } = useGetProjectTeamsQuery(pageConfig);
-
+  const { t } = useTranslation();
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("team.id"),
       dataIndex: "id",
       key: "id",
     },
     {
       id: 2,
-      title: "Status",
+      title: t("team.status"),
       dataIndex: "status",
       key: "status",
       render: (status) => (status ? "True" : "False"),
     },
     {
       id: 3,
-      title: "Team Name",
+      title: t("team.team_name"),
       dataIndex: "projectTeamName",
       key: "projectTeamName",
     },
     {
       id: 4,
-      title: "Action",
+      title: t("team.action"),
       key: "action",
       render: ({ id, projectTeamName, status }) => (
         <div className='flex justify-start items-center'>
@@ -61,15 +62,15 @@ const ProjectTeam = () => {
 
   return (
     <div>
-      <PageTitle title='Back' />
+      <PageTitle title={t("team.back")} />
 
       <CardCustom
-        title={"Team List"}
+        title={t("team.team_list")}
         extra={
           <>
             <CreateDrawer
               permission={"create-projectTeam"}
-              title={"Create team"}
+              title={t("team.create_team")}
             >
               <AddProjectTeam />
             </CreateDrawer>

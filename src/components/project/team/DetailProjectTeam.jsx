@@ -7,36 +7,39 @@ import UserPrivateComponent from "../../PrivateRoutes/UserPrivateComponent";
 import Loader from "../../loader/loader";
 import PageTitle from "../../page-header/PageHeader";
 import AddProjectTeamMember from "./AddProjectTeamMember";
+import { useTranslation } from "react-i18next"; 
 
-const columns = [
-  {
-    id: 1,
-    title: "ID",
-    dataIndex: "userId",
-    key: "userId",
-  },
-  {
-    id: 2,
-    title: "Name",
-    key: "username",
-    render: ({ user }) => user.firstName + " " + user.lastName,
-  },
-  {
-    id: 4,
-    title: "Action",
-    dataIndex: "userId",
-    key: "action",
-    render: (userId) => (
-      <div className='flex justify-start'>
-        <UserPrivateComponent permission={"readSingle-user"}>
-           <ViewBtn path={`/admin/hr/staffs/${userId}/`} />
-         </UserPrivateComponent>
-      </div>
-    ),
-  },
-];
+
 
 const DetailProjectTeam = () => {
+  const { t } = useTranslation();
+  const columns = [
+    {
+      id: 1,
+      title: t("team.id"),
+      dataIndex: "userId",
+      key: "userId",
+    },
+    {
+      id: 2,
+      title: t("team.name"),
+      key: "username",
+      render: ({ user }) => user.firstName + " " + user.lastName,
+    },
+    {
+      id: 4,
+      title: t("team.action"),
+      dataIndex: "userId",
+      key: "action",
+      render: (userId) => (
+        <div className='flex justify-start'>
+          <UserPrivateComponent permission={"readSingle-user"}>
+             <ViewBtn path={`/admin/hr/staffs/${userId}/`} />
+           </UserPrivateComponent>
+        </div>
+      ),
+    },
+  ];
   const { id } = useParams("id");
 
   const { data: ProjectTeam, isLoading: teamLoading } =
@@ -51,7 +54,7 @@ const DetailProjectTeam = () => {
     <>
       {ProjectTeam ? (
         <div>
-          <PageTitle title='Back' />
+          <PageTitle title={t("team.back")} />
           {ProjectTeam && (
             <AddProjectTeamMember
               id={id}
@@ -63,16 +66,16 @@ const DetailProjectTeam = () => {
             <div className='flex justify-between mb-8'>
               <h1 className='text-lg '>
                 {" "}
-                <span className='font-semibold'>Project :</span>{" "}
+                <span className='font-semibold'>{t("team.project")} :</span>{" "}
                 {ProjectTeam.project?.name}
               </h1>
               <h1 className='text-lg'>
                 {" "}
-                <span className='font-semibold'>Team : </span>
+                <span className='font-semibold'>{t("team.team")} : </span>
                 {ProjectTeam.projectTeamName}
               </h1>
               <h1 className='text-lg '>
-                <span className='font-semibold'>Project Manager : </span>
+                <span className='font-semibold'>{t("team.project_manager")} : </span>
                 {(
                   ProjectTeam.project?.projectManager?.firstName +
                   " " +

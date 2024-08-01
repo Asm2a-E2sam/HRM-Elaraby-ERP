@@ -9,8 +9,10 @@ import StatusSelectionDropdown from "../../CommonUi/StatusSelectionDropdown";
 import TablePagination from "../../CommonUi/TablePagination";
 import PageTitle from "../../page-header/PageHeader";
 import AddJobSkills from "./AddJobSkills";
+import { useTranslation } from "react-i18next"; 
 
 const JobSkills = () => {
+    const { t } = useTranslation();
     const [pagConfig, setPageConfig] = useState({
         status: "true",
         page: 1,
@@ -20,23 +22,23 @@ const JobSkills = () => {
     const columns = [
         {
             key: "id",
-            title: "ID",
+            title: t("recruitment.id"),
             dataIndex: "id",
         },
         {
             key: "jobCategory",
-            title: "Job Category",
+            title: t("recruitment.job_category"),
             dataIndex: "jobCategory",
             render: (jobCategory) => jobCategory?.jobCategoryName,
         },
         {
             key: "jobSkillName",
-            title: "Skill",
+            title: t("recruitment.skill"),
             dataIndex: "jobSkillName",
         },
         {
             key: "action",
-            title: "Action",
+            title: t("recruitment.action"),
             dataIndex: "id",
             render: (id) => (
                 <ViewBtn path={`/admin/recruitment/jobSkills/${id}`} />
@@ -45,10 +47,10 @@ const JobSkills = () => {
     ];
     return (
         <>
-            <PageTitle title="back" />
+            <PageTitle title={t("recruitment.back")} />
 
             <CardCustom
-                title={"Job Skills"}
+                title={t("recruitment.job_skills")}
                 extra={
                     <>
                         <StatusSelectionDropdown
@@ -59,7 +61,7 @@ const JobSkills = () => {
 
                         <CreateDrawer
                             permission={"create-jobSkills"}
-                            title={"Job Skill"}
+                            title={t("recruitment.job_skill")}
                             width={35}
                         >
                             <AddJobSkills />

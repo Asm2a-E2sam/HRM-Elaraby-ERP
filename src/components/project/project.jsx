@@ -12,21 +12,23 @@ import CardCustom from "../CommonUi/CardCustom";
 import TablePagination from "../CommonUi/TablePagination";
 
 import BtnAllSvg from "../UI/Button/btnAllSvg";
+import { useTranslation } from "react-i18next"; 
 
 const Project = () => {
   const [pageConfig, setPageConfig] = useState({ value: "all", page: 1, count: 10 });
   const { data, isLoading } = useGetProjectsByStatusQuery(pageConfig);
+  const { t } = useTranslation();
 
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title:  t("project.id"),
       dataIndex: "id",
       key: "id",
     },
     {
       id: 2,
-      title: "Name",
+      title: t("project.name"),
       key: "name",
       render: ({ name }) => (
         <div className='font-semibold'>{name.toUpperCase()}</div>
@@ -34,7 +36,7 @@ const Project = () => {
     },
     {
       id: 3,
-      title: "Project Manager",
+      title: t("project.project_manager"),
       key: "projectManager",
       render: ({ projectManager }) =>
         (
@@ -46,7 +48,7 @@ const Project = () => {
 
     {
       id: 5,
-      title: "Kanban Board",
+      title: t("project.kanban_board"),
       dataIndex: "id",
       key: "board",
       render: (id) => (
@@ -58,7 +60,7 @@ const Project = () => {
     },
     {
       id: 4,
-      title: "Milestone",
+      title: t("project.milestone"),
       dataIndex: "id",
       key: "milestone",
       render: (id) => (
@@ -69,7 +71,7 @@ const Project = () => {
     },
     {
       id: 4,
-      title: "Task Status",
+      title: t("project.task_status"),
       dataIndex: "id",
       key: "taskStatus",
       render: (id) => (
@@ -80,7 +82,7 @@ const Project = () => {
     },
     {
       id: 4,
-      title: "Action",
+      title: t("project.action"),
       dataIndex: "id",
       key: "action",
       render: (id) => (
@@ -101,7 +103,7 @@ const Project = () => {
   };
   return (
     <CardCustom
-      title={"Project List"}
+      title={t("project.project_list")}
       extra={
         <>
           <div className='ml-2 mt-0.5'>
@@ -119,7 +121,7 @@ const Project = () => {
                 {
                   label: (
                     <span>
-                      <i className='bi bi-person-lines-fill'></i> PENDING
+                      <i className='bi bi-person-lines-fill'></i> {t("project.pending")}
                     </span>
                   ),
                   value: "PENDING",
@@ -127,7 +129,7 @@ const Project = () => {
                 {
                   label: (
                     <span>
-                      <i className='bi bi-person-lines-fill'></i> PROGRESS
+                      <i className='bi bi-person-lines-fill'></i> {t("project.progress")}
                     </span>
                   ),
                   value: "PROGRESS",
@@ -135,7 +137,7 @@ const Project = () => {
                 {
                   label: (
                     <span>
-                      <i className='bi bi-person-dash-fill'></i> COMPLETE
+                      <i className='bi bi-person-dash-fill'></i> {t("project.complete")}
                     </span>
                   ),
                   value: "COMPLETE",
@@ -143,7 +145,7 @@ const Project = () => {
                 {
                   label: (
                     <span>
-                      <i className='bi bi-person-dash-fill'></i> ONHOLD
+                      <i className='bi bi-person-dash-fill'></i> {t("project.on_hold")}
                     </span>
                   ),
                   value: "ONHOLD",
@@ -151,7 +153,7 @@ const Project = () => {
                 {
                   label: (
                     <span>
-                      <i className='bi bi-person-dash-fill'></i> DELETED
+                      <i className='bi bi-person-dash-fill'></i> {t("project.deleted")}
                     </span>
                   ),
                   value: "DELETED",
