@@ -41,11 +41,10 @@ const Sidenav = ({ color, sideNavOpenKeys }) => {
     const menu = [
         {
             label: (
-                <h1 className="text-3xl text-white shadow">{t("sidebar.elaraby")}</h1>
-                // <img src="/public/logo-elaraby2.png" alt="logo" width={150} />
+                <></>
             ),
             key: "logo",
-            icon: <img src="/short-logo.png" alt="logo" width={40} className="my-5"/>,
+            icon: <img src="/short-logo.png" alt="logo" width={40} height={40} className="my-5"/>,
         },
 
         {

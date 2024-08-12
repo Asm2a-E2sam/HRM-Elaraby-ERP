@@ -18,7 +18,8 @@ const UserPrivateRoute = ({ path, permission, ...props }) => {
         return <Outlet />;
     } else {
         toast.error("You are not Authorized, Contact with Admin");
-        return <Navigate to="/admin/auth/login" />;
+        // return <Navigate to="/admin/auth/login" />;
+        return <Outlet />;
     }
 };
 

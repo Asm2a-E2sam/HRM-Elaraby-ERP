@@ -30,7 +30,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
           result = await baseQuery(args, api, extraOptions);
         } else {
           localStorage.clear();
-          window.location.replace("/admin/auth/login");
+          // window.location.replace("/admin/auth/login");
           return undefined;
         }
       }

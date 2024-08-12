@@ -30,13 +30,13 @@ export const userApi = apiSlice.injectEndpoints({
         url: `user/register`,
         body: values,
       }),
-
+      
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           await queryFulfilled;
-          // toastHandler("Registration completed successfully","success");
+          toastHandler("Registration completed successfully","success");
         } catch (err) {
-          // toastHandler("Something went wrong, Please try again", "warning");
+          toastHandler("Something went wrong, Please try again", "warning");
         }
       },
       invalidatesTags: ["Users"],
