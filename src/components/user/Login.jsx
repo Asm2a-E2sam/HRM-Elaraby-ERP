@@ -19,14 +19,14 @@ const Login = () => {
   };
 
   const onFinish = async (values) => {
-    let val = { username: values.username, password: values.password };
-    console.log(values);
-    if (role === "admin") {
-      // loginAdmin(val);
-      loginUser(val);
-    } else {
-      loginUser(val);
-    }
+    // let val = { username: values.username, password: values.password };
+    // console.log(values);
+    loginUser(values);
+    // if (role === "admin") {
+    //   // loginAdmin(val);
+    // } else {
+    //   loginUser(val);
+    // }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -84,12 +84,12 @@ const Login = () => {
                 <Input.Password />
               </Form.Item>
 
-              <Form.Item name="role" className="mb-5 mx-4">
+              {/* <Form.Item name="role" className="mb-5 mx-4">
                 <Radio.Group onChange={onRoleChange} value={role}>
                   <Radio value="user">{t("login.user")}</Radio>
                   <Radio value="admin">{t("login.admin")}</Radio>
                 </Radio.Group>
-              </Form.Item>
+              </Form.Item> */}
 
               <Form.Item className="flex justify-center">
                 <Button
