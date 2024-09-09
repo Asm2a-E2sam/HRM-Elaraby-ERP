@@ -9,7 +9,12 @@ const AddAward = () => {
   const [addSingleAward, { isLoading }] = useAddAwardMutation();
 
   const onFinish = async (values) => {
-    const resp = await addSingleAward(values);
+    const adminId = localStorage.getItem("id");
+    let val = {
+      ...values,
+      admin_id:adminId
+    };
+    const resp = await addSingleAward(val);
 
     if (resp.data && !resp.error) {
       form.resetFields();

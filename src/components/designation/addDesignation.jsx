@@ -5,10 +5,15 @@ const AddDesignation = () => {
   const { Title } = Typography;
   const [addDesignation, { isLoading }] = useAddDesignationMutation();
   const [form] = Form.useForm();
+  const adminId = localStorage.getItem("id");
 
   const onFinish = async (values) => {
+    let val = {
+      ...values,
+      admin_id:adminId,
+    }
     try {
-      const resp = await addDesignation(values);
+      const resp = await addDesignation(val);
       if (resp.data && !resp.error) {
         form.resetFields();
       }

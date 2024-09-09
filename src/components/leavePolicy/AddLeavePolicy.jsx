@@ -10,10 +10,13 @@ const AddLeavePolicy = ({ drawer }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
+    const adminId = localStorage.getItem("id");
+
     const FormData = {
       ...values,
       paidLeaveCount: parseInt(values.paidLeaveCount),
       unpaidLeaveCount: parseInt(values.unpaidLeaveCount),
+      admin_id:adminId
     };
 
     const resp = await addSingleLeavePolicy(FormData);

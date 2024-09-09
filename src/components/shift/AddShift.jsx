@@ -12,10 +12,12 @@ const AddShift = ({ drawer }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
+    const adminId = localStorage.getItem("id");
     const shiftData = {
       name: values.name,
       startTime: dayjs(values.startTime).format(),
       endTime: dayjs(values.endTime).format(),
+      admin_id:adminId
     };
     try {
       const res = await addShift(shiftData);

@@ -6,8 +6,9 @@ export const userApi = apiSlice.injectEndpoints({
     getUsers: builder.query({
       query: (arg) => {
         const query = buildQuery(arg);
+        const adminId = localStorage.getItem("id");
         return {
-          url: `user?${query}`,
+          url: `user?${query}&admin_id=${adminId}`,
         };
       },
       providesTags: ["Users"],
@@ -34,6 +35,7 @@ export const userApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           await queryFulfilled;
+          console.log(queryFulfilled);          
           toastHandler("Registration completed successfully","success");
         } catch (err) {
           toastHandler("Something went wrong, Please try again", "warning");
@@ -107,6 +109,7 @@ export const userApi = apiSlice.injectEndpoints({
           localStorage.setItem("roleId", data.roleId);
           localStorage.setItem("user", data.username);
           localStorage.setItem("id", data.id);
+          localStorage.setItem("admin_id", data.admin_id);
           localStorage.setItem("isLogged", true);
           toastHandler("User logged in successfully","success");
           window.location.href = "/admin/dashboard";

@@ -20,7 +20,7 @@ const Login = () => {
 
   const onFinish = async (values) => {
     // let val = { username: values.username, password: values.password };
-    // console.log(values);
+    console.log(values);
     loginUser(values);
     // if (role === "admin") {
     //   // loginAdmin(val);

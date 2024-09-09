@@ -6,8 +6,9 @@ export const awardApi = apiSlice.injectEndpoints({
 		getAwards: builder.query({
 			query: (arg) => {
 				const query = buildQuery(arg);
+				const adminId = localStorage.getItem("id");
 				return {
-					url: `award?${query}`,
+					url: `award?${query}&admin_id=${adminId}`,
 				}
 			},
 			providesTags: ["Awards"],

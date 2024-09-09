@@ -1,5 +1,6 @@
 import { buildQuery, toastHandler } from "../../../../utils/functions";
 import { apiSlice } from "../api/apiSlice";
+const adminId = localStorage.getItem("id");
 
 export const accountApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -42,7 +43,7 @@ export const accountApi = apiSlice.injectEndpoints({
       query: (arg) => {
         const query = buildQuery(arg);
         return {
-          url: `account?${query}`,
+          url: `account?${query}&admin_id=${adminId}`,
         }
       },
       providesTags: ["getAccounts"],

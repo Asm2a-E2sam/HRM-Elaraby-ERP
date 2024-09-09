@@ -13,7 +13,13 @@ const AddPublicHoliday = () => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    const resp = await addPublicHoliday(values);
+    const adminId = localStorage.getItem("id");
+    let val = {
+      ...values,
+      admin_id: adminId,
+    };
+    
+    const resp = await addPublicHoliday(val);
     if (resp.data && !resp.error) {
       form.resetFields();
     }

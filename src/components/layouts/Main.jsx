@@ -92,7 +92,7 @@ function Main({ children }) {
                             ""
                         ) : (
                             <div className="px-5 py-4">
-                                <img src="/by2.png" alt="" />
+                                {/* <img src="/by2.png" alt="" /> */}
                                 {/* <h2
                                     className="text-white text-center mt-2 mb-1 "
                                     style={{ fontSize: "25px" }}

@@ -6,10 +6,15 @@ import { useAddDepartmentMutation } from "../../redux/rtk/features/Department/de
 
 const AddDepartment = () => {
   const [addDepartment, { isLoading: addLoading }] = useAddDepartmentMutation();
+  const adminId = localStorage.getItem("id");
 
   const [form] = Form.useForm();
   const onFinish = async (values) => {
-    const resp = await addDepartment(values);
+    let val = {
+      ...values,
+      admin_id:adminId
+    };
+    const resp = await addDepartment(val);
     if (resp.data && !resp.error) {
       form.resetFields();
     }

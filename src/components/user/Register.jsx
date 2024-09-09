@@ -16,22 +16,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next"; // Import useTranslation hook
 import { toast } from "react-toastify";
 import { useAddUserMutation } from "../../redux/rtk/features/user/userApi";
-import { useGetLeavePoliciesQuery } from "../../redux/rtk/features/leavePolicy/leavePolicyApi";
-import { useGetWeeklyHolidaysQuery } from "../../redux/rtk/features/weeklyHoliday/weeklyHolidayApi";
-import { useGetRolesQuery } from "../../redux/rtk/features/role/roleApi";
-import { useGetShiftsQuery } from "../../redux/rtk/features/shift/shiftApi";
-import { useGetDepartmentsQuery } from "../../redux/rtk/features/Department/departmentApi";
+// import { useGetLeavePoliciesQuery } from "../../redux/rtk/features/leavePolicy/leavePolicyApi";
+// import { useGetWeeklyHolidaysQuery } from "../../redux/rtk/features/weeklyHoliday/weeklyHolidayApi";
+// import { useGetRolesQuery } from "../../redux/rtk/features/role/roleApi";
+// import { useGetShiftsQuery } from "../../redux/rtk/features/shift/shiftApi";
+// import { useGetDepartmentsQuery } from "../../redux/rtk/features/Department/departmentApi";
 // import { useAddAdminMutation } from "../../redux/rtk/features/user/adminApi";
 
 const Register = () => {
   const { t } = useTranslation(); // Use the hook
 
-  const { data: leavePolicy } = useGetLeavePoliciesQuery({ query: 'all' });
-  const { data: weeklyHoliday } = useGetWeeklyHolidaysQuery({ query: 'all' });
-  const { data: shift } = useGetShiftsQuery({ query: 'all' });
-  const { data: list } = useGetRolesQuery({ query: 'all' });
+  // const { data: leavePolicy } = useGetLeavePoliciesQuery({ query: 'all' });
+  // const { data: weeklyHoliday } = useGetWeeklyHolidaysQuery({ query: 'all' });
+  // const { data: shift } = useGetShiftsQuery({ query: 'all' });
+  // const { data: list } = useGetRolesQuery({ query: 'all' });
 
-  const { data: department } = useGetDepartmentsQuery({ query: 'all' });
+  // const { data: department } = useGetDepartmentsQuery({ query: 'all' });
 
   // const [addAdmin, { isSuccess, isLoading }] = useAddAdminMutation();
   const [addUser, { isSuccess, isLoading }] = useAddUserMutation();
@@ -40,9 +40,11 @@ const Register = () => {
 
   const onFinish = async (values) => {
     console.log(values);
-    // let val = { ...values, roleId: 1};
+    let val = { ...values, roleId: 1};
     try {
-      await addUser(values);
+      const res = await addUser(val);
+      console.log(res);
+      
       toast.success(t("register.user_added_successfully"));
       navigate("/admin/auth/login");
     } catch (error) {
@@ -213,7 +215,7 @@ const Register = () => {
                 </Select>
               </Form.Item>
 
-              <Form.Item label={t("register.profile_image")} name="image">
+              {/* <Form.Item label={t("register.profile_image")} name="image">
                 <Upload
                   action="/upload" // Change this to your upload endpoint
                   listType="picture"
@@ -222,9 +224,9 @@ const Register = () => {
                 >
                   <Button icon={<UploadOutlined />}>{t("register.upload")}</Button>
                 </Upload>
-              </Form.Item>
+              </Form.Item> */}
 
-              <Form.Item
+              {/* <Form.Item
                 name="departmentId"
                 style={{ marginBottom: "10px" }}
                 label={t("register.department")}
@@ -238,8 +240,8 @@ const Register = () => {
                       </Option>
                     ))}
                 </Select>
-              </Form.Item>
-              <Form.Item
+              </Form.Item> */}
+              {/* <Form.Item
                 label={t("register.role")}
                 name="roleId"
                 style={{ marginBottom: "10px" }}
@@ -260,9 +262,9 @@ const Register = () => {
                       </Option>
                     ))}
                 </Select>
-              </Form.Item>
+              </Form.Item> */}
 
-              <Form.Item
+              {/* <Form.Item
                 label={t("register.shift")}
                 name="shiftId"
                 style={{ marginBottom: "10px" }}
@@ -329,7 +331,7 @@ const Register = () => {
                       </Option>
                     ))}
                 </Select>
-              </Form.Item> 
+              </Form.Item>  */}
 
               <Form.Item style={{ marginBottom: "10px", marginTop: "10px" }} wrapperCol={{ offset: 4, span: 16 }}>
                 <Button className="mt-5" block type="primary" shape="round" htmlType="submit" loading={isLoading}>

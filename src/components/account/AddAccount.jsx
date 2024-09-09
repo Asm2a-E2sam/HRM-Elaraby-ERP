@@ -18,7 +18,12 @@ const AddAccount = ({ drawer }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    const resp = await AddAccount(values);
+    const adminId = localStorage.getItem("id");
+    let val = {
+      ...values,
+      admin_id:adminId
+    };
+    const resp = await AddAccount(val);
     if (resp.data && !resp.error) {
       form.resetFields();
     }

@@ -6,8 +6,9 @@ export const shiftApi = apiSlice.injectEndpoints({
     getShifts: builder.query({
       query: (arg) => {
         const query = buildQuery(arg);
+        const adminId = localStorage.getItem("id");
         return {
-          url: `shift?${query}`,
+          url: `shift?${query}&admin_id=${adminId}`,
         }
       },
       providesTags: ["Shifts"],

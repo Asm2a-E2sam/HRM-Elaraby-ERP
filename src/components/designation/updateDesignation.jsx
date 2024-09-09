@@ -20,7 +20,12 @@ function UpdateDesignation() {
     name: cust.designationName,
   });
 
+  const adminId = localStorage.getItem("id");
   const onFinish = (values) => {
+    // let val = {
+    //   ...values,
+    //   // admin_id:adminId
+    // };
     try {
       updateDesignation({ id, values });
     } catch (error) {

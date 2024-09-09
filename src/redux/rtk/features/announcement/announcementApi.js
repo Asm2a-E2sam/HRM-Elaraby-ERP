@@ -1,11 +1,12 @@
 import { apiSlice } from "../api/apiSlice";
 import { toastHandler } from "../../../../utils/functions";
 
+const adminId = localStorage.getItem("id");
 export const announcementApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getAnnouncements: builder.query({
 			query: () => ({
-				url: `announcement?query=all`,
+				url: `announcement?query=all&admin_id=${adminId}`,
 			}),
 			providesTags: ["Announcements"],
 		}),
