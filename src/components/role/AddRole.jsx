@@ -9,11 +9,14 @@ import { useAddRoleMutation } from "../../redux/rtk/features/role/roleApi";
 import ViewBtn from "../Buttons/ViewBtn";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import ColVisibilityDropdown from "../Shared/ColVisibilityDropdown";
+import { useTranslation } from "react-i18next"; 
 
 const AddRole = () => {
   const [addRole, { isLoading }] = useAddRoleMutation();
   const { Title } = Typography;
   const [form] = useForm();
+  const { t } = useTranslation();
+
   const onFinish = async (values) => {
     const res = await addRole(values);
     if (!res.error && res.data) {
@@ -22,7 +25,7 @@ const AddRole = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding role");
+    toast.warning(t("role.failed_adding_role"));
   };
   return (
     <Form
@@ -38,12 +41,12 @@ const AddRole = () => {
       <div>
         <Form.Item
           style={{ marginBottom: "20px" }}
-          label='Name'
+          label={t("role.name")}
           name='name'
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: t("role.please_input_username"),
             },
           ]}
         >
@@ -64,7 +67,7 @@ const AddRole = () => {
             block
             loading={isLoading}
           >
-            Add New Role
+            {t("role.add_new_role")}
           </Button>
         </Form.Item>
       </div>

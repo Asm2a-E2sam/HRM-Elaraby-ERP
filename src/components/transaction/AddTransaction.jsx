@@ -9,6 +9,7 @@ import {
 } from "antd";
 
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next"; 
 
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
@@ -19,6 +20,7 @@ import AddAccount from "../account/AddAccount";
 
 const AddTransaction = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [addTransaction, { isLoading, isSuccess }] =
     useAddTransactionMutation();
@@ -70,7 +72,7 @@ const AddTransaction = () => {
         onFinishFailed={onFinishFailed}
         autoComplete='off'
       >
-        <Form.Item label='Date' required>
+        <Form.Item label={t("transaction.date")} required>
           <DatePicker
             defaultValue={dayjs("2015/01/01", "YYYY/MM/DD")}
             format={"YYYY/MM/DD"}
@@ -81,7 +83,7 @@ const AddTransaction = () => {
             rules={[
               {
                 required: true,
-                message: "Please input date!",
+                message: t("transaction.please_input_date"),
               },
             ]}
           />
@@ -90,14 +92,14 @@ const AddTransaction = () => {
         <Form.Item
           style={{ marginBottom: "10px" }}
           name='debitId'
-          label='Debit Account'
+          label= {t("transaction.debit_account")}
         >
           <Space.Compact block>
             <Select
               onChange={(value) => setAccount({ ...account, debitId: value })}
               loading={!accounts}
               showSearch
-              placeholder='Select Debit ID'
+              placeholder={t("transaction.select_debit_id")}
               optionFilterProp='children'
               filterOption={(input, option) => option.children.includes(input)}
               filterSort={(optionA, optionB) =>
@@ -122,14 +124,14 @@ const AddTransaction = () => {
         <Form.Item
           style={{ marginBottom: "10px" }}
           name='creditId'
-          label='Credit Account'
+          label={t("transaction.credit_account")}
         >
           <Space.Compact block>
             <Select
               onChange={(value) => setAccount({ ...account, creditId: value })}
               loading={!accounts}
               showSearch
-              placeholder='Select Credit ID'
+              placeholder={t("transaction.select_credit_id")}
               optionFilterProp='children'
               filterOption={(input, option) => option.children.includes(input)}
               filterSort={(optionA, optionB) =>
@@ -153,12 +155,12 @@ const AddTransaction = () => {
 
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label='Amount'
+          label={t("transaction.amount")}
           name='amount'
           rules={[
             {
               required: true,
-              message: "Please input amount!",
+              message: t("transaction.please_input_amount"),
             },
           ]}
         >
@@ -167,12 +169,12 @@ const AddTransaction = () => {
 
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label='Particulars'
+          label={t("transaction.particulars")}
           name='particulars'
           rules={[
             {
               required: true,
-              message: "Please input particulars!",
+              message: t("transaction.please_input_particulars"),
             },
           ]}
         >
@@ -190,7 +192,7 @@ const AddTransaction = () => {
             size='large'
             loading={isLoading}
           >
-            Pay Now
+            {t("transaction.pay_now")}
           </Button>
         </Form.Item>
       </Form>

@@ -1,8 +1,11 @@
 import { Select } from "antd";
 import { useState } from "react";
+import { useTranslation } from "react-i18next"; 
 
 export default function InterviewStatusSelection({ setPageConfig }) {
     const [interviewStatus, setInterviewStatus] = useState(null);
+    const { t } = useTranslation();
+
     const onChange = (value) => {
         setInterviewStatus(value);
         setPageConfig((prev) => {
@@ -27,7 +30,7 @@ export default function InterviewStatusSelection({ setPageConfig }) {
                     {
                         label: (
                             <span className="text-yellow-600 font-semibold">
-                                PENDING
+                                {t("pending")}
                             </span>
                         ),
                         value: "PENDING",
@@ -35,7 +38,7 @@ export default function InterviewStatusSelection({ setPageConfig }) {
                     {
                         label: (
                             <span className="text-green-700 font-semibold">
-                                INTERVIEWED
+                                {t("interviewed")}
                             </span>
                         ),
                         value: "INTERVIEWED",

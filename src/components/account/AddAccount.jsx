@@ -18,7 +18,7 @@ const AddAccount = ({ drawer }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    const adminId = localStorage.getItem("id");
+    const adminId = localStorage.getItem("admin_id");
     let val = {
       ...values,
       admin_id:adminId

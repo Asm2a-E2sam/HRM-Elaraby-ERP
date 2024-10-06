@@ -1,6 +1,7 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Drawer, Layout, Space } from "antd";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next"; 
 
 
 const BigDrawer = ({ children, btnTitle, title }) => {
@@ -12,6 +13,8 @@ const BigDrawer = ({ children, btnTitle, title }) => {
 	const onClose = () => {
 		setOpen(false);
 	};
+  const { t } = useTranslation();
+
 	return (
     <>
       <Button
@@ -37,7 +40,7 @@ const BigDrawer = ({ children, btnTitle, title }) => {
               type="danger"
               onClick={onClose}
             >
-              Cancel
+              {t("cancel")}
             </Button>
           </Space>
         }

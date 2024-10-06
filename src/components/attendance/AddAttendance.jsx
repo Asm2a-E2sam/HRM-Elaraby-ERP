@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next"; 
 
 import {
   Button,
@@ -17,6 +18,7 @@ import { useGetUsersQuery } from "../../redux/rtk/features/user/userApi";
 const AddAttendance = ({ drawer }) => {
   const { data: users } = useGetUsersQuery({ query: "all" });
   const [addManualAttendance, { isLoading }] = useAddManualAttendanceMutation();
+  const { t } = useTranslation();
 
   const { Title } = Typography;
   const [form] = Form.useForm();
@@ -41,11 +43,11 @@ const AddAttendance = ({ drawer }) => {
       userId: values.userId,
       comment: values.comment,
       inTime:
-        inTimeDateNew !== "Invalid Date"
+        inTimeDateNew !== t("add_attendance.invalid_date")
           ? dayjs(inTimeDateNew).format("YYYY-MM-DD HH:mm:ss")
           : null,
       outTime:
-        outTimeDateNew !== "Invalid Date"
+        outTimeDateNew !== t("add_attendance.invalid_date")
           ? dayjs(outTimeDateNew).format("YYYY-MM-DD HH:mm:ss")
           : null,
     };
@@ -58,13 +60,13 @@ const AddAttendance = ({ drawer }) => {
     }
   };
   const onFinishFailed = () => {
-    toast.warning("Failed at adding shift");
+    toast.warning(t("add_attendance.failed_at_adding_shift"));
   };
 
   return (
     <>
       <Title level={4} className='m-2 mt-5 mb-5 text-center'>
-        Add Manual Attendance
+        {t("add_attendance.add_manual_attendance")}
       </Title>
       {inTimeDate.time === null ||
       inTimeDate.date === null ||
@@ -72,7 +74,7 @@ const AddAttendance = ({ drawer }) => {
       outTimeDate.date === null ? (
         <p className='text-center text-rose-500 text-sm font-medium mb-4'>
           {" "}
-          * Please fill Date and Time
+          {t("add_attendance.please_fill_Date_and_time")}
         </p>
       ) : (
         ""
@@ -91,16 +93,16 @@ const AddAttendance = ({ drawer }) => {
         <div>
           <Form.Item
             style={{ marginBottom: "10px" }}
-            label='User'
+            label={t("add_attendance.user")}
             name='userId'
             rules={[
               {
                 required: true,
-                message: "Please input your user!",
+                message: t("add_attendance.please_input_your_user"),
               },
             ]}
           >
-            <Select placeholder='Select User'>
+            <Select placeholder={t("add_attendance.select_user")}>
               {users?.map((user) => (
                 <Select.Option key={user.id} value={user.id}>
                   {user.username}
@@ -111,7 +113,7 @@ const AddAttendance = ({ drawer }) => {
 
           <Form.Item
             style={{ marginBottom: "10px" }}
-            label='Start Time'
+            label={t("add_attendance.start_time")}
             name='inTime'
           >
             <div className='flex justify-between'>
@@ -133,7 +135,7 @@ const AddAttendance = ({ drawer }) => {
 
           <Form.Item
             style={{ marginBottom: "10px" }}
-            label='End Time'
+            label={t("add_attendance.end_time")}
             name='outTime'
           >
             <div className='flex justify-between'>
@@ -155,15 +157,15 @@ const AddAttendance = ({ drawer }) => {
 
           <Form.Item
             style={{ marginBottom: "10px" }}
-            label='Comment'
+            label={t("add_attendance.comment")}
             name='comment'
           >
-            <Input placeholder='Comment' />
+            <Input placeholder={t("add_attendance.comment")} />
           </Form.Item>
 
           <Form.Item
             style={{ marginBottom: "10px" }}
-            label='IP Address'
+            label={t("add_attendance.ip_address")}
             name='ip'
           >
             <Input placeholder='127.0.0.1' />
@@ -189,7 +191,7 @@ const AddAttendance = ({ drawer }) => {
               block
               loading={isLoading}
             >
-              Add Attendance
+              {t("add_attendance.add_attendance")}
             </Button>
           </Form.Item>
         </div>

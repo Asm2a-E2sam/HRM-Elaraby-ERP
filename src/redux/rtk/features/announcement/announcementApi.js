@@ -1,7 +1,7 @@
 import { apiSlice } from "../api/apiSlice";
 import { toastHandler } from "../../../../utils/functions";
 
-const adminId = localStorage.getItem("id");
+const adminId = localStorage.getItem("admin_id");
 export const announcementApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getAnnouncements: builder.query({

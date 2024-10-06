@@ -6,8 +6,12 @@ import { Layout, Menu } from "antd";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 const { Header, Content, Footer, Sider } = Layout;
+import { useTranslation } from "react-i18next"; 
 
-const HomeLayout = ({ children }) => (
+function HomeLayout ({ children }) {
+  const { t } = useTranslation();
+
+  return (
   <Layout>
     <Sider
       breakpoint='lg'
@@ -17,7 +21,7 @@ const HomeLayout = ({ children }) => (
     >
       <div className='logo '>
         <Link to='/admin'>
-          <h3 className='text-white my-[2px] mx-[10px]'>Smart ERP V1</h3>
+          <h3 className='text-white my-[2px] mx-[10px]'>{t("chart.smart_erp_v1")}</h3>
         </Link>
       </div>
 
@@ -29,22 +33,22 @@ const HomeLayout = ({ children }) => (
         items={[
           {
             key: 1,
-            label: <NavLink to={"/admin/supplier"}>Suppliers</NavLink>,
+            label: <NavLink to={"/admin/supplier"}>{t("chart.suppliers")}</NavLink>,
             icon: <BranchesOutlined />,
           },
           {
             key: 2,
-            label: <NavLink to={"/admin/product"}>Products</NavLink>,
+            label: <NavLink to={"/admin/product"}>{t("chart.products")}</NavLink>,
             icon: <SaveOutlined />,
           },
           {
             key: 3,
-            label: <NavLink to={"/admin/purchase"}>Purchase New</NavLink>,
+            label: <NavLink to={"/admin/purchase"}>{t("chart.purchase_new")}</NavLink>,
             icon: <AppstoreAddOutlined />,
           },
           {
             key: 4,
-            label: <NavLink to={"/admin/users"}>User List</NavLink>,
+            label: <NavLink to={"/admin/users"}>{t("chart.user_list")}</NavLink>,
             icon: <AppstoreAddOutlined />,
           },
         ]}
@@ -77,10 +81,11 @@ const HomeLayout = ({ children }) => (
           textAlign: "center",
         }}
       >
-        Omega Solution ©2022 Smart ERP
+        {t("chart.copy_right")}
       </Footer>
     </Layout>
   </Layout>
 );
+}
 
 export default HomeLayout;

@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 import { useAddProjectMutation } from "../../redux/rtk/features/projectManagement/project/project/projectApi";
 import { useGetUsersQuery } from "../../redux/rtk/features/user/userApi";
 import PageTitle from "../page-header/PageHeader";
-import { useTranslation } from "react-i18next"; 
+import { useTranslation } from "react-i18next";
 
 const AddProject = ({ drawer }) => {
   const { t } = useTranslation();
@@ -48,23 +48,23 @@ const AddProject = ({ drawer }) => {
   };
   return (
     <>
-      <PageTitle title={"Back"} />
-      <Row className='mt-4' justify={"center"}>
+      <PageTitle title={t("back")} />
+      <Row className="mt-4" justify={"center"}>
         <Col
           xs={24}
           sm={24}
           md={24}
           lg={drawer ? 22 : 18}
           xl={drawer ? 22 : 16}
-          className='column-design border rounded card-custom'
+          className="column-design border rounded card-custom"
         >
-          <Title level={4} className='m-2 mt-5 mb-5 text-center'>
-          {t("project.add_new_project")}
+          <Title level={4} className="m-2 mt-5 mb-5 text-center">
+            {t("project.add_new_project")}
           </Title>
           <Form
             form={form}
             style={{ marginBottom: "40px" }}
-            name='basic'
+            name="basic"
             labelCol={{
               span: 7,
             }}
@@ -73,13 +73,13 @@ const AddProject = ({ drawer }) => {
             }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
-            autoComplete='off'
+            autoComplete="off"
           >
             <div>
               <Form.Item
                 style={{ marginBottom: "10px" }}
                 label={t("project.project_manager")}
-                name='projectManagerId'
+                name="projectManagerId"
                 rules={[
                   {
                     required: true,
@@ -89,23 +89,29 @@ const AddProject = ({ drawer }) => {
               >
                 <Select
                   loading={listLoading}
-                  mode='single'
+                  mode="single"
                   showSearch
                   placeholder={t("project.select_project_manager")}
-                  optionFilterProp='children'
+                  optionFilterProp="children"
                 >
-                  {list?.map((item) => (
-                    <Select.Option key={item.id} value={item.id}>
-                      {item.firstName} {item.lastName}
+                  {Array.isArray(list) ? (
+                    list.map((item) => (
+                      <Select.Option key={item.id} value={item.id}>
+                        {item.firstName} {item.lastName}
+                      </Select.Option>
+                    ))
+                  ) : (
+                    <Select.Option disabled>
+                      {t("project.no_users_found")}
                     </Select.Option>
-                  ))}
+                  )}
                 </Select>
               </Form.Item>
 
               <Form.Item
                 style={{ marginBottom: "10px" }}
                 label={t("project.project_name")}
-                name='name'
+                name="name"
                 rules={[
                   {
                     required: true,
@@ -119,7 +125,7 @@ const AddProject = ({ drawer }) => {
               <Form.Item
                 style={{ marginBottom: "10px" }}
                 label={t("project.start_date")}
-                name='startDate'
+                name="startDate"
                 rules={[
                   {
                     required: true,
@@ -133,7 +139,7 @@ const AddProject = ({ drawer }) => {
               <Form.Item
                 style={{ marginBottom: "20px" }}
                 label={t("project.end_date")}
-                name='endDate'
+                name="endDate"
                 rules={[
                   {
                     required: true,
@@ -147,7 +153,7 @@ const AddProject = ({ drawer }) => {
               <Form.Item
                 style={{ marginBottom: "20px" }}
                 label={t("project.project_description")}
-                name='description'
+                name="description"
                 rules={[
                   {
                     required: true,
@@ -155,7 +161,9 @@ const AddProject = ({ drawer }) => {
                   },
                 ]}
               >
-                <Input.TextArea placeholder={t("project.enter_project_description")} />
+                <Input.TextArea
+                  placeholder={t("project.enter_project_description")}
+                />
               </Form.Item>
 
               <Form.Item
@@ -166,9 +174,9 @@ const AddProject = ({ drawer }) => {
                 }}
               >
                 <Button
-                  type='primary'
-                  size='large'
-                  htmlType='submit'
+                  type="primary"
+                  size="large"
+                  htmlType="submit"
                   block
                   loading={isLoading}
                 >

@@ -2,8 +2,10 @@ import { PlusSquareFilled } from "@ant-design/icons";
 import { Modal, Tooltip } from "antd";
 import { useState } from "react";
 import AddJobApplicationStatus from "../recruitment/jobApplicationStatus/AddJobApplicationStatus";
+import { useTranslation } from "react-i18next"; 
 
 const AddStatusColumn = () => {
+    const { t } = useTranslation();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const showModal = () => {
         setIsModalOpen(true);
@@ -16,7 +18,7 @@ const AddStatusColumn = () => {
     };
     return (
         <div className="new-card mr-10">
-            <Tooltip title="Add Column">
+            <Tooltip title={t("add_column")}>
                 <button
                     className="flex items-center justify-center w-6 h-6 ml-auto text-violet-500 rounded hover:bg-violet-500 hover:text-indigo-100"
                     type="primary"
@@ -26,7 +28,7 @@ const AddStatusColumn = () => {
                 </button>
             </Tooltip>
             <Modal
-                title="Add Column"
+                title={t("add_column")}
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}

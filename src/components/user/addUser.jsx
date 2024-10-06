@@ -35,7 +35,7 @@ const AddUser = () => {
   const { data: shift } = useGetShiftsQuery({query: 'all'});
   const { data: weeklyHoliday } = useGetWeeklyHolidaysQuery({query: 'all'});
   const { data: leavePolicy } = useGetLeavePoliciesQuery({query: 'all'});
-  const adminId = localStorage.getItem("id");
+  const adminId = localStorage.getItem("admin_id");
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
@@ -56,6 +56,7 @@ const AddUser = () => {
 
   const bloodGroups = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"]; // blood groups
 
+  console.log(designation);
   return (
     <>
       <UserPrivateComponent permission={"create-user"}>

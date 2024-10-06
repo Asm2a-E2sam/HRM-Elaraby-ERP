@@ -506,3 +506,39 @@ body {
 	color:#fff !important;
 	border-color: #373f81 !important;
 }
+
+.my_input {
+    display: block;
+    height: 50px;
+    width: 90%;
+    margin: 20px auto;
+    border: none;
+    padding-left: 20px;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    color: #858585;
+    font-weight: lighter;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
+  }
+  
+  .my_input::placeholder {
+    transform: translateY(0px);
+    transition: 0.5s;
+  }
+  
+  .my_input:hover,
+  .my_input:focus,
+  .my_input:active:focus {
+    color: #ff5722;
+    outline: none;
+    border-bottom: 1px solid #ff5722;
+  }
+  
+  .my_input:hover::placeholder,
+  .my_input:focus::placeholder,
+  .my_input:active:focus::placeholder {
+    color: #ff5722;
+    position: relative;
+    transform: translateY(-20px);
+  }

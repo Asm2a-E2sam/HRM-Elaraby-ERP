@@ -10,12 +10,14 @@ import CardCustom from "../CommonUi/CardCustom";
 import TablePagination from "../CommonUi/TablePagination";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import PageTitle from "../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 const PayslipList = () => {
   const [pageConfig, setPageConfig] = useState({page:1, count:10});
   const { data: payroll, isLoading } =
     useGetPayslipForPaymentMonthWiseQuery(pageConfig);
   const [addPayslipPayment, { isLoading: loading }] = useAddPaymentMutation();
+  const { t } = useTranslation();
 
   const onMonthChange = (date, dateString) => {
     setPageConfig((prev) => {
@@ -58,81 +60,81 @@ const PayslipList = () => {
 
   const columns = [
     {
-      title: "ID",
+      title: t("payslip_list.id"),
       dataIndex: "id",
       key: "id",
     },
     {
-      title: "Name",
+      title: t("payslip_list.name"),
       key: "name",
       dataIndex: "user",
       render: (user) => `${user?.firstName} ${user?.lastName}`,
     },
 
     {
-      title: "Salary",
+      title: t("payslip_list.salary"),
       dataIndex: "salary",
       key: "salary",
     },
     {
-      title: "Salary Payable",
+      title: t("payslip_list.salary_payable"),
       dataIndex: "salaryPayable",
       key: "salaryPayable",
     },
     {
-      title: "Month ",
+      title: t("payslip_list.month"),
       key: "month",
       render: ({ salaryMonth }) => `${salaryMonth}`,
     },
     {
-      title: "Year",
+      title: t("payslip_list.year"),
       key: "year",
       render: ({ salaryYear }) => `${salaryYear}`,
     },
 
     {
-      title: "bonus",
+      title: t("payslip_list.bonus"),
       dataIndex: "bonus",
       key: "bonus",
     },
 
     {
-      title: "bonusComment",
+      title: t("payslip_list.bonus_comment"),
       dataIndex: "bonusComment",
       key: "bonusComment",
     },
 
     {
-      title: "deduction",
+      title: t("payslip_list.deduction"),
       dataIndex: "deduction",
       key: "deduction",
     },
 
     {
-      title: "deductionComment",
+      title: t("payslip_list.deduction_comment"),
       dataIndex: "deductionComment",
       key: "deductionComment",
     },
 
     {
-      title: "Total",
+      title: t("payslip_list.total"),
       dataIndex: "totalPayable",
       key: "totalPayable",
     },
 
     {
-      title: "W Hours",
+      title: t("payslip_list.w_hours"),
       dataIndex: "workingHour",
       key: "workingHour",
       render: (workingHour) => `${workingHour?.toFixed(2)} hours`,
     },
     {
-      title: "Status",
+      title: t("payslip_list.status"),
       dataIndex: "paymentStatus",
       key: "paymentStatus",
     },
     {
-      title: "Action",
+      title: t("payslip_list.action"),
       key: "action",
       render: ({ id, paymentStatus }) => {
         const onPayment = async () => {
@@ -171,7 +173,7 @@ const PayslipList = () => {
   ];
   return (
     <div>
-      <PageTitle title="Back" />
+      <PageTitle title={t("payslip_list.back")} />
 
       <CardCustom
         title={"Payslip List"}
@@ -179,7 +181,7 @@ const PayslipList = () => {
           <div className="flex items-center">
             <h1 className="text-base text-color-2 items-center mr-2 mt-1 w-[140px]">
               {" "}
-              Select Month :{" "}
+              {t("payslip_list.select_month")} :{" "}
             </h1>
             <DatePicker
               format={"M"}
@@ -190,7 +192,7 @@ const PayslipList = () => {
             />
             <h1 className="text-base text-color-2 items-center mr-2 mt-1 w-[140px]">
               {" "}
-              Select Year :{" "}
+              {t("payslip_list.select_year")} :{" "}
             </h1>
             <DatePicker
               format={"YYYY"}

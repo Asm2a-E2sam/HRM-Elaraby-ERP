@@ -10,36 +10,38 @@ import TableNoPagination from "../CommonUi/TableNoPagination";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import DepartmentEditPopup from "../UI/PopUp/DepartmentEditPopup";
 import PageTitle from "../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 const DetailDepartment = () => {
   const { id } = useParams();
+  const { t } = useTranslation();
 
   const { data: department, isLoading } = useGetDepartmentQuery(id);
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title:t("detail_department.id"),
       dataIndex: "id",
       key: "id",
     },
 
     {
       id: 2,
-      title: " Name",
+      title: t("detail_department.name"),
       key: "firstName",
       render: ({ firstName, lastName }) => firstName + " " + lastName,
     },
 
     {
       id: 6,
-      title: "User Name",
+      title: t("detail_department.username"),
       dataIndex: "username",
       key: "username",
     },
 
     {
       id: 5,
-      title: "Role",
+      title: t("detail_department.role"),
       dataIndex: "role",
       key: "role",
       render: (role) => role?.name,
@@ -47,7 +49,7 @@ const DetailDepartment = () => {
 
     {
       id: 6,
-      title: "Designation",
+      title: t("detail_department.designation"),
       dataIndex: "designationHistory",
       key: "designationHistory",
       render: (designationHistory) =>
@@ -56,7 +58,7 @@ const DetailDepartment = () => {
 
     {
       id: 4,
-      title: "Action",
+      title: t("detail_department.action"),
       dataIndex: "id",
       key: "action",
       render: (id) => (
@@ -68,12 +70,12 @@ const DetailDepartment = () => {
   ];
   return (
     <div>
-      <PageTitle title=' Back  ' />
+      <PageTitle title={t("detail_department.back")} />
       <UserPrivateComponent permission={"readSingle-department"}>
         <CardCustom
           title={
             <h3>
-              ID : {department?.id} | {department?.name}
+              {t("detail_department.id")} : {department?.id} | {department?.name}
             </h3>
           }
           extra={
@@ -91,7 +93,7 @@ const DetailDepartment = () => {
           <TableNoPagination
             leftElement={
               <h1 className='p-2 font-semibold text-lg text-center'>
-                User List
+                {t("detail_department.user_list")} 
               </h1>
             }
             list={department?.user}

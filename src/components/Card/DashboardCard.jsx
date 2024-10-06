@@ -1,8 +1,11 @@
 import React, { Fragment } from "react";
 import "./Dashboard/style.css";
+import { useTranslation } from "react-i18next"; 
 
 const DashboardCard = ({ information, count, isCustomer, title }) => {
   console.log(isCustomer);
+  const { t } = useTranslation();
+
   return (
     <Fragment>
       <section className='grid md:grid-cols-2 xl:grid-cols-4 gap-6 mt-5 mb-5'>
@@ -44,7 +47,7 @@ const DashboardCard = ({ information, count, isCustomer, title }) => {
               {" "}
               {count?.id ? count?.id : 0}
             </span>
-            <span className='block text-gray-500'> Total Inoices </span>
+            <span className='block text-gray-500'> {t("dashboard_card.total_inoices")} </span>
           </div>
         </div>
         <div className='flex items-center p-8 bg-white shadow rounded-lg dashboard-card-bg'>
@@ -81,7 +84,7 @@ const DashboardCard = ({ information, count, isCustomer, title }) => {
               {" "}
               {information?.total_amount ? information?.total_amount : 0}
             </span>
-            <span className='block text-gray-500'>Total Amount</span>
+            <span className='block text-gray-500'>{t("dashboard_card.total_amount")}</span>
           </div>
         </div>
         <div className='flex items-center p-8 bg-white shadow rounded-lg dashboard-card-bg'>
@@ -122,7 +125,7 @@ const DashboardCard = ({ information, count, isCustomer, title }) => {
               {information?.profit ? information?.profit : 0}
             </span>
 
-            <span className='block text-gray-500'>Total Profit </span>
+            <span className='block text-gray-500'>{t("dashboard_card.total_profit")} </span>
           </div>
         </div>
 
@@ -161,7 +164,7 @@ const DashboardCard = ({ information, count, isCustomer, title }) => {
                 {information?.paid_amount ? information?.paid_amount : 0}
               </span>
 
-              <span className='block text-gray-500'>Total Paid Amount </span>
+              <span className='block text-gray-500'>{t("dashboard_card.total_paid_amount")}</span>
             </div>
           </div>
         ) : (
@@ -171,14 +174,14 @@ const DashboardCard = ({ information, count, isCustomer, title }) => {
                 {" "}
                 {information?.paid_amount ? information?.paid_amount : 0}
               </span>
-              <span className='block text-gray-500'>Paid Amount</span>
+              <span className='block text-gray-500'>{t("dashboard_card.paid_amount")}</span>
             </div>
             <div className='ml-auto'>
               <span className='block text-2xl font-bold'>
                 {" "}
                 {information?.due_amount ? information?.due_amount : 0}
               </span>
-              <span className='block text-gray-500'>Due Amount</span>
+              <span className='block text-gray-500'>{t("dashboard_card.due_amount")}</span>
             </div>
           </div>
         )}

@@ -14,23 +14,25 @@ import { MinusOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
 import ReactApexChart from "react-apexcharts";
 import lineChart from "./configs/lineChart";
+import { useTranslation } from "react-i18next"; 
 
 function LineChart() {
   const { Title, Paragraph } = Typography;
+  const { t } = useTranslation();
 
   return (
     <>
       <div className="linechart">
         <div>
-          <Title level={5}>Active Users</Title>
+          <Title level={5}>{t("chart.active_users")}</Title>
           <Paragraph className="lastweek">
-            than last week <span className="bnb2">+30%</span>
+          {t("chart.than_last_week")} <span className="bnb2">+30%</span>
           </Paragraph>
         </div>
         <div className="sales">
           <ul>
-            <li>{<MinusOutlined />} Traffic</li>
-            <li>{<MinusOutlined />} Sales</li>
+            <li>{<MinusOutlined />} {t("chart.traffic")}</li>
+            <li>{<MinusOutlined />} {t("chart.sales")}</li>
           </ul>
         </div>
       </div>

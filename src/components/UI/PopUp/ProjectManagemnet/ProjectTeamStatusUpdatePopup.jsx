@@ -1,11 +1,14 @@
 import { Button, Col, Form, Modal, Row, Select, Typography } from "antd";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next"; 
 
 import { useUpdateProjectTeamStatusMutation } from "../../../../redux/rtk/features/projectManagement/project/projectTeam/projectTeamApi";
 import BtnEditSvg from "../../Button/btnEditSvg";
 
 const ProjectTeamStatusUpdatePopup = ({ projectId, teamName, status }) => {
+  const { t } = useTranslation();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateProjectTeamStatus, { isLoading }] =
     useUpdateProjectTeamStatusMutation();
@@ -38,7 +41,7 @@ const ProjectTeamStatusUpdatePopup = ({ projectId, teamName, status }) => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding Project Team");
+    toast.warning(t("pop_up.failed_adding_project_team"));
   };
   return (
     <>
@@ -47,7 +50,7 @@ const ProjectTeamStatusUpdatePopup = ({ projectId, teamName, status }) => {
           <BtnEditSvg size={36} />
         </div>
         <Modal
-          title={`Update Satus`}
+          title={t("pop_up.update_status")}
           okButtonProps={{ style: { display: "none" } }}
           open={isModalOpen}
           onCancel={handleCancel}
@@ -63,7 +66,7 @@ const ProjectTeamStatusUpdatePopup = ({ projectId, teamName, status }) => {
               className="column-design border rounded card-custom"
             >
               <Title level={4} className="m-2 mt-5 mb-5 text-center">
-                {`Update Team Status:  ${teamName}`}
+                {`${t("pop_up.update_team_status")}:  ${teamName}`}
               </Title>
               <Form
                 form={form}
@@ -84,22 +87,22 @@ const ProjectTeamStatusUpdatePopup = ({ projectId, teamName, status }) => {
                 <div>
                   <Form.Item
                     style={{ marginBottom: "20px" }}
-                    label="Team Status"
+                    label={t("pop_up.team_status")}
                     name="status"
                     rules={[
                       {
                         required: true,
-                        message: "Select Team Status",
+                        message: t("pop_up.select_team_status"),
                       },
                     ]}
                   >
                     <Select
                       mode="single"
-                      placeholder="Select Team Status"
+                      placeholder={t("pop_up.select_team_status")}
                       optionFilterProp="children"
                     >
-                      <Select.Option value={true}>Active</Select.Option>
-                      <Select.Option value={false}>Inactive</Select.Option>
+                      <Select.Option value={true}>{t("active")}</Select.Option>
+                      <Select.Option value={false}>{t("inactive")}</Select.Option>
                     </Select>
                   </Form.Item>
 
@@ -117,7 +120,7 @@ const ProjectTeamStatusUpdatePopup = ({ projectId, teamName, status }) => {
                       block
                       loading={isLoading}
                     >
-                      Update
+                      {t("update")}
                     </Button>
                   </Form.Item>
                 </div>

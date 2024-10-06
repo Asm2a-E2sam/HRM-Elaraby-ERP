@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next"; 
 
 const UploadMany = ({ urlPath }) => {
   const [loader, setLoader] = useState(false);
   const [file, setFile] = useState();
+  const { t } = useTranslation();
 
   const fileReader = new FileReader();
 
@@ -33,12 +35,12 @@ const UploadMany = ({ urlPath }) => {
       .then((d) => {
         if (d.statusText === "OK") {
           setLoader(false);
-          toast.success("Uploaded Success");
+          toast.success(t("upload_many.uploaded_success"));
         }
       })
       .catch((err) => {
         console.log(err, "err");
-        toast.error("error in uploading ");
+        toast.error(t("upload_many.error_in_uploading"));
         setLoader(false);
       });
   };
@@ -61,7 +63,7 @@ const UploadMany = ({ urlPath }) => {
     <div className="text-center mt-2">
       {!file && (
         <p className="text-center mb-2" style={{ color: "red" }}>
-          Please select a CSV file for uploading
+          {t("upload_many.please_select_CSV_file_for_uploading")}
         </p>
       )}
       <form>
@@ -88,7 +90,7 @@ const UploadMany = ({ urlPath }) => {
           type="submit"
           onClick={handleOnSubmit}
         >
-          Import From CSV
+          {t("upload_many.import_from_CSV")}
         </button>
       </form>
     </div>

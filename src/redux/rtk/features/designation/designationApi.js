@@ -6,7 +6,7 @@ export const designationApi = apiSlice.injectEndpoints({
     getDesignations: builder.query({
       query: (arg) => {
         const query = buildQuery(arg);
-        const adminId = localStorage.getItem("id");
+        const adminId = localStorage.getItem("admin_id");
         return {
           url: `designation?${query}&admin_id=${adminId}`,
         };

@@ -2,6 +2,7 @@ import { Table } from "antd";
 import { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
 import ColVisibilityDropdown from "../Shared/ColVisibilityDropdown";
+import { useTranslation } from "react-i18next"; 
 
 const TableNoPagination = ({
   columns,
@@ -13,6 +14,8 @@ const TableNoPagination = ({
 }) => {
   // column select
   const [columnsToShow, setColumnsToShow] = useState([]);
+  const { t } = useTranslation();
+
   useEffect(() => {
     setColumnsToShow(columns);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,7 +38,7 @@ const TableNoPagination = ({
                   style={{ marginTop: "5px" }}
                   filename={csvFileName}
                 >
-                  Download CSV
+                  {t("download_CSV")}
                 </CSVLink>
               </div>
               <ColVisibilityDropdown

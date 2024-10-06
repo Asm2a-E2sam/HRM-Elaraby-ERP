@@ -6,7 +6,7 @@ export const userApi = apiSlice.injectEndpoints({
     getUsers: builder.query({
       query: (arg) => {
         const query = buildQuery(arg);
-        const adminId = localStorage.getItem("id");
+        const adminId = localStorage.getItem("admin_id");
         return {
           url: `user?${query}&admin_id=${adminId}`,
         };
@@ -103,13 +103,13 @@ export const userApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const { data } = await queryFulfilled;
-          
+          console.log(data);
           localStorage.setItem("access-token", data.token);
           localStorage.setItem("role", data.role);
           localStorage.setItem("roleId", data.roleId);
           localStorage.setItem("user", data.username);
           localStorage.setItem("id", data.id);
-          localStorage.setItem("admin_id", data.admin_id);
+          localStorage.setItem("admin_id", data.adminId);
           localStorage.setItem("isLogged", true);
           toastHandler("User logged in successfully","success");
           window.location.href = "/admin/dashboard";

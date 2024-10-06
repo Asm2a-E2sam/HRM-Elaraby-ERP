@@ -1,4 +1,5 @@
 import { Button, Col, Form, Input, Row, Typography } from "antd";
+import { useTranslation } from "react-i18next"; 
 
 import React, { useEffect, useState } from "react";
 
@@ -13,6 +14,7 @@ import Loader from "../../loader/loader";
 import PageTitle from "../../page-header/PageHeader";
 
 const UpdateTaskStatus = () => {
+  const { t } = useTranslation();
   const { Title } = Typography;
   const [form] = Form.useForm();
   const { id } = useParams("id");
@@ -43,12 +45,12 @@ const UpdateTaskStatus = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding TaskStatus");
+    toast.warning(t("update_task_status.failed_adding_task_status"));
   };
   return (
     <>
       {/* <UserPrivateComponent permission={"create-leaveApplication"}> */}
-      <PageTitle title="Back" />
+      <PageTitle title={t("update_task_status.back")} />
       <Row className="mt-[25px]">
         <Col
           xs={24}
@@ -59,7 +61,7 @@ const UpdateTaskStatus = () => {
           className="column-design border rounded card-custom"
         >
           <Title level={4} className="m-2 mt-5 mb-5 text-center">
-            Update Task Status Column
+            {t("update_task_status.update_task_status_column")}
           </Title>
           {initialValues ? (
             <Form
@@ -81,16 +83,16 @@ const UpdateTaskStatus = () => {
               <div>
                 <Form.Item
                   style={{ marginBottom: "20px" }}
-                  label="Task Status Name"
+                  label={t("update_task_status.task_status_name")}
                   name="name"
                   rules={[
                     {
                       required: true,
-                      message: "Enter Task Status Name",
+                      message: t("update_task_status.enter_task_status_name"),
                     },
                   ]}
                 >
-                  <Input placeholder="Enter Task Status Name" />
+                  <Input placeholder={t("update_task_status.enter_task_status_name")} />
                 </Form.Item>
 
                 <Form.Item
@@ -107,7 +109,7 @@ const UpdateTaskStatus = () => {
                     block
                     loading={isLoading}
                   >
-                    Update Now
+                    {t("update_task_status.update_now")}
                   </Button>
                 </Form.Item>
               </div>

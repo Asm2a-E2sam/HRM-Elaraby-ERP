@@ -1,4 +1,5 @@
 import { Button, Form, Input } from "antd";
+import { useTranslation } from "react-i18next"; 
 
 import React from "react";
 import { toast } from "react-toastify";
@@ -7,9 +8,10 @@ import { useAddAwardMutation } from "../../redux/rtk/features/award/awardApi";
 const AddAward = () => {
   const [form] = Form.useForm();
   const [addSingleAward, { isLoading }] = useAddAwardMutation();
+  const { t } = useTranslation();
 
   const onFinish = async (values) => {
-    const adminId = localStorage.getItem("id");
+    const adminId = localStorage.getItem("admin_id");
     let val = {
       ...values,
       admin_id:adminId
@@ -22,7 +24,7 @@ const AddAward = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding department");
+    toast.warning(t("add_award.failed_at_adding_department"));
   };
   return (
     <Form
@@ -39,30 +41,30 @@ const AddAward = () => {
       <div>
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label='Name'
+          label={t("add_award.name")}
           name='name'
           rules={[
             {
               required: true,
-              message: "Please input your award name!",
+              message: t("add_award.please_input_your_award_name"),
             },
           ]}
         >
-          <Input placeholder='Employee Of The Month' />
+          <Input placeholder={t("add_award.please_input_your_award_name")} />
         </Form.Item>
 
         <Form.Item
           style={{ marginBottom: "20px" }}
-          label='Description'
+          label={t("add_award.description")}
           name='description'
           rules={[
             {
               required: true,
-              message: "Please input your award description!",
+              message: t("add_award.please_input_your_award_description"),
             },
           ]}
         >
-          <Input placeholder='Employee Who Performed Well' />
+          <Input placeholder={t("add_award.employee_who_performed_well")} />
         </Form.Item>
 
         <Form.Item
@@ -79,7 +81,7 @@ const AddAward = () => {
             block
             loading={isLoading}
           >
-            Add New Award
+            {t("add_award.add_new_award")}
           </Button>
         </Form.Item>
       </div>

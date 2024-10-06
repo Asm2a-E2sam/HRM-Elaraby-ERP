@@ -4,15 +4,17 @@ import dayjs from "dayjs";
 import React from "react";
 import { toast } from "react-toastify";
 import { useAddShiftMutation } from "../../redux/rtk/features/shift/shiftApi";
+import { useTranslation } from "react-i18next"; 
 
 const AddShift = ({ drawer }) => {
   const [addShift, { isLoading: addLoading }] = useAddShiftMutation();
 
   const { Title } = Typography;
   const [form] = Form.useForm();
+  const { t } = useTranslation();
 
   const onFinish = async (values) => {
-    const adminId = localStorage.getItem("id");
+    const adminId = localStorage.getItem("admin_id");
     const shiftData = {
       name: values.name,
       startTime: dayjs(values.startTime).format(),
@@ -28,7 +30,7 @@ const AddShift = ({ drawer }) => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding shift");
+    toast.warning(t("shift.failed_adding_shift"));
   };
 
   return (
@@ -46,12 +48,12 @@ const AddShift = ({ drawer }) => {
       <div>
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label='Name'
+          label={t("shift.name")}
           name='name'
           rules={[
             {
               required: true,
-              message: "Please input your shift!",
+              message: t("shift.please_input_shift"),
             },
           ]}
         >
@@ -60,12 +62,12 @@ const AddShift = ({ drawer }) => {
 
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label='Start Time'
+          label={t("shift.start_time")}
           name='startTime'
           rules={[
             {
               required: true,
-              message: "Please input your shift!",
+              message: t("shift.please_input_shift"),
             },
           ]}
         >
@@ -74,12 +76,12 @@ const AddShift = ({ drawer }) => {
 
         <Form.Item
           style={{ marginBottom: "20px" }}
-          label='End Time'
+          label={t("shift.end_time")}
           name='endTime'
           rules={[
             {
               required: true,
-              message: "Please input your shift!",
+              message: t("shift.please_input_shift"),
             },
           ]}
         >
@@ -100,7 +102,7 @@ const AddShift = ({ drawer }) => {
             block
             loading={addLoading}
           >
-            Add New Shift
+            {t("shift.add_new_shift")}
           </Button>
         </Form.Item>
       </div>

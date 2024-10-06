@@ -1,4 +1,5 @@
 import { Button, Card, Checkbox, Col, Form, Row, Typography } from "antd";
+import { useTranslation } from "react-i18next"; 
 
 import { Fragment, useEffect, useState } from "react";
 import {
@@ -89,6 +90,7 @@ const AddPermission = () => {
     },
     []
   );
+  const { t } = useTranslation();
 
   const onFinish = async (values) => {
     try {
@@ -103,7 +105,7 @@ const AddPermission = () => {
         navigate(-1);
       }
       if (resp.message === "error") {
-        toast.error("Error at giving permission, Try again");
+        toast.error(t("role.error_giving_permission"));
         form.resetFields();
       }
 
@@ -121,7 +123,7 @@ const AddPermission = () => {
 
   return (
     <>
-      <PageTitle title={"Back"} />
+      <PageTitle title={t("role.back")} />
       <UserPrivateComponent permission={"create-rolePermission"}>
         <Row className="mt-[25px]" justify={"center"}>
           <Col
@@ -134,7 +136,7 @@ const AddPermission = () => {
           >
             <Card bordered={false} className="criclebox h-full">
               <Title level={3} className="m-3 text-center mb-5">
-                Add Permission :{" "}
+              {t("role.add_permission")} :{" "}
                 <span className="text-primary">{roleName}</span>
               </Title>
 
@@ -157,7 +159,7 @@ const AddPermission = () => {
                       shape="round"
                       loading={isLoading}
                     >
-                      Permit Now
+                      {t("role.permit_now")}
                     </Button>
                   </div>
                 </>

@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useUpdateDesignationMutation } from "../../redux/rtk/features/designation/designationApi";
 import PageTitle from "../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 function UpdateDesignation() {
   const { Title } = Typography;
   const [form] = Form.useForm();
+  const { t } = useTranslation();
 
   //Loading Old data from URL
   const location = useLocation();
@@ -20,7 +22,7 @@ function UpdateDesignation() {
     name: cust.designationName,
   });
 
-  const adminId = localStorage.getItem("id");
+  const adminId = localStorage.getItem("admin_id");
   const onFinish = (values) => {
     // let val = {
     //   ...values,
@@ -39,7 +41,7 @@ function UpdateDesignation() {
 
   return (
     <>
-      <PageTitle title={`back`} />
+      <PageTitle title={t("update_designation.back")} />
       <div className="text-center">
         <Card className="mt-2">
           <Row className="mt-[25px]">
@@ -52,7 +54,7 @@ function UpdateDesignation() {
               className="border rounded column-design"
             >
               <Title level={3} className="m-3 text-center">
-                Edit Designation Form
+              {t("update_designation.edit_designation_form")}  
               </Title>
               <Form
                 initialValues={{
@@ -74,12 +76,12 @@ function UpdateDesignation() {
                 <Form.Item
                   style={{ marginBottom: "10px" }}
                   fields={[{ name: "Name" }]}
-                  label="Name"
+                  label={t("update_designation.name")}
                   name="name"
                   rules={[
                     {
                       required: true,
-                      message: "Please input Designation name!",
+                      message: t("update_designation.please_input_designation_name"),
                     },
                   ]}
                 >
@@ -100,7 +102,7 @@ function UpdateDesignation() {
                     shape="round"
                     loading={isLoading}
                   >
-                    Update Now
+                    {t("update_designation.update_now")}
                   </Button>
                 </Form.Item>
               </Form>

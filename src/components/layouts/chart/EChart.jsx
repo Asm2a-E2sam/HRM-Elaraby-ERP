@@ -13,26 +13,28 @@
 import { Col, Row, Typography } from "antd";
 import ReactApexChart from "react-apexcharts";
 import eChart from "./configs/eChart";
+import { useTranslation } from "react-i18next"; 
 
 function EChart() {
   const { Title, Paragraph } = Typography;
+  const { t } = useTranslation();
 
   const items = [
     {
       Title: "3,6K",
-      user: "Users",
+      user: t("chart.users"),
     },
     {
       Title: "2m",
-      user: "Clicks",
+      user: t("chart.clicks"),
     },
     {
       Title: "$772",
-      user: "Sales",
+      user: t("chart.sales"),
     },
     {
       Title: "82",
-      user: "Items",
+      user: t("chart.items"),
     },
   ];
 
@@ -48,13 +50,12 @@ function EChart() {
         />
       </div>
       <div className="chart-vistior">
-        <Title level={5}>Active Users</Title>
+        <Title level={5}>{t("chart.active_users")}</Title>
         <Paragraph className="lastweek">
-          than last week <span className="bnb2">+30%</span>
+        {t("chart.than_last_week")} <span className="bnb2">+30%</span>
         </Paragraph>
         <Paragraph className="lastweek">
-          We have created multiple options for you to put together and customise
-          into pixel perfect pages.
+          {t("chart.last_week")}
         </Paragraph>
         <Row gutter>
           {items.map((v, index) => (

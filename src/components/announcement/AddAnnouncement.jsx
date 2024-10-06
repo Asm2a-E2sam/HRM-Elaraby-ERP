@@ -5,14 +5,16 @@ import React from "react";
 import { toast } from "react-toastify";
 
 import { useAddAnnouncementMutation } from "../../redux/rtk/features/announcement/announcementApi";
+import { useTranslation } from "react-i18next"; 
 
 const AddAnnouncement = () => {
   const [addAnnouncement, { isLoading }] = useAddAnnouncementMutation();
+  const { t } = useTranslation();
 
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    const adminId = localStorage.getItem("id");
+    const adminId = localStorage.getItem("admin_id");
     let val = {
       ...values,
       admin_id:adminId
@@ -25,7 +27,7 @@ const AddAnnouncement = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding shift");
+    toast.warning(t("add_announcement.failed_at_adding_shift "));
   };
 
   return (
@@ -43,24 +45,24 @@ const AddAnnouncement = () => {
       <div>
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label='Title'
+          label= {t("add_announcement.title")}
           name='title'
           rules={[
             {
               required: true,
-              message: "Please input your title!",
+              message: t("add_announcement.please_input_your_title"),
             },
           ]}
         >
-          <Input placeholder='Meeting at 00:00' />
+          <Input placeholder={`${t("add_announcement.meeting_at")} 00:00`} />
         </Form.Item>
 
         <Form.Item
           style={{ marginBottom: "20px" }}
-          label='Description'
+          label={t("add_announcement.description")}
           name={"description"}
         >
-          <Input.TextArea placeholder='Description' />
+          <Input.TextArea placeholder={t("add_announcement.description")} />
         </Form.Item>
 
         <Form.Item
@@ -77,7 +79,7 @@ const AddAnnouncement = () => {
             htmlType='submit'
             loading={isLoading}
           >
-            Add Announcement
+            {t("add_announcement.add_announcement")}
           </Button>
         </Form.Item>
       </div>

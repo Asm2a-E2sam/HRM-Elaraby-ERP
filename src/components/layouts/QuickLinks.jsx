@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next"; 
 
 export default function QuickLinks({ sideNavOpenKeysHandler }) {
   const QuickLinksContainer = ({ link, icon, bg, linkName }) => {
@@ -17,10 +18,11 @@ export default function QuickLinks({ sideNavOpenKeysHandler }) {
       </Link>
     );
   };
+  const { t } = useTranslation();
 
   return (
     <div className="pt-[16px] pb-0 md:pb-[32px]">
-      <p className="text-[16px] text-var(--text)">Quick Links</p>
+      <p className="text-[16px] text-var(--text)">{t("chart.quick_links")}</p>
 
       <div className="flex flex-wrap items-center justify-center gap-[15px] md:gap-[20px]">
         <QuickLinksContainer

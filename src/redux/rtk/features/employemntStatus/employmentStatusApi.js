@@ -7,7 +7,7 @@ export const employmentStatusApi = apiSlice.injectEndpoints({
 		getEmploymentStatuses: builder.query({
 			query: (arg) => {
 				const query = buildQuery(arg);
-				const adminId = localStorage.getItem("id");
+				const adminId = localStorage.getItem("admin_id");
 				return {
 					url: `employment-status?${query}&admin_id=${adminId}`,
 				};

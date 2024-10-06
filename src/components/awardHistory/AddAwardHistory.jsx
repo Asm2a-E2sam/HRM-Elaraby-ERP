@@ -15,11 +15,13 @@ import { useParams } from "react-router-dom";
 import { useGetAwardsQuery } from "../../redux/rtk/features/award/awardApi";
 import { useAddAwardHistoryMutation } from "../../redux/rtk/features/awardHistory/awardHistoryApi";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
+import { useTranslation } from "react-i18next"; 
 
 const AddAwardHistory = ({ setLoading }) => {
   const { id } = useParams("id");
   const { data: award } = useGetAwardsQuery({ query: "all" });
   const [addAwardHistory, { isLoading }] = useAddAwardHistoryMutation();
+  const { t } = useTranslation();
 
   const { Title } = Typography;
   const [form] = Form.useForm();
@@ -41,8 +43,9 @@ const AddAwardHistory = ({ setLoading }) => {
     }
   };
 
+
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding award");
+    toast.warning(t("add_award_history.failed_at_adding_award"));
 
     setLoading(false);
   };
@@ -59,7 +62,7 @@ const AddAwardHistory = ({ setLoading }) => {
             className="column-design border rounded card-custom"
           >
             <Title level={4} className="m-2 mt-5 mb-5 text-center">
-              Add Award History
+            {t("add_award_history.add_award_history")}
             </Title>
             <Form
               form={form}
@@ -79,11 +82,11 @@ const AddAwardHistory = ({ setLoading }) => {
               <div>
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label="Award Name"
+                  label={t("add_award_history.award_name")}
                   name="awardId"
                   rules={[{ required: true }]}
                 >
-                  <Select placeholder="Select award" loading={!award}>
+                  <Select placeholder={t("add_award_history.select_award")} loading={!award}>
                     {award &&
                       award.map((award) => (
                         <Select.Option key={award.id} value={award.id}>
@@ -95,12 +98,12 @@ const AddAwardHistory = ({ setLoading }) => {
 
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label="Awarded Date"
+                  label={t("add_award_history.awarded_date")}
                   name="awardedDate"
                   rules={[
                     {
                       required: true,
-                      message: "Please input your awarded Date!",
+                      message: t("add_award_history.please_input_your_awarded_date"),
                     },
                   ]}
                 >
@@ -109,7 +112,7 @@ const AddAwardHistory = ({ setLoading }) => {
 
                 <Form.Item
                   style={{ marginBottom: "20px" }}
-                  label="Comment"
+                  label={t("add_award_history.comment")}
                   name="comment"
                 >
                   <Input />
@@ -129,7 +132,7 @@ const AddAwardHistory = ({ setLoading }) => {
                     block
                     loading={isLoading}
                   >
-                    Add New Award
+                   {t("add_award_history.add_award_history")}
                   </Button>
                 </Form.Item>
               </div>

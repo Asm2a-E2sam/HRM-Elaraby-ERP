@@ -1,8 +1,11 @@
 import { Select } from "antd";
 import { useState } from "react";
 import { useGetJobApplicationStatusesQuery } from "../../redux/rtk/features/recruitment/jobApplicationStatus/jobApplicationStatusApi";
+import { useTranslation } from "react-i18next"; 
 
 export default function ApplicationStatusSelection({ setPageConfig }) {
+    const { t } = useTranslation();
+
     const [applicationStatusId, setApplicationStatusId] = useState(null);
     const onChange = (value) => {
         setApplicationStatusId(value);
@@ -32,7 +35,7 @@ export default function ApplicationStatusSelection({ setPageConfig }) {
                 width: 120,
             }}
             onChange={onChange}
-            placeholder="All Application"
+            placeholder={t("all_application")}
             options={
                 jobApplicationStatusData &&
                 !jobApplicationStatusLoading &&
