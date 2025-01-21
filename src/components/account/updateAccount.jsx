@@ -1,4 +1,5 @@
 import { Button, Form, Input, Modal, Select } from "antd";
+import { useTranslation } from "react-i18next"; 
 import React, { useState } from "react";
 import {
   useGetMainAccountQuery,
@@ -10,6 +11,7 @@ const UpdateAccount = ({ data, id }) => {
   const { data: accounts, isLoading } = useGetMainAccountQuery();
   const [UpdateAccount, { isLoading: addLoading }] = useUpdateAccountMutation();
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   const [form] = Form.useForm();
 
@@ -51,16 +53,16 @@ const UpdateAccount = ({ data, id }) => {
   return (
     <>
       <Button onClick={showModal} size='small'>
-        Update Account
+      {t("update_account.update_account")}
       </Button>
       <Modal
         open={open}
-        title='Update Account'
+        title={t("update_account.update_account")}
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
           <Button key='back' type='danger' onClick={handleCancel}>
-            cancel
+            {t("update_account.cancel")}
           </Button>,
         ]}
       >
@@ -84,11 +86,11 @@ const UpdateAccount = ({ data, id }) => {
           <Form.Item
             style={{ marginBottom: "10px" }}
             name='name'
-            label='Name'
+            label={t("update_account.name")}
             rules={[
               {
                 required: true,
-                message: "Please input debit account!",
+                message: t("update_account.please_input_debit_account"),
               },
             ]}
           >
@@ -98,11 +100,11 @@ const UpdateAccount = ({ data, id }) => {
           <Form.Item
             style={{ marginBottom: "10px" }}
             name='accountId'
-            label='Account Type'
+            label={t("update_account.account_type")}
             rules={[
               {
                 required: true,
-                message: "Please input debit account!",
+                message: t("update_account.please_input_debit_account"),
               },
             ]}
           >
@@ -112,7 +114,7 @@ const UpdateAccount = ({ data, id }) => {
               style={{
                 width: 200,
               }}
-              placeholder='Select Account Type'
+              placeholder={t("update_account.select_account_type")}
               optionFilterProp='children'
               filterOption={(input, option) => option.children.includes(input)}
               filterSort={(optionA, optionB) =>
@@ -144,7 +146,7 @@ const UpdateAccount = ({ data, id }) => {
               shape='round'
               loading={addLoading}
             >
-              Update Account
+              {t("update_account.update_account")}
             </Button>
           </Form.Item>
         </Form>

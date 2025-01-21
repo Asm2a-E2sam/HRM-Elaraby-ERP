@@ -2,6 +2,7 @@ import { Form, Input, InputNumber } from "antd";
 import { Button } from "antd/lib";
 import { useState } from "react";
 import { useUpdateConfigEmailMutation } from "../../redux/rtk/features/emailConfig/emailConfigApi";
+import { useTranslation } from "react-i18next"; 
 
 export default function UpdateEmailConfig({ data }) {
   const [form] = Form.useForm();
@@ -13,6 +14,7 @@ export default function UpdateEmailConfig({ data }) {
     emailUser: data[0]?.emailUser,
     emailPass: data[0]?.emailPass,
   });
+  const { t } = useTranslation();
 
   const onFinish = (values) => {
     try {
@@ -35,12 +37,12 @@ export default function UpdateEmailConfig({ data }) {
       >
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label="Config Name"
+          label={t("update_email_config.config_name")}
           name="emailConfigName"
           rules={[
             {
               required: true,
-              message: "Please input Config Name!",
+              message: t("update_email_config.please_input_config_name"),
             },
           ]}
         >
@@ -48,12 +50,12 @@ export default function UpdateEmailConfig({ data }) {
         </Form.Item>
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label="Host"
+          label={t("update_email_config.host")}
           name="emailHost"
           rules={[
             {
               required: true,
-              message: "Please input Host!",
+              message: t("update_email_config.please_input_host"),
             },
           ]}
         >
@@ -61,12 +63,12 @@ export default function UpdateEmailConfig({ data }) {
         </Form.Item>
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label="Port"
+          label={t("update_email_config.port")}
           name="emailPort"
           rules={[
             {
               required: true,
-              message: "Please input Port!",
+              message: t("update_email_config.please_input_port"),
             },
           ]}
         >
@@ -74,12 +76,12 @@ export default function UpdateEmailConfig({ data }) {
         </Form.Item>
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label="User Email"
+          label={t("update_email_config.user_email")}
           name="emailUser"
           rules={[
             {
               required: true,
-              message: "Please input User Email!",
+              message: t("update_email_config.please_input_user_email"),
             },
           ]}
         >
@@ -87,12 +89,12 @@ export default function UpdateEmailConfig({ data }) {
         </Form.Item>
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label="Password"
+          label={t("update_email_config.password")}
           name="emailPass"
           rules={[
             {
               required: true,
-              message: "Please input Password!",
+              message: t("update_email_config.please_input_password"),
             },
           ]}
         >
@@ -106,7 +108,7 @@ export default function UpdateEmailConfig({ data }) {
             shape="round"
             size="large"
           >
-            Update Config Email
+            {t("update_email_config.update_config_email")}
           </Button>
         </Form.Item>
       </Form>

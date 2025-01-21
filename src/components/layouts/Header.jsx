@@ -24,7 +24,8 @@ const toggler = [
 
 function Header({ onPress, collapsed, handleCollapsed }) {
   useEffect(() => window.scrollTo(0, 0));
-  const { t, i18n } = useTranslation();  const isLogged = localStorage.getItem("isLogged");
+  const { t, i18n } = useTranslation();  
+  const isLogged = localStorage.getItem("isLogged");
   const user = localStorage.getItem("user");
 
   const items = [

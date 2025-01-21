@@ -2,6 +2,7 @@ import { Button, ColorPicker, Form, Input, Typography } from "antd";
 
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next"; 
 
 import { useAddEmploymentStatusMutation } from "../../redux/rtk/features/employemntStatus/employmentStatusApi";
 
@@ -9,16 +10,15 @@ const AddEmploymentStatus = ({ drawer }) => {
   const [addEmploymentStatus, { isLoading: loading }] =
     useAddEmploymentStatusMutation();
   const [colorCode, setColorCode] = useState("#1677FF");
+  const { t } = useTranslation();
 
   const { Title } = Typography;
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    const adminId = localStorage.getItem("id");
     const FormData = {
       ...values,
       colourValue: colorCode,
-      admin_id:adminId
     };
 
     const resp = await addEmploymentStatus(FormData);
@@ -30,7 +30,7 @@ const AddEmploymentStatus = ({ drawer }) => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding shift");
+    toast.warning(t("add_employment_status.failed_at_adding_shift"));
   };
 
   return (
@@ -48,19 +48,19 @@ const AddEmploymentStatus = ({ drawer }) => {
       <div>
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label='Name'
+          label={t("add_employment_status.name")}
           name='name'
           rules={[
             {
               required: true,
-              message: "Please input your shift!",
+              message: t("add_employment_status.please_input_your_shift"),
             },
           ]}
         >
-          <Input placeholder='Parmanet' />
+          <Input placeholder={t("add_employment_status.parmanet")} />
         </Form.Item>
 
-        <Form.Item style={{ marginBottom: "10px" }} label='Color Code'>
+        <Form.Item style={{ marginBottom: "10px" }} label={t("add_employment_status.color_code")}>
           <ColorPicker
             showText
             format='hex'
@@ -70,7 +70,7 @@ const AddEmploymentStatus = ({ drawer }) => {
             }}
             presets={[
               {
-                label: "Recommended",
+                label: t("add_employment_status.recommended"),
                 colors: [
                   "#000000",
                   "#000000E0",
@@ -105,7 +105,7 @@ const AddEmploymentStatus = ({ drawer }) => {
                 ],
               },
               {
-                label: "Recent",
+                label: t("add_employment_status.recent"),
                 colors: [],
               },
             ]}
@@ -114,10 +114,10 @@ const AddEmploymentStatus = ({ drawer }) => {
 
         <Form.Item
           style={{ marginBottom: "20px" }}
-          label='Description'
+          label={t("add_employment_status.description")}
           name={"description"}
         >
-          <Input.TextArea placeholder='Description' />
+          <Input.TextArea placeholder={t("add_employment_status.description")} />
         </Form.Item>
 
         <Form.Item
@@ -134,7 +134,7 @@ const AddEmploymentStatus = ({ drawer }) => {
             htmlType='submit'
             loading={loading}
           >
-            Add Employment Status
+            {t("add_employment_status.add_employment_status")}
           </Button>
         </Form.Item>
       </div>

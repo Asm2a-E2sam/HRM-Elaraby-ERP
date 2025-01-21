@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import { addDepartment } from "./DesignationApis";
+import { useTranslation } from "react-i18next"; 
 
 const AddDesHistory = ({ drawer }) => {
   const [list, setList] = useState(null);
   const [loader, setLoader] = useState(false);
+  const { t } = useTranslation();
 
   const { Title } = Typography;
 
@@ -23,7 +25,7 @@ const AddDesHistory = ({ drawer }) => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding department");
+    toast.warning(t("add_des_history.failed_at_adding_department"));
     setLoader(false);
   };
   return (
@@ -42,7 +44,7 @@ const AddDesHistory = ({ drawer }) => {
             className="column-design border rounded card-custom"
           >
             <Title level={4} className="m-2 mt-5 mb-5 text-center">
-              Add New department
+            {t("add_des_history.add_new_department")}
             </Title>
             <Form
               style={{ marginBottom: "100px" }}
@@ -61,12 +63,12 @@ const AddDesHistory = ({ drawer }) => {
               <div>
                 <Form.Item
                   style={{ marginBottom: "20px" }}
-                  label="Name"
+                  label={t("add_des_history.name")}
                   name="name"
                   rules={[
                     {
                       required: true,
-                      message: "Please input your Designation!",
+                      message: {t("add_des_history.please_input_your_designation")},
                     },
                   ]}
                 >
@@ -88,7 +90,7 @@ const AddDesHistory = ({ drawer }) => {
                     block
                     loading={loader}
                   >
-                    Add New Designation
+                    {t("add_des_history.add_new_designation")}
                   </Button>
                 </Form.Item>
               </div>

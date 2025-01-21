@@ -4,9 +4,11 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { addSingleProjectTeam } from "../../redux/rtk/features/projectManagement/project/projectTeam/projectTeam";
 import getUserFromToken from "../../utils/getUserFromToken";
+import { useTranslation } from "react-i18next"; 
 
 const AddProjectTeam = ({ drawer }) => {
-  const [loader, setLoader] = useState(false);
+const { t } = useTranslation();
+const [loader, setLoader] = useState(false);
   const [userList, setuserList] = useState([
     {
       id: 1,
@@ -48,7 +50,7 @@ const AddProjectTeam = ({ drawer }) => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding Project Team");
+    toast.warning(t("add_project_team.failed_adding_Project_Team"));
     setLoader(false);
   };
   return (
@@ -64,7 +66,7 @@ const AddProjectTeam = ({ drawer }) => {
           className="column-design border rounded card-custom"
         >
           <Title level={4} className="m-2 mt-5 mb-5 text-center">
-            Add Project Team
+            {t("add_project_team.add_project_team")}
           </Title>
           <Form
             form={form}
@@ -84,21 +86,21 @@ const AddProjectTeam = ({ drawer }) => {
             <div>
               <Form.Item
                 style={{ marginBottom: "10px" }}
-                label="User"
+                label={t("add_project_team.user")}
                 name="userId"
                 rules={[
                   {
                     required: true,
-                    message: "Select User",
+                    message: t("add_project_team.select_user"),
                   },
                 ]}
               >
                 <Select
                   mode="single"
-                  placeholder="Select User"
+                  placeholder={t("add_project_team.select_user")}
                   optionFilterProp="children"
                 >
-                  {userList.map((item) => (
+                  {userList?.map((item) => (
                     <Select.Option key={item.id} value={item.id}>
                       {item.firstName} {item.lastName}
                     </Select.Option>
@@ -121,7 +123,7 @@ const AddProjectTeam = ({ drawer }) => {
                   block
                   loading={loader}
                 >
-                  Submit
+                  {t("add_project_team.submit")}
                 </Button>
               </Form.Item>
             </div>

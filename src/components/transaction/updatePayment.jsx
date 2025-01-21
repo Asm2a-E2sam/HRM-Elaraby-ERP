@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import Main from "../layouts/Main";
 import PageTitle from "../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 //Update Supplier API REQ
 const updateSupplier = async (id, values) => {
@@ -61,12 +62,13 @@ function UpdateSup() {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  const { t } = useTranslation();
 
   return (
     <UserPrivateComponent permission={"upate-transaction"}>
       <Fragment>
         <Main>
-          <PageTitle title={`Back`} />
+          <PageTitle title={t("transaction.back")} />
           <div className="text-center">
             <div className="">
               <Row className="mt-[25px]">
@@ -81,7 +83,7 @@ function UpdateSup() {
                   {success && (
                     <div>
                       <Alert
-                        message={`Supplier details updated successfully`}
+                        message={t("transaction.supplier_details_updated_successfully")}
                         type="success"
                         closable={true}
                         showIcon
@@ -90,7 +92,7 @@ function UpdateSup() {
                   )}
                   <Card bordered={false} className="criclebox h-full">
                     <Title level={3} className="m-3 text-center">
-                      Edit Supplier Form
+                      {t("transaction.edit_supplier_form")}
                     </Title>
                     <Form
                       initialValues={{
@@ -112,12 +114,12 @@ function UpdateSup() {
                       <Form.Item
                         style={{ marginBottom: "10px" }}
                         fields={[{ name: "Name" }]}
-                        label="Name"
+                        label={t("transaction.name")}
                         name="name"
                         rules={[
                           {
                             required: true,
-                            message: "Please input supplier name!",
+                            message: t("transaction.please_input_supplier_name"),
                           },
                         ]}
                       >
@@ -126,12 +128,12 @@ function UpdateSup() {
 
                       <Form.Item
                         style={{ marginBottom: "10px" }}
-                        label="Phone"
+                        label={t("transaction.phone")}
                         name="phone"
                         rules={[
                           {
                             required: true,
-                            message: "Please input supplier Phone!",
+                            message: t("transaction.please_input_supplier_phone"),
                           },
                         ]}
                       >
@@ -140,12 +142,12 @@ function UpdateSup() {
 
                       <Form.Item
                         style={{ marginBottom: "10px" }}
-                        label="Address"
+                        label={t("transaction.address")}
                         name="address"
                         rules={[
                           {
                             required: true,
-                            message: "Please input supplier Address!",
+                            message: t("transaction.please_input_supplier_address"),
                           },
                         ]}
                       >
@@ -154,17 +156,17 @@ function UpdateSup() {
 
                       <Form.Item
                         style={{ marginBottom: "10px" }}
-                        label="Due Amount"
+                        label={t("transaction.due_amount")}
                         name="due_amount"
                         rules={[
                           {
                             type: Number,
                             required: true,
-                            message: "Please input supplier amount!",
+                            message: t("transaction.please_input_supplier_amount"),
                           },
                         ]}
                       >
-                        <Input type="number" />
+                        <Input type={t("transaction.number")} />
                       </Form.Item>
 
                       <Form.Item
@@ -180,7 +182,7 @@ function UpdateSup() {
                           htmlType="submit"
                           shape="round"
                         >
-                          Update Now
+                          {t("transaction.update_now")}
                         </Button>
                       </Form.Item>
                     </Form>

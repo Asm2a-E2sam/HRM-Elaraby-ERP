@@ -1,13 +1,11 @@
 import { apiSlice } from "../api/apiSlice";
 import { buildQuery, toastHandler } from "./../../../../utils/functions";
 
-const adminId = localStorage.getItem("id")
-
 export const leaveApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getLeaves: builder.query({
       query: () => ({
-        url: `leave-application?admin_id=${adminId}`,
+        url: `leave-application?query=all`,
       }),
       providesTags: ["Leaves"],
     }),
@@ -16,7 +14,7 @@ export const leaveApi = apiSlice.injectEndpoints({
       query: (arg) => {
         const query = buildQuery(arg);
         return {
-          url: `leave-application?${query}&admin_id=${adminId}`,
+          url: `leave-application?${query}`,
         };
       },
       providesTags: ["LeaveByStatus"],

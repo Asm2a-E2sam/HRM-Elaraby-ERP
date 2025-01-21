@@ -1,8 +1,11 @@
 import { Select } from "antd";
 import { useState } from "react";
+import { useTranslation } from "react-i18next"; 
 
 export default function StatusSelectionDropdown({ setPageConfig }) {
     const [status, setStatus] = useState("true");
+    const { t } = useTranslation();
+
     const onChange = (value) => {
         setStatus(value);
 
@@ -28,7 +31,7 @@ export default function StatusSelectionDropdown({ setPageConfig }) {
                     {
                         label: (
                             <span className="text-green-900 font-semibold">
-                                Active
+                                {t("active")}
                             </span>
                         ),
                         value: "true",
@@ -36,7 +39,7 @@ export default function StatusSelectionDropdown({ setPageConfig }) {
                     {
                         label: (
                             <span className="text-red-600 font-semibold">
-                                Inactive
+                                {t("inactive")}
                             </span>
                         ),
                         value: "false",

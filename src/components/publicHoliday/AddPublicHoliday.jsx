@@ -6,45 +6,41 @@ import { toast } from "react-toastify";
 import { useAddPublicHolidayMutation } from "../../redux/rtk/features/publicHoliday/publicHolidayApi";
 import ViewBtn from "../Buttons/ViewBtn";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
+import { useTranslation } from "react-i18next"; 
 
 const AddPublicHoliday = () => {
   const [addPublicHoliday, { isLoading: addLoading }] =
     useAddPublicHolidayMutation();
   const [form] = Form.useForm();
+  const { t } = useTranslation();
 
   const onFinish = async (values) => {
-    const adminId = localStorage.getItem("id");
-    let val = {
-      ...values,
-      admin_id: adminId,
-    };
-    
-    const resp = await addPublicHoliday(val);
+    const resp = await addPublicHoliday(values);
     if (resp.data && !resp.error) {
       form.resetFields();
     }
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding department");
+    toast.warning(t("add_public_holiday.failed_adding_department"));
   };
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("add_public_holiday.id"),
       dataIndex: "id",
       key: "id",
     },
     {
       id: 2,
-      title: "Name",
+      title:  t("add_public_holiday.name"),
       dataIndex: "name",
       key: "name",
     },
 
     {
       id: 3,
-      title: "Date",
+      title:  t("add_public_holiday.date"),
       dataIndex: "date",
       key: "date",
       render: (date) => dayjs(date).format("DD/MM/YYYY"),
@@ -52,14 +48,14 @@ const AddPublicHoliday = () => {
 
     {
       id: 3,
-      title: "Created At",
+      title:  t("add_public_holiday.create_at"),
       dataIndex: "createdAt",
       key: "createdAt",
       render: (createdAt) => dayjs(createdAt).format("DD/MM/YYYY"),
     },
     {
       id: 4,
-      title: "Action",
+      title:  t("add_public_holiday.action"),
       dataIndex: "id",
       key: "action",
       render: (id) => (
@@ -84,30 +80,30 @@ const AddPublicHoliday = () => {
       <div>
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label='Name'
+          label={ t("add_public_holiday.name")}
           name='name'
           rules={[
             {
               required: true,
-              message: "Please input name!",
+              message: t("add_public_holiday.please_input_name"),
             },
           ]}
         >
-          <Input placeholder='New Year' />
+          <Input placeholder={t("add_public_holiday.new_year")} />
         </Form.Item>
 
         <Form.Item
           style={{ marginBottom: "20px" }}
-          label='Date'
+          label={t("add_public_holiday.date")}
           name='date'
           rules={[
             {
               required: true,
-              message: "Please input date!",
+              message: t("add_public_holiday.please_input_date"),
             },
           ]}
         >
-          <DatePicker placeholder='Select Date' />
+          <DatePicker placeholder={t("add_public_holiday.select_date")} />
         </Form.Item>
 
         <Form.Item
@@ -124,7 +120,7 @@ const AddPublicHoliday = () => {
             block
             loading={addLoading}
           >
-            Add Public Holiday
+            {t("add_public_holiday.add_public_holiday")}
           </Button>
         </Form.Item>
       </div>

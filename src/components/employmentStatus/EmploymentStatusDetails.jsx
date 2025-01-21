@@ -10,51 +10,53 @@ import CommonDelete from "../CommonUi/CommonDelete";
 import TableNoPagination from "../CommonUi/TableNoPagination";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import PageTitle from "../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 //PopUp
 
 const DetailEmploymentStatus = () => {
   const { id } = useParams();
+  const { t } = useTranslation();
 
   const { data: employmentStatus ,isLoading} = useGetEmploymentStatusQuery(id);
    const columns = [
      {
        id: 1,
-       title: "ID",
+       title: t("detail_employment_status.id"),
        dataIndex: "id",
        key: "id",
      },
 
      {
        id: 2,
-       title: " Name",
+       title: t("detail_employment_status.name"),
        key: "firstName",
        render: ({ firstName, lastName }) => firstName + " " + lastName,
      },
 
      {
        id: 6,
-       title: "User Name",
+       title: t("detail_employment_status.username"),
        dataIndex: "username",
        key: "username",
      },
      {
        id: 7,
-       title: "Start Time",
+       title: t("detail_employment_status.start_time"),
        dataIndex: "startTime",
        key: "startTime",
        render: (startTime) => dayjs(startTime).format("hh:mm A"),
      },
      {
        id: 8,
-       title: "End Time",
+       title: t("detail_employment_status.end_time"),
        dataIndex: "endTime",
        key: "endTime",
        render: (endTime) => dayjs(endTime).format("hh:mm A"),
      },
      {
        id: 4,
-       title: "Action",
+       title: t("detail_employment_status.action"),
        dataIndex: "id",
        key: "action",
        render: (id) => (
@@ -66,12 +68,12 @@ const DetailEmploymentStatus = () => {
    ];
   return (
     <div>
-      <PageTitle title=" Back  " />
+      <PageTitle title={t("detail_employment_status.back")} />
       <UserPrivateComponent permission={"readSingle-employmentStatus"}>
         <CardCustom
           title={
             <h3>
-              ID : {employmentStatus?.id} | {employmentStatus?.name}
+              {t("detail_employment_status.id")} : {employmentStatus?.id} | {employmentStatus?.name}
             </h3>
           }
           extra={
@@ -96,7 +98,7 @@ const DetailEmploymentStatus = () => {
           <TableNoPagination
             leftElement={
               <h1 className="p-2 font-semibold text-lg text-center">
-                Employee List
+                {t("detail_employment_status.employee_list")}
               </h1>
             }
             list={employmentStatus?.user}

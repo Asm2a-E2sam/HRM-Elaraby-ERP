@@ -3,35 +3,37 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useDeletePermissionsMutation } from "../../redux/rtk/features/role/roleApi";
 import ColVisibilityDropdown from "../Shared/ColVisibilityDropdown";
+import { useTranslation } from "react-i18next"; 
 
 const CustomTable = ({ role }) => {
   const [keys, setKeys] = useState([]);
   const [columnsToShow, setColumnsToShow] = useState([]);
+  const { t } = useTranslation();
 
   const columns = [
     {
       id: 1,
-      title: "ID",
+      title: t("role.id"),
       dataIndex: "id",
       key: "id",
     },
     {
       id: 2,
-      title: "Name",
+      title: t("role.name"),
       dataIndex: "permission",
       key: "permission",
       render: ({ name } = {}) => name,
     },
     {
       id: 3,
-      title: "Created At",
+      title: t("role.create_at"),
       dataIndex: "createdAt",
       key: "createdAt",
       render: (createdAt) => dayjs(createdAt).format("DD/MM/YYYY"),
     },
     {
       id: 4,
-      title: "Updated At",
+      title: t("role.updated_at"),
       dataIndex: "updatedAt",
       key: "updatedAt",
       render: (updatedAt) => dayjs(updatedAt).format("DD/MM/YYYY"),
@@ -67,12 +69,12 @@ const CustomTable = ({ role }) => {
   return (
     <Card className='card-body mb-3 '>
       <div className='table-responsive'>
-        <h4 className='text-center mb-2 text-2xl'> Permissions</h4>
+        <h4 className='text-center mb-2 text-2xl'> {t("role.permissions")}</h4>
 
         {keys && keys.length > 0 && (
           <div className='text-start mb-1'>
             <Button type='danger' onClick={onDelete} loading={isLoading}>
-              Delete
+              {t("role.delete")}
             </Button>
           </div>
         )}

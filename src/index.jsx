@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 // import store from "./redux/root";
 import store from "./redux/rtk/app/store";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+// import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -33,5 +33,5 @@ const configuration = {
         }
     },
 };
-serviceWorkerRegistration.register(configuration);
+// serviceWorkerRegistration.register(configuration);
 // reportWebVitals();

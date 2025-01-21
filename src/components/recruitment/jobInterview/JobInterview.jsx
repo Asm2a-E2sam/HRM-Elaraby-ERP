@@ -12,8 +12,10 @@ import StatusSelectionDropdown from "../../CommonUi/StatusSelectionDropdown";
 import TablePagination from "../../CommonUi/TablePagination";
 import PageTitle from "../../page-header/PageHeader";
 import AddJobInterview from "./AddJobInterview";
+import { useTranslation } from "react-i18next"; 
 
 const JobInterview = () => {
+    const { t } = useTranslation();
     const [pagConfig, setPageConfig] = useState({
         status: "true",
         page: 1,
@@ -23,29 +25,29 @@ const JobInterview = () => {
     const columns = [
         {
             key: "id",
-            title: "ID",
+            title: t("job_interview.id"),
             dataIndex: "id",
         },
         {
             key: "jobApplication",
-            title: "Candidate Name",
+            title: t("job_interview.candidate_name"),
             dataIndex: "jobApplication",
             render: (jobApplication) => jobApplication?.name,
         },
         {
             key: "jobApplication",
-            title: "Applied For",
+            title: t("job_interview.applied_for"),
             dataIndex: "jobApplication",
             render: (jobApplication) => jobApplication?.job?.jobTitle,
         },
         {
             key: "scheduleDate",
-            title: "Schedule Date",
+            title: t("job_interview.schedule_date"),
             dataIndex: "scheduleDate",
         },
         {
             key: "scheduleTime",
-            title: "Schedule Time",
+            title: t("job_interview.schedule_time"),
             dataIndex: "scheduleTime",
             render: (scheduleTime) =>
                 dayjs(`1970-01-01 ${scheduleTime}`, {
@@ -54,7 +56,7 @@ const JobInterview = () => {
         },
         {
             key: "interviewStatus",
-            title: "Interview Status",
+            title: t("job_interview.interview_status"),
             dataIndex: "interviewStatus",
             render: (interviewStatus) => (
                 <span
@@ -70,7 +72,7 @@ const JobInterview = () => {
         },
         {
             key: "action",
-            title: "Action",
+            title: t("job_interview.action"),
             dataIndex: "id",
             render: (id) => (
                 <ViewBtn path={`/admin/recruitment/jobInterview/${id}`} />
@@ -79,10 +81,10 @@ const JobInterview = () => {
     ];
     return (
         <>
-            <PageTitle title="back" />
+            <PageTitle title={t("job_interview.back")} />
 
             <CardCustom
-                title={"Job Interview"}
+                title={t("job_interview.job_interview")}
                 extra={
                     <>
                         <StatusSelectionDropdown
@@ -96,7 +98,7 @@ const JobInterview = () => {
 
                         <CreateDrawer
                             permission={"create-jobInterview"}
-                            title={"Job Interview"}
+                            title={t("job_interview.job_interview")}
                             width={35}
                         >
                             <AddJobInterview />

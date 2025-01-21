@@ -6,9 +6,8 @@ export const departmentApi = apiSlice.injectEndpoints({
 		getDepartments: builder.query({
 			query: (arg) => {
 				const query= buildQuery(arg);
-				const adminId = localStorage.getItem("id");
 				return{
-					url: `department?${query}&admin_id=${adminId}`,
+					url: `department?${query}`,
 				};
 			},
 			providesTags: ["Departments"],

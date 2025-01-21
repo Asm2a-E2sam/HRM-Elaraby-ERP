@@ -1,19 +1,17 @@
 import { Button, Form, Input, Typography } from "antd";
 import { useAddDesignationMutation } from "../../redux/rtk/features/designation/designationApi";
+import { useTranslation } from "react-i18next"; 
 
 const AddDesignation = () => {
   const { Title } = Typography;
   const [addDesignation, { isLoading }] = useAddDesignationMutation();
   const [form] = Form.useForm();
-  const adminId = localStorage.getItem("id");
+  const { t } = useTranslation();
+
 
   const onFinish = async (values) => {
-    let val = {
-      ...values,
-      admin_id:adminId,
-    }
     try {
-      const resp = await addDesignation(val);
+      const resp = await addDesignation(values);
       if (resp.data && !resp.error) {
         form.resetFields();
       }
@@ -40,12 +38,12 @@ const AddDesignation = () => {
     >
       <Form.Item
         style={{ marginBottom: "20px" }}
-        label='Name'
+        label={t("add_designation.name")}
         name='name'
         rules={[
           {
             required: true,
-            message: "Please input designation name!",
+            message: t("add_designation.please_input_designation_name"),
           },
         ]}
       >
@@ -67,7 +65,7 @@ const AddDesignation = () => {
           size='large'
           loading={isLoading}
         >
-          Add Designation
+          {t("detail_department.add_designation")}
         </Button>
       </Form.Item>
     </Form>

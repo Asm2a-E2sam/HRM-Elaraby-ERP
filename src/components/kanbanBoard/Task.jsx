@@ -3,8 +3,11 @@ import { Tooltip } from "antd";
 import dayjs from "dayjs";
 import React from "react";
 import "./styles.css";
+import { useTranslation } from "react-i18next"; 
 
 const Task = ({ taskS: task, btnLoading, btnId, handleDeleteTask }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="task new-column-card" draggable="true">
       <div className="task__tags ">
@@ -12,7 +15,7 @@ const Task = ({ taskS: task, btnLoading, btnId, handleDeleteTask }) => {
           {task.priority.name}
         </span>
         <button className="task__options">
-          <Tooltip title="Delete Task">
+          <Tooltip title={t("delete_task")}>
             <button
               className="text-sm text-red-500 ml-2 float-right"
               onClick={() => handleDeleteTask(task.id)}
@@ -41,7 +44,7 @@ const Task = ({ taskS: task, btnLoading, btnId, handleDeleteTask }) => {
         <span>{/* 		<i className='fas fa-comment'></i>4 */}</span>
         <span>{/* <i className='fas fa-paperclip'></i>8 */}</span>
         {/* <span className='task__owner'></span> */}
-        <span> Time : {task.completionTime} Hours</span>
+        <span> {t("time")} : {task.completionTime}{t("hours")}</span>
       </div>
     </div>
   );

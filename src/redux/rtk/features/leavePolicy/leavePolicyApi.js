@@ -6,10 +6,8 @@ export const leavePolicyApi = apiSlice.injectEndpoints({
 		getLeavePolicies: builder.query({
 			query: (arg) => {
 				const query = buildQuery(arg);
-				const adminId = localStorage.getItem("id");
-
 				return {
-					url: `leave-policy?${query}&admin_id=${adminId}`,
+					url: `leave-policy?${query}`,
 				}
 			},
 			providesTags: ["LeavePolicies"],

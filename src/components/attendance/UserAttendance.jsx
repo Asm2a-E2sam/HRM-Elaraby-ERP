@@ -87,7 +87,7 @@ const UserAttendance = () => {
       key: "punchBy",
       render: (punchBy) => (
         <span>
-          {punchBy[0]?.firstName + " " + punchBy[0]?.lastName || "Not Checked"}
+          {punchBy[0]?.firstName + " " + punchBy[0]?.lastName || t("attendance.not_checked")}
         </span>
       ),
     },
@@ -96,7 +96,7 @@ const UserAttendance = () => {
       title: t("attendance.total_hours"),
       dataIndex: "totalHour",
       key: "totalHour",
-      render: (totalHour) => totalHour || "Not Checked",
+      render: (totalHour) => totalHour || t("attendance.not_checked"),
     },
   ];
   return (

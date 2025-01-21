@@ -56,7 +56,7 @@ function GetAllAward() {
       <PageTitle title={t("award.back")} />
 
       <CardCustom
-        title={"Award List"}
+        title={t("award.award_list")}
         extra={
           <>
             <CreateDrawer

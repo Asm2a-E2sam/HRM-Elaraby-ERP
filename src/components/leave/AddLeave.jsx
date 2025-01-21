@@ -18,11 +18,9 @@ const AddLeave = ({ drawer }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    const adminId = localStorage.getItem("id");
-
     const leaveData = {
       ...values,
-      userId: adminId,
+      userId: id,
       leaveFrom: dayjs(values.leaveFrom).format(),
       leaveTo: dayjs(values.leaveTo).format(),
     };

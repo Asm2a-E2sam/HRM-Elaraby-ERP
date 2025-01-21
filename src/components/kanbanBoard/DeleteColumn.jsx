@@ -1,9 +1,11 @@
 import { Button, Popover } from "antd";
 import { useDeleteTaskStatusMutation } from "../../redux/rtk/features/projectManagement/project/taskStatus/taskStatusApi";
 import "./styles.css";
+import { useTranslation } from "react-i18next"; 
 
 const DeleteColumn = ({ id, projectId }) => {
   const [deleteTaskStatus] = useDeleteTaskStatusMutation();
+  const { t } = useTranslation();
 
   const onDelete = async () => {
     await deleteTaskStatus(id);
@@ -12,7 +14,7 @@ const DeleteColumn = ({ id, projectId }) => {
   const content = (
     <div>
       <Button className='text-sm text-red-500 ml-2' onClick={onDelete}>
-        Delete
+      {t("delete")}
       </Button>
     </div>
   );

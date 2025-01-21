@@ -4,11 +4,13 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useUpdateAwardMutation } from "../../../redux/rtk/features/award/awardApi";
 import BtnEditSvg from "../Button/btnEditSvg";
+import { useTranslation } from "react-i18next"; 
 
 const AwardEditPopup = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { id } = useParams("id");
   const [updateAward, { isLoading }] = useUpdateAwardMutation();
+  const { t } = useTranslation();
 
   const onFinish = async (values) => {
     await updateAward({ id, values });
@@ -20,7 +22,7 @@ const AwardEditPopup = ({ data }) => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding department");
+    toast.warning(t("pop_up.failed_adding_department"));
   };
   const showModal = () => {
     setIsModalOpen(true);
@@ -37,7 +39,7 @@ const AwardEditPopup = ({ data }) => {
         <BtnEditSvg size={36} />
       </button>
       <Modal
-        title='Award Edit'
+        title={t("pop_up.award_edit")}
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -60,12 +62,12 @@ const AwardEditPopup = ({ data }) => {
           <div>
             <Form.Item
               style={{ marginBottom: "10px" }}
-              label='Name'
+              label={t("pop_up.name")}
               name='name'
               rules={[
                 {
                   required: true,
-                  message: "Please input your award name!",
+                  message: t("pop_up.please_input_award_name"),
                 },
               ]}
             >
@@ -74,12 +76,12 @@ const AwardEditPopup = ({ data }) => {
 
             <Form.Item
               style={{ marginBottom: "20px" }}
-              label='Description'
+              label={t("pop_up.description")}
               name='description'
               rules={[
                 {
                   required: true,
-                  message: "Please input your award description!",
+                  message: t("pop_up.please_input_award_description"),
                 },
               ]}
             >
@@ -100,7 +102,7 @@ const AwardEditPopup = ({ data }) => {
                 block
                 loading={isLoading}
               >
-                Update Award
+                {t("pop_up.update_award")}
               </Button>
             </Form.Item>
           </div>

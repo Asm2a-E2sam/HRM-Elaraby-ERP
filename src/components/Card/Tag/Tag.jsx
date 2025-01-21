@@ -1,6 +1,7 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { Input, Tag, Tooltip } from "antd";
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next"; 
 
 
 
@@ -11,6 +12,7 @@ const AddTag = ({ setTags, tags }) => {
   const [editInputValue, setEditInputValue] = useState("");
   const inputRef = useRef(null);
   const editInputRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (inputVisible) {
@@ -107,7 +109,7 @@ const AddTag = ({ setTags, tags }) => {
       )}
       {!inputVisible && (
         <Tag className="site-tag-plus" onClick={showInput}>
-          <PlusOutlined /> New Tag
+          <PlusOutlined /> {t("new_tag")}
         </Tag>
       )}
     </>

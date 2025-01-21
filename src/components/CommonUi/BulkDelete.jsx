@@ -1,6 +1,8 @@
 import { Button, Popconfirm } from "antd";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next"; 
+
 export default function BulkDelete({
 	selected,
 	setSelected,
@@ -8,6 +10,8 @@ export default function BulkDelete({
 	loadThunk,
 }) {
 	const dispatch = useDispatch();
+	const { t } = useTranslation();
+
 	const [open, setOpen] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const showPopconfirm = () => {
@@ -34,7 +38,7 @@ export default function BulkDelete({
 	};
 	return (
 		<Popconfirm
-			title={`You are going to delete ${selected.length} items. Are you sure?`}
+			title={t("you_are_going_to_delete")}
 			open={open}
 			placement='topLeft'
 			onConfirm={handleOk}
@@ -43,7 +47,7 @@ export default function BulkDelete({
 			}}
 			onCancel={handleCancel}>
 			<Button type='danger' onClick={showPopconfirm}>
-				Delete {selected.length} items
+				{t("delete_items")}
 			</Button>
 		</Popconfirm>
 	);

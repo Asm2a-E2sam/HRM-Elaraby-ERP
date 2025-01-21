@@ -1,4 +1,5 @@
 import { Button, Form, Input, Typography } from "antd";
+import { useTranslation } from "react-i18next"; 
 
 import React from "react";
 import { toast } from "react-toastify";
@@ -6,22 +7,18 @@ import { useAddDepartmentMutation } from "../../redux/rtk/features/Department/de
 
 const AddDepartment = () => {
   const [addDepartment, { isLoading: addLoading }] = useAddDepartmentMutation();
-  const adminId = localStorage.getItem("id");
+  const { t } = useTranslation();
 
   const [form] = Form.useForm();
   const onFinish = async (values) => {
-    let val = {
-      ...values,
-      admin_id:adminId
-    };
-    const resp = await addDepartment(val);
+   const resp = await addDepartment(values);
     if (resp.data && !resp.error) {
       form.resetFields();
     }
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding department");
+    toast.warning(t("add_department.failed_at_adding_department"));
   };
 
   return (
@@ -43,12 +40,12 @@ const AddDepartment = () => {
       <div>
         <Form.Item
           style={{ marginBottom: "20px" }}
-          label='Name'
+          label={t("add_department.failed_at_adding_department")}
           name='name'
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: t("add_department.please_input_your_username"),
             },
           ]}
         >
@@ -69,7 +66,7 @@ const AddDepartment = () => {
             block
             loading={addLoading}
           >
-            Add New department
+            {t("add_department.add_new_department")}
           </Button>
         </Form.Item>
       </div>

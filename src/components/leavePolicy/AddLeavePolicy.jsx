@@ -3,6 +3,7 @@ import { Button, Form, Input } from "antd";
 import React from "react";
 import { toast } from "react-toastify";
 import { useAddLeavePolicyMutation } from "../../redux/rtk/features/leavePolicy/leavePolicyApi";
+import { useTranslation } from "react-i18next"; 
 
 const AddLeavePolicy = ({ drawer }) => {
   const [addSingleLeavePolicy, { isLoading: addLoading }] =
@@ -10,13 +11,11 @@ const AddLeavePolicy = ({ drawer }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    const adminId = localStorage.getItem("id");
 
     const FormData = {
       ...values,
       paidLeaveCount: parseInt(values.paidLeaveCount),
       unpaidLeaveCount: parseInt(values.unpaidLeaveCount),
-      admin_id:adminId
     };
 
     const resp = await addSingleLeavePolicy(FormData);
@@ -25,9 +24,10 @@ const AddLeavePolicy = ({ drawer }) => {
       form.resetFields();
     }
   };
+  const { t } = useTranslation();
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding department");
+    toast.warning(t("add_leave_policy.failed_at_adding_department"));
   };
 
   return (
@@ -45,12 +45,12 @@ const AddLeavePolicy = ({ drawer }) => {
       <div>
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label='Name'
+          label={t("add_leave_policy.name")}
           name='name'
           rules={[
             {
               required: true,
-              message: "Please input your leave-policy name!",
+              message: t("add_leave_policy.name_msg"),
             },
           ]}
         >
@@ -59,12 +59,12 @@ const AddLeavePolicy = ({ drawer }) => {
 
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label='Paid Leave '
+          label={t("add_leave_policy.paid_leave")}
           name='paidLeaveCount'
           rules={[
             {
               required: true,
-              message: "Please input your paid leave!",
+              message: t("add_leave_policy.paid_leave_msg"),
             },
           ]}
         >
@@ -73,12 +73,12 @@ const AddLeavePolicy = ({ drawer }) => {
 
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label='Unpaid Leave '
+          label={t("add_leave_policy.unpaid_leave")}
           name='unpaidLeaveCount'
           rules={[
             {
               required: true,
-              message: "Please input your unpaid Leave !",
+              message: t("add_leave_policy.unpaid_leave_msg"),
             },
           ]}
         >
@@ -99,7 +99,7 @@ const AddLeavePolicy = ({ drawer }) => {
             block
             loading={addLoading}
           >
-            Add New Policy
+            {t("add_leave_policy.add_new_policy")}
           </Button>
         </Form.Item>
       </div>

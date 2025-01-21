@@ -53,7 +53,7 @@ const RoleList = () => {
 
   return (
     <div>
-      <PageTitle title='Back' />
+      <PageTitle title={t("back")} />
       <CardCustom
         title= {t("user_list.role_list")}
         extra={

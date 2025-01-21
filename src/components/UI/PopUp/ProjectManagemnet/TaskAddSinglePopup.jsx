@@ -10,11 +10,13 @@ import BigDrawer from "../../../Drawer/BigDrawer";
 import AddMilestone from "../../../project/milestone/AddMilestone";
 import AddTaskPriority from "../../../project/taskPriority/AddtaskPriority";
 import AddProjectTeam from "../../../project/team/AddProjectTeam";
+import { useTranslation } from "react-i18next"; 
 
 const TaskAddSinglePopup = ({ projectId, taskStatusId }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
   const [startDate, setstartDate] = useState(null);
+  const { t } = useTranslation();
   const [endDate, setendDate] = useState(null);
   const { data: taskPriority, isLoading: taskPriorityLoading } =
     useGetTaskPrioritiesQuery();
@@ -44,7 +46,7 @@ const TaskAddSinglePopup = ({ projectId, taskStatusId }) => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding task");
+    toast.warning(t("pop_up.failed_adding_task"));
   };
   const showModal = () => {
     setIsModalOpen(true);
@@ -128,21 +130,21 @@ const TaskAddSinglePopup = ({ projectId, taskStatusId }) => {
 							</Form.Item> */}
 
               <div className='flex justify-around ml-5 mr-10'>
-                <span className='font-semibold mr-2 mt-1'>Milestone :</span>
+                <span className='font-semibold mr-2 mt-1'>{t("pop_up.milestone")} :</span>
                 <Form.Item
                   style={{ marginBottom: "10px" }}
                   name='milestoneId'
                   rules={[
                     {
                       required: true,
-                      message: "Please input your milestone!",
+                      message: t("pop_up.please_input_your_milestone"),
                     },
                   ]}
                 >
                   <Select
                     className='mr-2'
                     loading={milestoneLoading}
-                    placeholder='Select Milestone'
+                    placeholder={t("pop_up.select_milestone")}
                     mode='single'
                     style={{ width: "160px" }}
                   >
@@ -158,7 +160,7 @@ const TaskAddSinglePopup = ({ projectId, taskStatusId }) => {
                 </BigDrawer>
               </div>
               <div className='flex justify-start'>
-                <span className='font-semibold mr-2 mt-1'>Priority :</span>
+                <span className='font-semibold mr-2 mt-1'>{t("pop_up.priority")} :</span>
                 <Form.Item
                   style={{ marginBottom: "10px" }}
                   name='priorityId'
@@ -166,13 +168,13 @@ const TaskAddSinglePopup = ({ projectId, taskStatusId }) => {
                   rules={[
                     {
                       required: true,
-                      message: "Please input your priority!",
+                      message: t("pop_up.please_input_your_priority"),
                     },
                   ]}
                 >
                   <Select
                     className='mr-2'
-                    placeholder='Select Priority'
+                    placeholder={t("pop_up.select_priority")}
                     loading={taskPriorityLoading}
                     mode='single'
                     style={{ width: "160px" }}
@@ -215,19 +217,19 @@ const TaskAddSinglePopup = ({ projectId, taskStatusId }) => {
 
             <Form.Item
               style={{ marginBottom: "10px" }}
-              label='Team Select'
+              label={t("pop_up.team_select")}
               name='teamSelect'
               rules={[
                 teamUserList?.length === 0 && {
                   required: true,
-                  message: "Please Select Team!",
+                  message: t("pop_up.please_select_team"),
                 },
               ]}
             >
               <div className='flex'>
                 <Select
                   className='mr-2'
-                  placeholder='Select Team'
+                  placeholder={t("pop_up.select_team")}
                   loading={projectTeamLoading}
                   onChange={(value) => {
                     // eslint-disable-next-line array-callback-return
@@ -262,18 +264,18 @@ const TaskAddSinglePopup = ({ projectId, taskStatusId }) => {
 
             <Form.Item
               style={{ marginBottom: "10px" }}
-              label='Team Member Select'
+              label={t("pop_up.team_member_select")}
               rules={[
                 {
                   required: true,
-                  message: "Please Select Team Member!",
+                  message: t("pop_up.please_select_team_member"),
                 },
               ]}
               name='assignedTask'
             >
               <Select
                 className='mr-2'
-                placeholder='Select Member'
+                placeholder={t("pop_up.select_member")}
                 loading={teamUserList?.length === 0}
                 mode='multiple'
                 optionFilterProp='children'
@@ -288,27 +290,27 @@ const TaskAddSinglePopup = ({ projectId, taskStatusId }) => {
 
             <Form.Item
               style={{ marginBottom: "10px" }}
-              label='Task Name'
+              label={t("pop_up.task_name")}
               rules={[
                 {
                   required: true,
-                  message: "Please input task name!",
+                  message: t("pop_up.please_input_task_name"),
                 },
               ]}
               name='name'
             >
-              <Input placeholder='Task Name' />
+              <Input placeholder={t("pop_up.task_name")} />
             </Form.Item>
 
             <Form.Item
               style={{ marginBottom: "10px" }}
-              label='Start Date'
+              label={t("pop_up.start_date")}
               name='startDate'
               valuePropName='startDate'
               rules={[
                 {
                   required: true,
-                  message: "Please input your start date!",
+                  message: t("pop_up.please_input_start_date"),
                 },
               ]}
             >
@@ -317,11 +319,11 @@ const TaskAddSinglePopup = ({ projectId, taskStatusId }) => {
 
             <Form.Item
               style={{ marginBottom: "10px" }}
-              label='End Date'
+              label={t("pop_up.end_date")}
               rules={[
                 {
                   required: true,
-                  message: "Please input your end date!",
+                  message: t("pop_up.please_input_end_date"),
                 },
               ]}
               name='endDate'
@@ -332,31 +334,31 @@ const TaskAddSinglePopup = ({ projectId, taskStatusId }) => {
 
             <Form.Item
               style={{ marginBottom: "10px" }}
-              label='Description'
+              label={t("pop_up.description")}
               name='description'
               rules={[
                 {
                   required: true,
-                  message: "Please input your description!",
+                  message: t("pop_up.please_input_description"),
                 },
               ]}
             >
-              <Input.TextArea placeholder='Description' />
+              <Input.TextArea placeholder={t("pop_up.description")} />
             </Form.Item>
 
             <Form.Item
               style={{ marginBottom: "20px" }}
-              label='Completion Time'
+              label={t("pop_up.completion_time")}
               name='completionTime'
               required
               rules={[
                 {
                   required: true,
-                  message: "Please input your Completion Time!",
+                  message: t("pop_up.please_input_completion_time"),
                 },
               ]}
             >
-              <Input placeholder='20.00 in Hours' />
+              <Input placeholder={`20.00 ${t("pop_up.in_hours")}`} />
             </Form.Item>
 
             <Form.Item
@@ -373,7 +375,7 @@ const TaskAddSinglePopup = ({ projectId, taskStatusId }) => {
                 htmlType='submit'
                 loading={isLoading}
               >
-                Add Now
+                {t("pop_up.add_now")}
               </Button>
             </Form.Item>
           </div>

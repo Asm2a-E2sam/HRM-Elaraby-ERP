@@ -11,10 +11,12 @@ import {
 import AddStatusColumn from "./AddStatusColumn";
 import Application from "./Application";
 import DeleteJobApplicationStatus from "./DeleteJobApplicationStatus";
+import { useTranslation } from "react-i18next"; 
 
 function JobKanbanBoard() {
   const [data, setData] = useState([]);
   // const [newColumnTitle, setNewColumnTitle] = useState("");
+  const { t } = useTranslation();
 
   const { data: list, loading } = useGetJobApplicationStatusesQuery({
     query: "all",
@@ -123,7 +125,7 @@ function JobKanbanBoard() {
     <div style={{ height: "97%" }}>
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold antialiased txt-color-2">
-          JOB BOARD{" "}
+          {t("job_board")}{" "}
         </h1>
         <AddStatusColumn />
       </div>
@@ -198,7 +200,7 @@ function JobKanbanBoard() {
         <div className="flex justify-center items-center h-96">
           <div>
             <h1 className="text-3xl font-semibold text-gray-600">
-              No Job Application Found
+              {t("no_job_application_found")}
             </h1>
           </div>
         </div>

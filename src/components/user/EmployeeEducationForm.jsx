@@ -1,8 +1,11 @@
 import { MinusCircleOutlined } from "@ant-design/icons";
 import { DatePicker, Form, Input, Space } from "antd";
 import React from "react";
+import { useTranslation } from "react-i18next"; 
 
 const EmployeeEducationForm = ({ key, restField, remove, name }) => {
+  const { t } = useTranslation();
+
   return (
     <div>
       <Space
@@ -25,7 +28,7 @@ const EmployeeEducationForm = ({ key, restField, remove, name }) => {
             },
           ]}
         >
-          <Input placeholder='Degree' />
+          <Input placeholder={t("employee_education_form.degree")} />
         </Form.Item>
         <Form.Item
           {...restField}
@@ -37,14 +40,14 @@ const EmployeeEducationForm = ({ key, restField, remove, name }) => {
             },
           ]}
         >
-          <Input placeholder='Institution' />
+          <Input placeholder={t("employee_education_form.institution")} />
         </Form.Item>
         <Form.Item
           {...restField}
           name={[name, "result"]}
           rules={[{ required: true, message: "Missing result" }]}
         >
-          <Input placeholder='Result' />
+          <Input placeholder={t("employee_education_form.result")} />
         </Form.Item>
 
         <Form.Item
@@ -52,7 +55,7 @@ const EmployeeEducationForm = ({ key, restField, remove, name }) => {
           name={[name, "studyStartDate"]}
           rules={[{ required: true, message: "Missing studyStartDate" }]}
         >
-          <DatePicker placeholder='studyStartDate' />
+          <DatePicker placeholder={t("employee_education_form.study_start_date")} />
         </Form.Item>
 
         <Form.Item
@@ -60,7 +63,7 @@ const EmployeeEducationForm = ({ key, restField, remove, name }) => {
           name={[name, "studyEndDate"]}
           
         >
-          <DatePicker placeholder='studyEndDate' />
+          <DatePicker placeholder={t("employee_education_form.study_end_date")}  />
         </Form.Item>
 
         <Form.Item
@@ -68,7 +71,7 @@ const EmployeeEducationForm = ({ key, restField, remove, name }) => {
           name={[name, "fieldOfStudy"]}
           rules={[{ required: true, message: "Missing fieldOfStudy" }]}
         >
-          <Input placeholder='Field Of Study; Computer' />
+          <Input placeholder={t("employee_education_form.field")} />
         </Form.Item>
         <MinusCircleOutlined
           className='txt-color'

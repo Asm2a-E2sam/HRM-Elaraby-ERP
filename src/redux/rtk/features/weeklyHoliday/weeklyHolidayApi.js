@@ -6,10 +6,8 @@ export const weeklyHolidayApi = apiSlice.injectEndpoints({
     getWeeklyHolidays: builder.query({
       query: (arg) => {
         const query = buildQuery(arg);
-        const adminId = localStorage.getItem("id");
-
         return {
-          url: `weekly-holiday?${query}&admin_id=${adminId}`,
+          url: `weekly-holiday?${query}`,
         }
       },
       providesTags: ["WeeklyHolidays"],

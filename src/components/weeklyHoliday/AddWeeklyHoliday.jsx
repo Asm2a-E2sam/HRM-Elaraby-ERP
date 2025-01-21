@@ -1,4 +1,5 @@
 import { Button, Form, Input, Select, Typography } from "antd";
+import { useTranslation } from "react-i18next"; 
 
 import React from "react";
 import { toast } from "react-toastify";
@@ -8,16 +9,12 @@ const AddWeeklyHoliday = () => {
   const [addSingleWeeklyHoliday, { isLoading: addLoading }] =
     useAddWeeklyHolidayMutation();
   const [form] = Form.useForm();
+  const { t } = useTranslation();
 
   const { Title } = Typography;
 
   const onFinish = async (values) => {
-    const adminId = localStorage.getItem("id");
-    let val = {
-      ...values,
-      admin_id: adminId,
-    };
-    const resp = await addSingleWeeklyHoliday(val);
+    const resp = await addSingleWeeklyHoliday(values);
 
     if (resp.data && !resp.error) {
       form.resetFields();
@@ -25,7 +22,7 @@ const AddWeeklyHoliday = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding department");
+    toast.warning(t("add_weekly_holiday.failed_at_adding_department"));
   };
   return (
     <Form
@@ -42,59 +39,59 @@ const AddWeeklyHoliday = () => {
       <div>
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label="Name"
+          label={t("add_weekly_holiday.name")}
           name="name"
           rules={[
             {
               required: true,
-              message: "Please input name!",
+              message: t("add_weekly_holiday.please_input_name"),
             },
           ]}
         >
-          <Input placeholder="Saturday-Friday" />
+          <Input placeholder={t("add_weekly_holiday.saturday_friday")} />
         </Form.Item>
 
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label="Start Day"
+          label={t("add_weekly_holiday.start_day")}
           name="startDay"
           rules={[
             {
               required: true,
-              message: "Please input start day!",
+              message: t("add_weekly_holiday.please_input_start_day"),
             },
           ]}
         >
-          <Select placeholder="Select Start Day">
-            <Select.Option value="Saturday">Saturday</Select.Option>
-            <Select.Option value="Sunday">Sunday</Select.Option>
-            <Select.Option value="Monday">Monday</Select.Option>
-            <Select.Option value="Tuesday">Tuesday</Select.Option>
-            <Select.Option value="Wednesday">Wednesday</Select.Option>
-            <Select.Option value="Thursday">Thursday</Select.Option>
-            <Select.Option value="Friday">Friday</Select.Option>
+          <Select placeholder={t("add_weekly_holiday.select_start_day")}>
+            <Select.Option value="Saturday">{t("add_weekly_holiday.saturday")}</Select.Option>
+            <Select.Option value="Sunday">{t("add_weekly_holiday.sunday")}</Select.Option>
+            <Select.Option value="Monday">{t("add_weekly_holiday.monday")}</Select.Option>
+            <Select.Option value="Tuesday">{t("add_weekly_holiday.tuesday")}</Select.Option>
+            <Select.Option value="Wednesday">{t("add_weekly_holiday.wednesday")}</Select.Option>
+            <Select.Option value="Thursday">{t("add_weekly_holiday.thursday")}</Select.Option>
+            <Select.Option value="Friday">{t("add_weekly_holiday.friday")}</Select.Option>
           </Select>
         </Form.Item>
 
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label="End Day"
+          label={t("add_weekly_holiday.end_day")}
           name="endDay"
           rules={[
             {
               required: true,
-              message: "Please input End day!",
+              message: t("add_weekly_holiday.please_input_end_day"),
             },
           ]}
         >
-          <Select placeholder="Select Start Day">
-            <Select.Option value="Saturday">Saturday</Select.Option>
-            <Select.Option value="Sunday">Sunday</Select.Option>
-            <Select.Option value="Monday">Monday</Select.Option>
-            <Select.Option value="Tuesday">Tuesday</Select.Option>
-            <Select.Option value="Wednesday">Wednesday</Select.Option>
-            <Select.Option value="Thursday">Thursday</Select.Option>
-            <Select.Option value="Friday">Friday</Select.Option>
+          <Select placeholder={t("add_weekly_holiday.select_end_day")}>
+          <Select.Option value="Saturday">{t("add_weekly_holiday.saturday")}</Select.Option>
+            <Select.Option value="Sunday">{t("add_weekly_holiday.sunday")}</Select.Option>
+            <Select.Option value="Monday">{t("add_weekly_holiday.monday")}</Select.Option>
+            <Select.Option value="Tuesday">{t("add_weekly_holiday.tuesday")}</Select.Option>
+            <Select.Option value="Wednesday">{t("add_weekly_holiday.wednesday")}</Select.Option>
+            <Select.Option value="Thursday">{t("add_weekly_holiday.thursday")}</Select.Option>
+            <Select.Option value="Friday">{t("add_weekly_holiday.friday")}</Select.Option>
           </Select>
         </Form.Item>
 
@@ -112,7 +109,7 @@ const AddWeeklyHoliday = () => {
             block
             loading={addLoading}
           >
-            Add Weekly Holiday
+            {t("add_weekly_holiday.add_weekly_holiday")}
           </Button>
         </Form.Item>
       </div>

@@ -1,4 +1,5 @@
 import { Button, Form, Input } from "antd";
+import { useTranslation } from "react-i18next"; 
 
 import React from "react";
 
@@ -7,6 +8,8 @@ import { toast } from "react-toastify";
 import { useAddTaskPriorityMutation } from "../../../redux/rtk/features/projectManagement/project/taskPriority/taskPriorityApi";
 
 const AddTaskPriority = () => {
+  const { t } = useTranslation();
+
   const [form] = Form.useForm();
   const [addSingleTaskPriority, { isLoading }] = useAddTaskPriorityMutation();
   const onFinish = async (values) => {
@@ -22,7 +25,7 @@ const AddTaskPriority = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding TaskPriority");
+    toast.warning(t("add_task_priority.failed_adding_task"));
   };
   return (
     <Form
@@ -39,16 +42,16 @@ const AddTaskPriority = () => {
       <div>
         <Form.Item
           style={{ marginBottom: "10px" }}
-          label='TaskPriority Name'
+          label={t("add_task_priority.task_priority_name")}
           name='name'
           rules={[
             {
               required: true,
-              message: "Enter TaskPriority Name",
+              message: t("add_task_priority.enter_task_priority_name"),
             },
           ]}
         >
-          <Input placeholder='Enter TaskPriority Name' />
+          <Input placeholder={t("add_task_priority.enter_task_priority_name")} />
         </Form.Item>
 
         <Form.Item
@@ -65,7 +68,7 @@ const AddTaskPriority = () => {
             block
             loading={isLoading}
           >
-            Submit
+            {t("add_task_priority.submit")}
           </Button>
         </Form.Item>
       </div>

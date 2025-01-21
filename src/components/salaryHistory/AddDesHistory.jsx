@@ -12,9 +12,11 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import { addSalaryHistory } from "./salaryHistoryApis";
+import { useTranslation } from "react-i18next"; 
 
 const AddSalaryHistory = ({ drawer }) => {
   const [loader, setLoader] = useState(false);
+  const { t } = useTranslation();
 
   const { Title } = Typography;
 
@@ -28,7 +30,7 @@ const AddSalaryHistory = ({ drawer }) => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    toast.warning("Failed at adding Salary History");
+    toast.warning(t("add_salary_history.failed_adding_salary_history"));
     setLoader(false);
   };
   return (
@@ -47,7 +49,7 @@ const AddSalaryHistory = ({ drawer }) => {
             className="column-design border rounded card-custom"
           >
             <Title level={4} className="m-2 mt-5 mb-5 text-center">
-              Add New Salary History
+            {t("add_salary_history.add_new_salary_history")}
             </Title>
             <Form
               style={{ marginBottom: "100px" }}
@@ -66,12 +68,12 @@ const AddSalaryHistory = ({ drawer }) => {
               <div>
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label="Salary"
+                  label={t("add_salary_history.salary")}
                   salary="salary"
                   rules={[
                     {
                       required: true,
-                      message: "Please input your salary!",
+                      message: t("add_salary_history.please_input_salary"),
                     },
                   ]}
                 >
@@ -80,28 +82,28 @@ const AddSalaryHistory = ({ drawer }) => {
 
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label="Start Date"
+                  label={t("add_salary_history.start_date")}
                   name="salaryStartDate"
                   rules={[
                     {
                       required: true,
-                      message: "Please input your start date!",
+                      message: t("add_salary_history.please_input_start_date"),
                     },
                   ]}
                 >
-                  <DatePicker placeholder="Select date" />
+                  <DatePicker placeholder={t("add_salary_history.select_date")} />
                 </Form.Item>
 
                 <Form.Item
                   style={{ marginBottom: "10px" }}
-                  label="End Date"
+                  label={t("add_salary_history.end_date")}
                   name="salaryEndDate"
                 >
-                  <DatePicker placeholder="Select date" />
+                  <DatePicker placeholder={t("add_salary_history.select_date")} />
                 </Form.Item>
 
-                <Form.Item label="Comment" name="salaryComment">
-                  <Input placeholder="comment" />
+                <Form.Item label={t("add_salary_history.comment")} name="salaryComment">
+                  <Input placeholder={t("add_salary_history.comment")} />
                 </Form.Item>
 
                 <Form.Item
@@ -119,7 +121,7 @@ const AddSalaryHistory = ({ drawer }) => {
                     block
                     loading={loader}
                   >
-                    Add New Designation
+                    {t("add_salary_history.add_new_designation")}
                   </Button>
                 </Form.Item>
               </div>

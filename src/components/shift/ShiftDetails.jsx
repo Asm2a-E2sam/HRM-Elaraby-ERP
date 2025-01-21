@@ -11,52 +11,54 @@ import TableNoPagination from "../CommonUi/TableNoPagination";
 import UserPrivateComponent from "../PrivateRoutes/UserPrivateComponent";
 import ShiftEditPopup from "../UI/PopUp/ShiftEditPopup";
 import PageTitle from "../page-header/PageHeader";
+import { useTranslation } from "react-i18next"; 
 
 //PopUp
 
 
 const DetailShift = () => {
   const { id } = useParams();
+  const { t } = useTranslation();
 
   const { data: shift ,isLoading:loading} = useGetShiftQuery(id);
    const columns = [
      {
        id: 1,
-       title: "ID",
+       title: t("shift.id"),
        dataIndex: "id",
        key: "id",
      },
 
      {
        id: 2,
-       title: " Name",
+       title: t("shift.name"),
        key: "firstName",
        render: ({ firstName, lastName }) => firstName + " " + lastName,
      },
 
      {
        id: 6,
-       title: "User Name",
+       title: t("shift.username"),
        dataIndex: "username",
        key: "username",
      },
      {
        id: 7,
-       title: "Start Time",
+       title: t("shift.start_time"),
        dataIndex: "startTime",
        key: "startTime",
        render: (startTime) => dayjs(startTime).format("hh:mm A"),
      },
      {
        id: 8,
-       title: "End Time",
+       title: t("shift.end_time"),
        dataIndex: "endTime",
        key: "endTime",
        render: (endTime) => dayjs(endTime).format("hh:mm A"),
      },
      {
        id: 4,
-       title: "Action",
+       title: t("shift.action"),
        dataIndex: "id",
        key: "action",
        render: (id) => (
@@ -68,13 +70,13 @@ const DetailShift = () => {
    ];
   return (
     <div>
-      <PageTitle title=" Back " />
+      <PageTitle title={t("shift.back")} />
 
       <UserPrivateComponent permission={"readSingle-shift"}>
         <CardCustom
           title={
             <h3>
-              ID : {shift?.id} | {shift?.name}
+              {t("shift.id")} : {shift?.id} | {shift?.name}
             </h3>
           }
           extra={
@@ -95,7 +97,7 @@ const DetailShift = () => {
           <TableNoPagination
             leftElement={
               <h1 className="p-2 font-semibold text-lg text-center">
-                Employee List
+                {t("shift.employee_list")}
               </h1>
             }
             list={shift?.user}
