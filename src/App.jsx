@@ -4,7 +4,6 @@ import { ToastContainer } from "react-toastify";
 import "./App.css";
 
 import Login from "./components/user/Login";
-import Register from "./components/user/Register";
 import Logout from "./components/user/Logout";
 import UserList from "./components/user/user";
 
@@ -161,7 +160,6 @@ function App() {
               {/* job desk public route ended*/}
 
 
-              <Route path='/admin/auth/register' exact element={<Register/>} />
               <Route path='/admin/auth/login' exact element={<Login />} />
               <Route path='/admin/auth/logout' exact element={<Logout />} />
               <Route element={<UserPrivateRoute permission={"create-user"} />}>

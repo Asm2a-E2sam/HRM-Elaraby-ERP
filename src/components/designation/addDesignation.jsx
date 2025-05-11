@@ -6,17 +6,16 @@ const AddDesignation = () => {
   const { Title } = Typography;
   const [addDesignation, { isLoading }] = useAddDesignationMutation();
   const [form] = Form.useForm();
+<<<<<<< HEAD
   const adminId = localStorage.getItem("admin_id");
+=======
+>>>>>>> bedaf815c21ad1eec7599208043754cc6219b2d7
   const { t } = useTranslation();
 
 
   const onFinish = async (values) => {
-    let val = {
-      ...values,
-      admin_id:adminId,
-    }
     try {
-      const resp = await addDesignation(val);
+      const resp = await addDesignation(values);
       if (resp.data && !resp.error) {
         form.resetFields();
       }

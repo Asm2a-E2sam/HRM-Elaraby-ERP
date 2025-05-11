@@ -18,10 +18,12 @@ const AddAccount = ({ drawer }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
+<<<<<<< HEAD
     const adminId = localStorage.getItem("admin_id");
+=======
+>>>>>>> bedaf815c21ad1eec7599208043754cc6219b2d7
     let val = {
       ...values,
-      admin_id:adminId
     };
     const resp = await AddAccount(val);
     if (resp.data && !resp.error) {

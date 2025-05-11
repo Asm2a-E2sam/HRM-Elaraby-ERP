@@ -16,11 +16,13 @@ const AddEmploymentStatus = ({ drawer }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
+<<<<<<< HEAD
     const adminId = localStorage.getItem("admin_id");
+=======
+>>>>>>> bedaf815c21ad1eec7599208043754cc6219b2d7
     const FormData = {
       ...values,
       colourValue: colorCode,
-      admin_id:adminId
     };
 
     const resp = await addEmploymentStatus(FormData);

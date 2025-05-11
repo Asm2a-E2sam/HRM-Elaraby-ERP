@@ -6,10 +6,13 @@ export const PublicHolidayApi = apiSlice.injectEndpoints({
     getPublicHolidays: builder.query({
       query: (arg) => {
         const query = buildQuery(arg);
+<<<<<<< HEAD
         const adminId = localStorage.getItem("admin_id");
 
+=======
+>>>>>>> bedaf815c21ad1eec7599208043754cc6219b2d7
         return {
-          url: `public-holiday?${query}&admin_id=${adminId}`,
+          url: `public-holiday?${query}`,
         }
       },
       providesTags: ["PublicHolidays"],

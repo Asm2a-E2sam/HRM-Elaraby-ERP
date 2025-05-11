@@ -35,13 +35,16 @@ const Login = () => {
 
   return (
     <>
-      <Row className="card-row ">
-        <Col span={24}>
+      <Row className="card-row">
+        {/* <Col lg={12} sm={24} className="flex align-items-center justify-center">
+          <iframe src="https://lottie.host/embed/36d8d0d2-807e-4dd8-9d8d-da45f7f16f79/PV3pRsbIO4.json" width={300}></iframe>
+        </Col> */}
+        <Col span={24} className="flex align-items-center justify-center">
           <Card
             bordered={false}
-            className="w-full max-w-[30rem] mx-auto bg-slate-50 shadow-lg"
+            className="w-full max-w-[40rem] max-h-[60vh] py-5 mx-auto bg-slate-50"
           >
-            <Title level={3} className="m-3 text-center">
+            <Title level={2} className="m-3 text-center text-slate-800">
               {t("login.login")}
             </Title>
             <Form
@@ -67,7 +70,7 @@ const Login = () => {
                   },
                 ]}
               >
-                <Input />
+                <Input/>
               </Form.Item>
 
               <Form.Item
@@ -84,13 +87,6 @@ const Login = () => {
                 <Input.Password />
               </Form.Item>
 
-              {/* <Form.Item name="role" className="mb-5 mx-4">
-                <Radio.Group onChange={onRoleChange} value={role}>
-                  <Radio value="user">{t("login.user")}</Radio>
-                  <Radio value="admin">{t("login.admin")}</Radio>
-                </Radio.Group>
-              </Form.Item> */}
-
               <Form.Item className="flex justify-center">
                 <Button
                   type="primary"
@@ -99,15 +95,6 @@ const Login = () => {
                 >
                   {t("login.submit")}
                 </Button>
-              </Form.Item>
-
-              <Form.Item className="w-100 mt-[30px] text-center">
-                <p>
-                  {t("login.do_not_have_account")}
-                  <Link to="/admin/auth/register" className="px-3">
-                    {t("login.register_now")}
-                  </Link>
-                </p>
               </Form.Item>
             </Form>
           </Card>

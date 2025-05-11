@@ -35,13 +35,15 @@ const AddUser = () => {
   const { data: shift } = useGetShiftsQuery({query: 'all'});
   const { data: weeklyHoliday } = useGetWeeklyHolidaysQuery({query: 'all'});
   const { data: leavePolicy } = useGetLeavePoliciesQuery({query: 'all'});
+<<<<<<< HEAD
   const adminId = localStorage.getItem("admin_id");
+=======
+>>>>>>> bedaf815c21ad1eec7599208043754cc6219b2d7
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
     const FormData = {
       ...values,
-      admin_id:adminId,
       education: values.education || [],
     };
     try {

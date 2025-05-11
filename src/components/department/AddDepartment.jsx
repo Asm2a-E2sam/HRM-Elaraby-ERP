@@ -7,16 +7,15 @@ import { useAddDepartmentMutation } from "../../redux/rtk/features/Department/de
 
 const AddDepartment = () => {
   const [addDepartment, { isLoading: addLoading }] = useAddDepartmentMutation();
+<<<<<<< HEAD
   const adminId = localStorage.getItem("admin_id");
+=======
+>>>>>>> bedaf815c21ad1eec7599208043754cc6219b2d7
   const { t } = useTranslation();
 
   const [form] = Form.useForm();
   const onFinish = async (values) => {
-    let val = {
-      ...values,
-      admin_id:adminId
-    };
-    const resp = await addDepartment(val);
+   const resp = await addDepartment(values);
     if (resp.data && !resp.error) {
       form.resetFields();
     }

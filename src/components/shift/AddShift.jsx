@@ -14,12 +14,14 @@ const AddShift = ({ drawer }) => {
   const { t } = useTranslation();
 
   const onFinish = async (values) => {
+<<<<<<< HEAD
     const adminId = localStorage.getItem("admin_id");
+=======
+>>>>>>> bedaf815c21ad1eec7599208043754cc6219b2d7
     const shiftData = {
       name: values.name,
       startTime: dayjs(values.startTime).format(),
       endTime: dayjs(values.endTime).format(),
-      admin_id:adminId
     };
     try {
       const res = await addShift(shiftData);

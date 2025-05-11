@@ -15,6 +15,7 @@ const AddPublicHoliday = () => {
   const { t } = useTranslation();
 
   const onFinish = async (values) => {
+<<<<<<< HEAD
     const adminId = localStorage.getItem("admin_id");
     let val = {
       ...values,
@@ -22,6 +23,9 @@ const AddPublicHoliday = () => {
     };
     
     const resp = await addPublicHoliday(val);
+=======
+    const resp = await addPublicHoliday(values);
+>>>>>>> bedaf815c21ad1eec7599208043754cc6219b2d7
     if (resp.data && !resp.error) {
       form.resetFields();
     }

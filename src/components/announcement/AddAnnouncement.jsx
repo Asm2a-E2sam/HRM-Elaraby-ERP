@@ -14,12 +14,16 @@ const AddAnnouncement = () => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
+<<<<<<< HEAD
     const adminId = localStorage.getItem("admin_id");
     let val = {
       ...values,
       admin_id:adminId
     };
     const resp = await addAnnouncement(val);
+=======
+    const resp = await addAnnouncement(values);
+>>>>>>> bedaf815c21ad1eec7599208043754cc6219b2d7
 
     if (resp.data && !resp.error) {
       form.resetFields();

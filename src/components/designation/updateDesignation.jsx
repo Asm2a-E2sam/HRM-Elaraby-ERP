@@ -22,11 +22,15 @@ function UpdateDesignation() {
     name: cust.designationName,
   });
 
+<<<<<<< HEAD
   const adminId = localStorage.getItem("admin_id");
+=======
+  const adminId = localStorage.getItem("");
+>>>>>>> bedaf815c21ad1eec7599208043754cc6219b2d7
   const onFinish = (values) => {
     // let val = {
     //   ...values,
-    //   // admin_id:adminId
+    //   // :adminId
     // };
     try {
       updateDesignation({ id, values });
